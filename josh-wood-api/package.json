@@ -14,7 +14,7 @@
     "https": "^1.0.0",
     "mailchimp-api-v3": "^1.8.0",
     "md5": "^2.2.1",
-    "morgan": "^1.9.0",
+    "morgan": "^1.9.1",
     "newrelic": "^2.6.0",
     "node-zendesk": "^1.2.0"
   }
