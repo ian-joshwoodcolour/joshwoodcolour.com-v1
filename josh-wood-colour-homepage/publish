@@ -1,0 +1,70 @@
+#!/usr/bin/env node
+
+const HTML_PATH = './public/index.html'
+const TEMPLATE_PATH = '../josh-wood-colour-shopify/src/templates/index.liquid'
+const ASSETS_PATH = '../josh-wood-colour-shopify/src/assets/'
+
+const fs = require("fs")
+const childProcess = require("child_process")
+
+const transforms = [
+    (data) => data.replace(
+        /(["'])\/?([a-z0-9A-Z\-\/_]*\.[jpg|png|js][^"^']*)(["'])/g,
+        "$1{{ '$2' | asset_url }}$3"
+    ),
+    (data) => data.replace(
+        `link as="script" `,
+        `link as="script" type="text/javascript" `
+    )
+]
+fs.readFile(
+    HTML_PATH,
+    'utf-8',
+    (error, data) => {
+        if(error) {
+            console.log(error)
+            return
+        };
+        fs.open(
+            TEMPLATE_PATH,'w', (error, file) => 
+            {
+                const transformedData = transforms.reduce(
+                    (value, transform) => transform(value), data
+                )
+
+                console.log(transformedData);
+
+                if(error) {
+                    console.log(error)
+                    return
+                };
+                fs.writeFile(
+                    TEMPLATE_PATH,
+                    transformedData, 
+                    (error) => {
+                        if(error) {
+                            console.log(error)
+                            return
+                        };
+                        fs.close(file, (error) => {
+                            if(error) {
+                                console.log(error)
+                                return
+                            };
+                            childProcess.exec(`cp -a ./public/* ${ASSETS_PATH}`, 
+                            (error) => {
+                                if(error) {
+                                    console.log(error)
+                                    return
+                                };
+                                console.log('SUCCESS!')
+                            })
+                        })
+                        
+                    }
+                )
+                
+            }
+        )
+    })
+

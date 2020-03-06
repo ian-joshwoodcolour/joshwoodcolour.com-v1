@@ -1,0 +1,39 @@
+backend:
+  name: git-gateway
+  branch: master
+
+media_folder: static/img
+public_folder: /img
+
+collections:
+  - name: "banner"
+    label: "Banner"
+    folder: "src/pages/banner"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Template Key", name: "templateKey", widget: "hidden", default: "banner-item"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Sort", name: "sort", widget: "number", default: 0, required: false}
+      - {label: "Subtitle", name: "subTitle", widget: "string", required: false}
+      - {label: "Button Label", name: "buttonLabel", widget: "text", required: false}
+      - {label: "Button URL", name: "buttonUrl", widget: "text", required: false}
+      - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "pages"
+    label: "Pages"
+    files:
+      - file: "src/pages/index.md"
+        label: "Landing Page"
+        name: "index"
+        fields:
+          - {label: "Template Key", name: "templateKey", widget: "hidden", default: "index-page"}
+          - {label: Title, name: title, widget: string}
+      - file: "src/pages/product-teaser/index.md"
+        label: "Product Teaser"
+        name: "product-teaser"
+        fields:
+          - {label: "Template Key", name: "templateKey", widget: "hidden", default: "product-teaser"}
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "string"}
+          - {label: "Body", name: "body", widget: "markdown"}

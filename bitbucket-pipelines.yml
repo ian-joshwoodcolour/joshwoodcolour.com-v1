@@ -1,0 +1,11 @@
+image: node:8.9.3
+
+pipelines:
+  default:
+    - step:
+        caches:
+          - node
+        script:
+          - cd josh-wood-colour-shopify
+          - npm install
+          - npm run unit-tests

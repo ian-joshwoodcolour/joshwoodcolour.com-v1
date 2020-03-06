@@ -1,0 +1,12 @@
+# Settings in the [build] context are global and are applied to all contexts 
+# unless otherwise overridden by more specific contexts.  
+[build]
+  base = "josh-wood-colour-homepage/"
+  publish = "josh-wood-colour-homepage/public/"
+  command = "npm run build"
+  functions = "josh-wood-colour-homepage/lambda"
+
+[[headers]]
+  for = "/*" # This defines which paths this specific [[headers]] block will cover.
+  [headers.values]
+    X-Frame-Options = "ALLOWALL"

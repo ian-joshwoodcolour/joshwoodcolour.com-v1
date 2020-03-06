@@ -1,0 +1,19 @@
+{
+  "name": "josh-wood-colour-data-summaries",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "consultation-mailchimp": "node consultation-mailchimp.js",
+    "consultation-google-analytics-events": "node consultation-google-analytics-events.js",
+    "orders-shopify": "node orders-shopify.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.3.2",
+    "csv-parse": "^2.0.2",
+    "jsonexport": "^2.0.11",
+    "lodash.flatmap": "^4.5.0",
+    "lodash.map": "^4.6.0",
+    "shopify-api-node": "^2.11.0"
+  }
+}

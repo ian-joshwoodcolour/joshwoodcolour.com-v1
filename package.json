@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "heroku-postbuild": "cd josh-wood-colour-consultation; yarn install",
+    "start": "cd josh-wood-colour-consultation; npm start"
+  }
+}
