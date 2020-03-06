@@ -1,0 +1,77 @@
+{%- assign quote_used = false -%}
+
+{%- for block in section.blocks -%}
+    {%- assign page_matches_url = false -%}
+    {%- assign is_home_page = false -%}
+    {%- assign is_product_page = false -%}
+
+    {%- assign page_url = page.url -%}
+    {%- if template == 'product' -%}
+        {%- assign page_url = product.url -%}
+    {%- endif -%}
+
+    {%- if block.settings.page contains page_url -%}
+        {%- assign page_matches_url = true -%}
+    {%- elsif template == 'index' and block.settings.page == '/pages/home' -%}
+        {%- assign is_home_page = true -%}
+    {%- endif -%}
+
+    {%- if page_matches_url == true or is_home_page == true or is_product_page == true -%}
+        {%- assign quote_used = true -%}
+        {%- assign text = block.settings.quote -%}
+        {%- assign quotee = block.settings.quotee -%}
+        {%- assign quotee_title = block.settings.quotee_title -%}
+        {%- include 'quote' -%}
+
+        {%- if template == 'product' -%}
+            {%- break -%}
+        {%- endif -%}
+    {%- endif %}
+{%- endfor -%}
+
+{%- if template == 'product' -%}
+    {%- unless quote_used -%}
+        {%- assign text = '' -%}
+        {%- assign quotee = '' -%}
+        {%- assign quotee_title = '' -%}
+        {%- include 'quote' -%}
+    {%- endunless -%}
+
+    <script>
+    window.globalData.associatedProductQuotes = [{%- for block in section.blocks -%}{%- if block.settings.page contains '/products/' -%}{productURL: "{{ block.settings.page }}", text: "{{ block.settings.quote }}", quotee: "{{ block.settings.quotee }}", quoteeTitle: "{{ block.settings.quotee_title }}"},{%- endif -%}{%- endfor -%}];
+    </script>
+{%- endif -%}
+
+{% schema %}
+{
+    "name": "Quotes",
+    "blocks": [
+        {
+            "name": "Quotes",
+            "type": "object",
+            "settings": [
+                {
+                    "type": "textarea",
+                    "id": "quote",
+                    "label": "Quote"
+                },
+                {
+                    "type": "text",
+                    "id": "quotee",
+                    "label": "Quotee"
+                },
+                {
+                    "type": "text",
+                    "id": "quotee_title",
+                    "label": "Quotee Title"
+                },
+                {
+                    "type": "url",
+                    "id": "page",
+                    "label": "Page to feature on"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

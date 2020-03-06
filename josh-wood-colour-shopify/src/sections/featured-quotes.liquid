@@ -1,0 +1,147 @@
+{%- assign has_content = false -%}
+{%- if section.blocks[0].settings.quote_1 != blank -%}
+    {%- assign has_content = true -%}
+{%- endif -%}
+
+{%- if has_content -%}
+    <section class="o-section o-wrapper">
+        {%- for block in section.blocks -%}
+            <div class="u-p u-p+@tabletSmall u-p++@tablet u-text-center u-border-grey-4">
+                <div class="c-quote-tabs js-tabs-container" data-timeout="5000">
+                    <div class="c-quote-tabs__quotes js-equal-height-container" id="quote-tabs-content">
+                        {%- if block.settings.quote_1 != blank -%}
+                            <div class="div c-quote-tabs__quote c-quote-tabs__quote--active is-active js-panel js-equal-height" id="quote-1" role="tabpanel" aria-labelledby="quote-1-tab" data-component="Featured quote">
+                                {%- assign disable_lazyload = true -%}
+                                {%- assign text = block.settings.quote_1 -%}
+                                {%- assign quotee = block.settings.quotee_1 -%}
+                                {% include 'quote' %}
+                            </div>
+                        {%- endif -%}
+                        {%- if block.settings.quote_2 != blank -%}
+                            <div class="div c-quote-tabs__quote js-panel js-equal-height" id="quote-2" role="tabpanel" aria-labelledby="quote-2-tab" data-component="Featured quote">
+                                {%- assign disable_lazyload = true -%}
+                                {%- assign text = block.settings.quote_2 -%}
+                                {%- assign quotee = block.settings.quotee_2 -%}
+                                {% include 'quote' %}
+                            </div>
+                        {%- endif -%}
+                        {%- if block.settings.quote_3 != blank -%}
+                            <div class="div c-quote-tabs__quote js-panel js-equal-height" id="quote-3" role="tabpanel" aria-labelledby="quote-3-tab" data-component="Featured quote">
+                                {%- assign disable_lazyload = true -%}
+                                {%- assign text = block.settings.quote_3 -%}
+                                {%- assign quotee = block.settings.quotee_3 -%}
+                                {% include 'quote' %}
+                            </div>
+                        {%- endif -%}
+                        {%- if block.settings.quote_4 != blank -%}
+                            <div class="div c-quote-tabs__quote js-panel js-equal-height" id="quote-4" role="tabpanel" aria-labelledby="quote-4-tab" data-component="Featured quote">
+                                {%- assign disable_lazyload = true -%}
+                                {%- assign text = block.settings.quote_4 -%}
+                                {%- assign quotee = block.settings.quotee_4 -%}
+                                {% include 'quote' %}
+                            </div>
+                        {%- endif -%}
+                    </div>
+                    <nav class="c-quote-tabs__tabs u-mt+" id="quote-tabs" role="tablist">
+                        {%- if block.settings.quote_1 != blank -%}
+                            <button class="c-quote-tabs__tab c-quote-tabs__tab--active js-tab" role="tab" id="quote-1-tab" aria-controls="quote-1" aria-selected="true" aria-label="{{ block.settings.quotee_1 }}">
+                                <img src="{{ block.settings.quotee_logo_1 | img_url: 'x200' }}" alt="{{ block.settings.quotee_1 }}'s logo" class="u-bg-transparent u-mh-100">
+                            </button>
+                        {%- endif -%}
+                        {%- if block.settings.quote_2 != blank -%}
+                            <button class="c-quote-tabs__tab js-tab" role="tab" id="quote-2-tab" aria-controls="quote-2" aria-selected="false" aria-label="{{ block.settings.quotee_2 }}">
+                                <img src="{{ block.settings.quotee_logo_2 | img_url: 'x200' }}" alt="{{ block.settings.quotee_2 }}'s logo" class="u-bg-transparent u-mh-100">
+                            </button>
+                        {%- endif -%}
+                        {%- if block.settings.quote_3 != blank -%}
+                            <button class="c-quote-tabs__tab js-tab" role="tab" id="quote-3-tab" aria-controls="quote-3" aria-selected="false" aria-label="{{ block.settings.quotee_3 }}">
+                                <img src="{{ block.settings.quotee_logo_3 | img_url: 'x200' }}" alt="{{ block.settings.quotee_3 }}'s logo" class="u-bg-transparent u-mh-100">
+                            </button>
+                        {%- endif -%}
+                        {%- if block.settings.quote_4 != blank -%}
+                            <button class="c-quote-tabs__tab js-tab" role="tab" id="quote-4-tab" aria-controls="quote-4" aria-selected="false" aria-label="{{ block.settings.quotee_4 }}">
+                                <img src="{{ block.settings.quotee_logo_4 | img_url: 'x200' }}" alt="{{ block.settings.quotee_4 }}'s logo" class="u-bg-transparent u-mh-100">
+                            </button>
+                        {%- endif -%}
+                    </nav>
+                </div>
+            </div>
+            
+            {%- assign disable_lazyload = false -%}
+        {%- endfor -%}
+    </section>
+{%- endif -%}
+
+{% schema %}
+{
+    "name": "Featured Quotes",
+    "blocks": [
+        {
+            "name": "Featured Quotes",
+            "type": "object",
+            "settings": [
+                {
+                    "type": "textarea",
+                    "id": "quote_1",
+                    "label": "Quote"
+                },
+                {
+                    "type": "text",
+                    "id": "quotee_1",
+                    "label": "Quotee (not visible, but used for SEO)"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "quotee_logo_1",
+                    "label": "Quotee Logo"
+                },
+                {
+                    "type": "textarea",
+                    "id": "quote_2",
+                    "label": "Quote"
+                },
+                {
+                    "type": "text",
+                    "id": "quotee_2",
+                    "label": "Quotee (not visible, but used for SEO)"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "quotee_logo_2",
+                    "label": "Quotee Logo"
+                },
+                {
+                    "type": "textarea",
+                    "id": "quote_3",
+                    "label": "Quote"
+                },
+                {
+                    "type": "text",
+                    "id": "quotee_3",
+                    "label": "Quotee (not visible, but used for SEO)"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "quotee_logo_3",
+                    "label": "Quotee Logo"
+                },
+                {
+                    "type": "textarea",
+                    "id": "quote_4",
+                    "label": "Quote"
+                },
+                {
+                    "type": "text",
+                    "id": "quotee_4",
+                    "label": "Quotee (not visible, but used for SEO)"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "quotee_logo_4",
+                    "label": "Quotee Logo"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

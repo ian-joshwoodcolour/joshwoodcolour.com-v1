@@ -1,0 +1,90 @@
+{% include 'product-collection-url' %}
+
+{%- for block in section.blocks -%}
+    {%- if block.settings.product_url contains product.url and product_collection_url contains block.settings.collection_url -%}
+        <div class="c-modal c-modal--promo js-modal u-hide" data-modal="product-ingredients">
+            <div class="c-modal__wrapper t-white u-p u-p+@mobile js-modal-wrapper" style="max-width: 800px;">
+                {%- assign modal_name = 'product-ingredients' -%}
+                {% include 'modal-close-button' %}
+                
+                <h2 class="u-heading u-h5 u-mb">Ingredients</h2>
+                <p class="js-product-ingredients">{{ block.settings.ingredients_text | newline_to_br }}</p>
+            </div>
+        </div>
+        <div class="c-modal c-modal--promo js-modal u-hide" data-modal="product-warnings">
+            <div class="c-modal__wrapper t-white u-p u-p+@mobile js-modal-wrapper" style="max-width: 800px;">
+                {%- assign modal_name = 'product-warnings' -%}
+                {% include 'modal-close-button' %}
+                
+                <h2 class="u-heading u-h5 u-mb">Warnings</h2>
+                <p class="js-product-warnings">{{ block.settings.warnings_text | newline_to_br }}</p>
+            </div>
+        </div>
+    {%- endif -%}
+{%- endfor -%}
+
+<script>
+window.globalData.productInformation = [
+    {%- for block in section.blocks -%}
+        {%- if product_collection_url contains block.settings.collection_url -%}
+            {
+                collectionURL: "{{ block.settings.collection_url }}",
+                detailsText: [
+                    {%- assign details_list = block.settings.details_text | newline_to_br | split: '<br />' -%}
+                    {%- for item in details_list -%}
+                        "{{ item | strip_newlines }}",
+                    {%- endfor -%}
+                ],
+                ingredientsText: "{{ block.settings.ingredients_text | newline_to_br | strip_newlines }}",
+                photoURL: "{{ block.settings.product_photo | img_url: '820x1040', crop: 'center' }}",
+                productURL: "{{ block.settings.product_url }}",
+                warningsText: "{{ block.settings.warnings_text | newline_to_br | strip_newlines }}"
+            },
+        {%- endif -%}
+    {%- endfor -%}
+];
+</script>
+ 
+{% schema %}
+{
+    "name": "Product information",
+    "blocks": [
+        {
+            "name": "Information content",
+            "type": "object",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "product_photo",
+                    "label": "Product Photo"
+                },
+                {
+                    "type": "url",
+                    "id": "product_url",
+                    "label": "Product"
+                },
+                {
+                    "type": "url",
+                    "id": "collection_url",
+                    "label": "Collection"
+                },
+                {
+                    "type": "textarea",
+                    "id": "details_text",
+                    "label": "Details Text"
+                },
+                {
+                    "type": "textarea",
+                    "id": "ingredients_text",
+                    "label": "Ingredients Text"
+                },
+                {
+                    "type": "textarea",
+                    "id": "warnings_text",
+                    "label": "Warnings Text"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

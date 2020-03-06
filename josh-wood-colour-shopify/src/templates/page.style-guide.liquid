@@ -1,0 +1,525 @@
+<style>main { margin-top: 0 !important; }</style>
+
+<section class="c-style-guide">
+    <div class="c-style-guide__left">
+        {% include 'logo', classes: 'c-style-guide__logo' %}
+
+        <nav class="c-style-guide__nav js-style-guide-nav"></nav>
+    </div><div class="c-style-guide__right">
+        <h1 class="u-heading">Style Guide</h1>
+        <h2 class="u-h6 u-case-upper u-mt">JoshWoodColour.com</h2>
+
+        <section class="c-style-guide__section">
+            <h2 class="u-mb+">Typography</h2>
+
+            <div class="o-layout o-layout--huge">
+                <div class="o-layout__item u-6/12@desktop">
+                    <div class="u-label">Headings</div>
+                    <ul class="o-ui-list">
+                        <li class="o-ui-list__item">
+                            <h1 class="u-heading">Heading 1</h1>
+                        </li>
+                        <li class="o-ui-list__item">
+                            <h2 class="u-heading">Heading 2</h2>
+                        </li>
+                        <li class="o-ui-list__item">
+                            <h3 class="u-heading">Heading 3</h3>
+                        </li>
+                        <li class="o-ui-list__item">
+                            <h4>Heading 4</h4>
+                        </li>
+                        <li class="o-ui-list__item">
+                            <h5>Heading 5</h5>
+                        </li>
+                        <li class="o-ui-list__item">
+                            <h6>Heading 6</h6>
+                        </li>
+                    </ul>
+                </div><div class="o-layout__item u-6/12@desktop">
+                    <div class="u-label">Body copy</div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget metus dapibus, mollis enim sed, viverra erat. Pellentesque in hendrerit nibh. Vestibulum tincidunt, justo eget molestie tincidunt, nunc sem imperdiet nulla, vel efficitur ex odio ultricies lacus. Aenean non nisl et sapien tempor egestas. Aenean tincidunt feugiat velit, nec feugiat diam pellentesque vel. In sagittis nunc vel quam luctus vehicula nec eget massa. Duis sed diam dignissim, tempor lacus in, molestie nunc. Mauris euismod hendrerit enim, sit amet ultrices sem. Praesent sit amet tortor pulvinar, viverra arcu in, maximus arcu. Nam aliquet dictum tortor. Etiam et lectus risus. Mauris iaculis condimentum turpis sit amet ultrices. Quisque vel venenatis nisl. Nulla facilisi. Nulla purus nulla, congue tincidunt libero porttitor, vehicula condimentum purus.</p>
+
+                    <br><br>
+
+                    <div class="u-label">Bold copy</div>
+                    <strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</strong>
+
+                    <br><br>
+
+                    <div class="u-label">Italic copy</div>
+                    <em>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</em>
+
+                    <br><br>
+
+                    <div class="u-label">Linked copy</div>
+                    Lorem ipsum dolor sit amet, <a href="#">consectetur adipiscing</a> elit.
+
+                    <br><br>
+
+                    <div class="u-label">Numeral</div>
+                    <span class="u-numeral u-heading">2016</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="c-style-guide__section">
+            <h2 class="u-mb+">Buttons</h2>
+
+            <ul class="o-list-inline">
+                <li class="o-list-inline__item">
+                    <div class="u-label">Default</div>
+                    <a href="#" class="c-button c-button--black c-button--icon c-icon-link">
+                        Explore the salon
+                    </a>
+                </li>
+                <li class="o-list-inline__item u-pl@mobile u-pl+@desktop">
+                    <div class="u-label">Rounded button</div>
+                    <a href="#" class="c-button c-button--black c-button--round">
+                        Explore the salon 
+                    </a>
+                </li>
+                <li class="o-list-inline__item u-pl@mobile u-pl+@desktop">
+                    <div class="u-label">Thin button</div>
+                    <a href="#" class="c-button c-button--black c-button--thin">
+                        Explore the salon
+                    </a>
+                </li>
+                <li class="o-list-inline__item u-pl@mobile u-pl+@desktop"">
+                    <div class="u-label">Ghost button</div>
+                    <a href="#" class="c-button c-button--black c-button--ghost">
+                        Explore the salon
+                    </a>
+                </li>
+            </ul>
+
+            <br><br>
+
+            <div class="u-label">Text/icon button</div>
+            <a href="#" class="c-icon-link">
+                Explore the salon
+            </a> 
+        </section>
+
+        <section class="c-style-guide__section">
+            <h2 class="u-mb+">Page Header</h2>
+
+            <div class="u-label">Default</div>
+            <div class="s-no-hero">
+                <style>.c-page-header { position: relative !important; }</style>
+                {% section 'header' %}
+            </div>
+
+            <br><br>
+
+            <div class="u-label">With a Hero Banner</div>
+            <div class="s-hero" style="background-color: #f17458;">
+                {% section 'header' %}
+            </div>
+        </section>
+
+        <section class="c-style-guide__section">
+            <h2 class="u-mb+">Page Footer</h2>
+        
+            <div class="u-label">Default</div>
+            {% section 'footer' %}
+        </section>
+
+        <section class="c-style-guide__section">
+            <h2 class="u-mb+">Hero Banner</h2>
+
+            <em>A Hero Banner is only ever used at the top of a page.</em>
+
+            <br><br>
+
+            <div class="u-label">Default</div>
+            {% include 'hero-banner', id: 1, background_image: 'https://images.unsplash.com/photo-1496124134604-7493ec63de68?dpr=1&auto=compress,format&fit=crop&w=376&h=564&q=80&cs=tinysrgb&crop=', background_image_large: 'https://images.unsplash.com/photo-1496124134604-7493ec63de68?dpr=1&auto=format&fit=crop&w=1500&h=2250&q=80&cs=tinysrgb&crop=' %}
+
+            <br><br>
+
+            <div class="u-label">With copy and a CTA link</div>
+            {% include 'hero-banner', id: 2, background_image: 'https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?dpr=1&auto=compress,format&fit=crop&w=376&h=251&q=80&cs=tinysrgb&crop=', background_image_large: 'https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?dpr=1&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=', has_logo: true, text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id felis facilisis, congue libero a, commodo nisl. Donec vulputate orci erat, non fermentum massa egestas eget.", cta_label: "Click here", cta_url: "/" %}
+
+            <br><br>
+
+            <div class="u-label">With JWC Logo</div>
+            {% include 'hero-banner', id: 3, background_image: 'https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?dpr=1&auto=compress,format&fit=crop&w=376&h=251&q=80&cs=tinysrgb&crop=', background_image_large: 'https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?dpr=1&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=', has_logo: true %}
+
+            <br><br>
+
+            <div class="u-label">With background colour only</div>
+            {% include 'hero-banner', id: 4, background_colour: '#f17458', has_logo: true %}
+        </section>
+
+        <section class="c-style-guide__section">
+            <h2 class="u-mb+">Quotes</h2>
+
+            <div class="u-label">Default</div>
+            {% include 'quote', text: 'The experience at Josh Wood Atelier is just a whole new level', quotee: 'Ruth Crilly', quotee_title: 'Model, Writer, Beauty Insider' %}
+
+            <br><br>
+
+            <div class="u-label">Just text</div>
+            {% include 'quote', text: 'The experience at Josh Wood Atelier is just a whole new level' %}
+
+            <br><br>
+
+            <div class="u-label">No title</div>
+            {% include 'quote', text: 'The experience at Josh Wood Atelier is just a whole new level', quotee: 'Ruth Crilly' %}
+        </section>
+
+        <section class="c-style-guide__section">
+            <h2 class="u-mb+">Instagram feed</h2>
+
+            <div class="u-label">Default</div>
+            {% section 'instagram-feed' %}
+        </section>
+
+        <section class="c-style-guide__section">
+            <h2 class="u-mb+">Filter navigation</h2>
+
+            <em>Used to filter content on a page (see: The experts)</em>
+
+            <br><br>
+
+            <div class="u-label">Default</div>
+            <nav class="c-filter-nav u-pt u-pt0@mobile u-fade-in">
+                <ul class="o-list-inline c-filter-nav__nav u-pt0">
+                    <li class="o-list-inline__item c-filter-nav__item u-pt0" key={index}>
+                        <button class="c-button c-button--black c-button--block c-button--ghost u-1/1">
+                            Stylists
+                        </button>
+                    </li>
+                    <li class="o-list-inline__item c-filter-nav__item u-pt0" key={index}>
+                        <button class="c-button c-button--black c-button--block c-button--ghost u-1/1">
+                            Colourists
+                        </button>
+                    </li>
+                    <li class="o-list-inline__item c-filter-nav__item u-pt0" key={index}>
+                        <button class="c-button c-button--black c-button--block c-button--ghost u-1/1">
+                            Other
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+
+            <br><br>
+
+            <div class="u-label">With a selected filter</div>
+            <nav class="c-filter-nav u-pt u-pt0@mobile u-fade-in">
+                <ul class="o-list-inline c-filter-nav__nav u-pt0">
+                    <li class="o-list-inline__item c-filter-nav__item u-pt0" key={index}>
+                        <button class="c-button c-button--black c-button--block u-1/1">
+                            Stylists
+                        </button>
+                    </li>
+                    <li class="o-list-inline__item c-filter-nav__item u-pt0" key={index}>
+                        <button class="c-button c-button--black c-button--block c-button--ghost u-1/1">
+                            Colourists
+                        </button>
+                    </li>
+                    <li class="o-list-inline__item c-filter-nav__item u-pt0" key={index}>
+                        <button class="c-button c-button--black c-button--block c-button--ghost u-1/1">
+                            Other
+                        </button>
+                    </li>
+                </ul>
+            </nav> 
+        </section>
+
+        <section class="c-style-guide__section">
+            <h2 class="u-mb+">Cards</h2>
+
+            <em>Cards have so many variations, there is no default style</em>
+
+            <br><br>
+
+            <div class="o-layout o-layout--huge o-layout--matrix">
+                <div class="o-layout__item u-4/12@desktop u-6/12@tablet">
+                    <div class="u-label">Default card</div>
+
+                    {% include 'card', photo: 'https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?dpr=1&auto=compress,format&fit=crop&w=376&h=564&q=80&cs=tinysrgb&crop=', has_frame: true, frame_position: 'right', card_size: 'default', classes: '' %}
+                </div><div class="o-layout__item u-4/12@desktop u-6/12@tablet">
+                    <div class="u-label">Square card</div>
+
+                    {% include 'card', photo: 'https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?dpr=1&auto=compress,format&fit=crop&w=376&h=564&q=80&cs=tinysrgb&crop=', has_frame: true, frame_position: 'right', card_size: 'square', classes: '' %}
+                </div><div class="o-layout__item u-4/12@desktop u-6/12@tablet">
+                    <div class="u-label">Short card</div>
+
+                    {% include 'card', photo: 'https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?dpr=1&auto=compress,format&fit=crop&w=376&h=564&q=80&cs=tinysrgb&crop=', has_frame: true, frame_position: 'right', card_size: 'shorter', classes: '' %}
+                </div><div class="o-layout__item u-4/12@desktop u-6/12@tablet">
+                    <div class="u-label">Tall card</div>
+
+                    {% include 'card', photo: 'https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?dpr=1&auto=compress,format&fit=crop&w=376&h=564&q=80&cs=tinysrgb&crop=', has_frame: true, frame_position: 'right', card_size: 'tall', classes: '' %}
+                </div><div class="o-layout__item u-4/12@desktop u-6/12@tablet">
+                    <div class="u-label">With default frame</div>
+
+                    {% include 'card', photo: 'https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?dpr=1&auto=compress,format&fit=crop&w=376&h=564&q=80&cs=tinysrgb&crop=', has_frame: true, frame_position: 'left', classes: '' %}
+                </div><div class="o-layout__item u-4/12@desktop u-6/12@tablet">
+                    <div class="u-label">With tall frame</div>
+
+                    {% include 'card', photo: 'https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?dpr=1&auto=compress,format&fit=crop&w=376&h=564&q=80&cs=tinysrgb&crop=', has_frame: true, frame_position: 'left-tall', classes: '' %}
+                </div><div class="o-layout__item u-4/12@desktop u-6/12@tablet">
+                    <div class="u-label">With frame right</div>
+
+                    {% include 'card', photo: 'https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?dpr=1&auto=compress,format&fit=crop&w=376&h=564&q=80&cs=tinysrgb&crop=', has_frame: true, frame_position: 'right', classes: '' %}
+                </div><div class="o-layout__item u-4/12@desktop u-6/12@tablet">
+                    <div class="u-label">With gold frame</div>
+
+                    {% include 'card', photo: 'https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?dpr=1&auto=compress,format&fit=crop&w=376&h=564&q=80&cs=tinysrgb&crop=', has_frame: true, frame_position: 'right', frame_classes: 'gold', classes: '' %}
+                </div><div class="o-layout__item u-4/12@desktop u-6/12@tablet">
+                    <div class="u-label">No frame</div>
+
+                    {% include 'card', photo: 'https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?dpr=1&auto=compress,format&fit=crop&w=376&h=564&q=80&cs=tinysrgb&crop=', has_frame: false, classes: '' %}
+                </div><div class="o-layout__item u-4/12@desktop u-6/12@tablet">
+                    <div class="u-label">With frame and title left</div>
+
+                    {% include 'card', photo: 'https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?dpr=1&auto=compress,format&fit=crop&w=376&h=564&q=80&cs=tinysrgb&crop=', has_frame: true, title: 'A card with a title', title_position: 'left', classes: '' %}
+                </div><div class="o-layout__item u-4/12@desktop u-6/12@tablet">
+                    <div class="u-label">With frame and title right</div>
+
+                    {% include 'card', photo: 'https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?dpr=1&auto=compress,format&fit=crop&w=376&h=564&q=80&cs=tinysrgb&crop=', has_frame: true, title: 'A card with a title', title_position: 'right', classes: '' %}
+                </div><div class="o-layout__item u-4/12@desktop u-6/12@tablet">
+                    <div class="u-label">With frame, title and subtitle</div>
+
+                    {% include 'card', photo: 'https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?dpr=1&auto=compress,format&fit=crop&w=376&h=564&q=80&cs=tinysrgb&crop=', has_frame: true, title: 'A card with a title', title_position: 'right', subtitle: 'Another title', classes: '' %}
+                </div>
+            </div>
+
+            <div class="u-label">With 'row' frame</div>
+
+            {% include 'card', photo: 'https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?dpr=1&auto=compress,format&fit=crop&w=376&h=564&q=80&cs=tinysrgb&crop=', has_frame: true, frame_position: 'left', card_size: 'shorter', card_row: true, title: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod', text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.', classes: '' %}
+
+            <br><br>
+
+            <div class="u-label">Card Hero Section</div>
+
+            <em>The hero section is full-width, with copy and a CTA.</em>
+
+            <br><br>
+
+            <div class="o-wrapper">
+                {% section 'about-josh-teaser' %}
+            </div>
+        </section>
+
+        <section class="c-style-guide__section">
+            <h2 class="u-mb+">Page Intro</h2>
+
+            <em>For page intro sections, the title is on the left and the copy on the right.</em>
+
+            <br><br>
+
+            <div class="u-label">Default</div>
+
+            <div class="o-wrapper">
+                <div class="o-layout u-stack-layout@mobile">
+                    <div class="o-layout__item u-6/12@mobile">
+                        <h1 class="u-heading u-h2">Lorem ipsum dolor sit amet, consectetur adipisicing</h1>
+                    </div><div class="o-layout__item u-1/12@mobile">
+                    </div><div class="o-layout__item u-5/12@mobile">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="c-style-guide__section">
+            <h2 class="u-mb+">'Your Hair Colour Story' Teaser</h2>
+
+            <div class="u-label">Default</div>
+
+            <div class="o-wrapper">
+                {% section 'your-hair-colour-story-teaser' %}
+            </div>
+        </section>
+
+        <section class="c-style-guide__section">
+            <h2 class="u-mb+">Salon Content</h2>
+
+            <div class="u-label">Salon Experts Teaser</div>
+
+            <div class="o-wrapper">
+                {% section 'experts-teaser' %}
+            </div>
+
+            <br><br><br><br><br><br>
+
+            <div class="u-label">Featured photos</div>
+
+            <div class="o-wrapper">
+                {% section 'salon-photos' %}
+            </div>
+
+            <br><br><br><br><br><br>
+
+            <div class="u-label">Salon Photos</div>
+
+            <div class="o-wrapper">
+                {% section 'salon-space' %}
+            </div>
+
+            <br><br><br><br><br><br>
+
+            <div class="u-label">Map</div>
+
+            <div class="o-wrapper">
+                {% section 'salon-map' %}
+            </div>
+
+            <br><br><br><br><br><br>
+
+            <div class="u-label">Hours</div>
+
+            <div class="o-wrapper">
+                {% section 'salon-hours' %}
+            </div>
+        </section>
+
+        <section class="c-style-guide__section">
+            <h2 class="u-mb+">Accordion</h2>
+
+            <div class="u-label">Default</div>
+
+            <ul class="o-ui-list u-mt u-mt+@mobile">
+                <li class="o-ui-list__item u-ph- u-ph@mobile">
+                    <div class="c-accordion">
+                        <button class="c-accordion__toggle js-visibility-toggle" id="accordion-demo-1-toggle" aria-controls="accordion-demo-1" aria-expanded="false" role="tab">
+                            Accordion Toggle #1
+
+                            {% assign classes = 'c-svg c-accordion__toggle-icon' %}
+                            {% include 'plus-icon' %}
+                        </button>
+                        <div class="c-accordion__content" id="accordion-demo-1" aria-labelledby="accordion-demo-1-toggle" aria-hidden="true" role="tabpanel">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </div>
+                    </div>
+                </li>
+                <li class="o-ui-list__item u-ph- u-ph@mobile">
+                    <div class="c-accordion">
+                        <button class="c-accordion__toggle js-visibility-toggle" id="accordion-demo-2-toggle" aria-controls="accordion-demo-2" aria-expanded="false" role="tab">
+                            Accordion Toggle #2
+
+                            {% assign classes = 'c-svg c-accordion__toggle-icon' %}
+                            {% include 'plus-icon' %}
+                        </button>
+                        <div class="c-accordion__content" id="accordion-demo-2" aria-labelledby="accordion-demo-2-toggle" aria-hidden="true" role="tabpanel">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="c-style-guide__section">
+            <h2 class="u-mb+">Chatbot</h2>
+
+            <div class="u-label">Default</div>
+
+            <button class="c-button c-button--black u-mt js-chatbot-open">
+                Start the chat
+                
+                {% assign classes = 'c-svg c-svg--currentcolor c-svg--w16 c-button__icon' %}
+                {% include 'right-arrow-icon' %}
+            </button>
+
+            <div id="chat" class="s-chatbot u-hide js-chatbot">
+                <button class="c-button c-button--black c-button--thin c-button--round s-chatbot__close js-chatbot-close">
+                    Close <svg width="24" height="24" class="c-svg c-svg--currentcolor c-svg--w14 c-button__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path d="M10.73 11.792l-6.79 6.792L5 19.644l6.792-6.79 6.792 6.79 1.06-1.06-6.79-6.792L19.643 5l-1.06-1.06-6.792 6.79L5 3.94 3.94 5l6.79 6.792z" id="a"/></defs><use fill="#000" fill-rule="nonzero" xlink:href="#a"/></svg>
+                </button>
+                
+                {% include 'your-hair-colour-story-form' %}
+            </div>
+        </section>
+
+        <section class="c-style-guide__section">
+            <h2 class="u-mb+">Price List</h2>
+
+            <div class="u-label">Default</div>
+
+            <div class="c-price-list c-price-list--headers">
+                <h4>Gloss</h4>
+
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Varderer</td>
+                            <td>Advocate</td>
+                            <td>Associate</td>
+                        </tr>
+                        <tr>
+                            <td>£55</td>
+                            <td>£75</td>
+                            <td>£105</td>
+                        </tr>
+                        <tr>
+                            <td>Principal</td>
+                            <td>Master</td>
+                            <td>Creative Master</td>
+                        </tr>
+                        <tr>
+                            <td>£130</td>
+                            <td>£145</td>
+                            <td>£165</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</section>
+
+
+<script>
+const nav = document.querySelector('.js-style-guide-nav');
+const sections = document.querySelectorAll('.c-style-guide__section');
+
+const getAnchorVal = (val) => (typeof val === 'string') ? val.toLowerCase().replace(/ /g, '-') : '';
+const setAnchorVal = (el, val) => el.setAttribute('id', val);
+
+const html = [...sections].map(section => {
+    const sectionHeading = section.querySelector('h2');
+    const sectionAnchorVal = getAnchorVal(sectionHeading.innerText);
+    const variants = section.querySelectorAll('.u-label');
+    
+    setAnchorVal(section, sectionAnchorVal);
+
+    [...variants].map(variant => {
+        const variantAnchorVal = getAnchorVal(variant.innerText);
+
+        setAnchorVal(variant, `${sectionAnchorVal}-${variantAnchorVal}`);
+    });
+
+    return `<div class="u-mb">
+        <h3 class="u-heading u-h5 u-mb-">
+            <a href="#${sectionAnchorVal}">
+                ${sectionHeading.innerText}
+            </a>
+        </h3>
+        
+        ${[...variants].map(variant => {
+            const variantAnchorVal = getAnchorVal(variant.innerText);
+
+            return `<a href="#${sectionAnchorVal}-${variantAnchorVal}" style="text-transform: capitalize">
+                ${variant.innerText.toLowerCase()}
+            </a><br>`;
+        }).join('')}
+    </div>`;
+}).join('');;
+
+nav.innerHTML = html;
+</script>

@@ -1,0 +1,77 @@
+<div class="c-concealer-teaser u-lazyload u-fade-intersected js-monitor" style="background-image: url('{{ section.blocks[0].settings.photo_mobile | img_url: '1000x' }}');">
+    <style>@media only screen and (min-width: 46.0525em) { .c-concealer-teaser { background-image: url('{{ section.blocks[0].settings.photo | img_url: '1800x' }}') !important; } }}</style>
+    <section class="o-section o-wrapper">
+        <div class="u-6/12@mobile u-4/12@desktop">
+            <h3 class="u-heading u-mb">{{ section.blocks[0].settings.title }}</h3>
+
+            <p>{{ section.blocks[0].settings.text }}</p>
+
+            {%- if section.blocks[0].settings.cta_url and section.blocks[0].settings.cta_label -%}
+                <a href="{{ section.blocks[0].settings.cta_url }}" class="c-button c-button--black u-1/1 u-mt u-align-center">
+                    {{ section.blocks[0].settings.cta_label }}
+                </a>
+            {%- endif -%}
+
+            {%- if section.blocks[0].settings.secondary_cta_url and section.blocks[0].settings.secondary_cta_label -%}
+                <a href="{{ section.blocks[0].settings.secondary_cta_url }}" class="c-button c-button--black c-button--ghost u-1/1 u-mt- u-align-center">
+                    {{ section.blocks[0].settings.secondary_cta_label }}
+                </a>
+            {%- endif -%}
+        </div>
+    </section>
+</div>
+
+{% schema %}
+{
+    "name": "Concealer Product Teaser",
+    "blocks": [
+        {
+            "name": "Teaser content",
+            "type": "object",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "photo",
+                    "label": "Photo"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "photo_mobile",
+                    "label": "Photo (mobile)"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "textarea",
+                    "id": "text",
+                    "label": "Text"
+                },
+                {
+                    "type": "url",
+                    "id": "cta_url",
+                    "label": "CTA URL"
+                },
+                {
+                    "type": "text",
+                    "id": "cta_label",
+                    "label": "CTA Label"
+                },
+                {
+                    "type": "url",
+                    "id": "secondary_cta_url",
+                    "label": "Secondary CTA URL"
+                },
+                {
+                    "type": "text",
+                    "id": "secondary_cta_label",
+                    "label": "Secondary CTA Label"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

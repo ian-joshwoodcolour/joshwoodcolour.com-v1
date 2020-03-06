@@ -1,0 +1,75 @@
+<div class="o-layout u-stack-layout@mobile u-flex@mobile">
+    <div class="o-layout__item u-5/12@mobile u-flex u-direction-column u-justify-center">
+        <h3 class="u-heading u-mb u-mt@mobile">{{ section.blocks[0].settings.title }}</h3>
+
+        <p>{{ section.blocks[0].settings.text }}</p>
+    
+        <div class="u-mt u-flex@mobile">
+            {%- if section.blocks[0].settings.cta_label and section.blocks[0].settings.cta_url -%}
+                <a href="{{ section.blocks[0].settings.cta_url }}" class="c-button c-button--black u-mr u-1/1">{{ section.blocks[0].settings.cta_label }}</a>
+            {%- endif -%}
+            {%- if section.blocks[0].settings.secondary_cta_label and section.blocks[0].settings.secondary_cta_url -%}
+                <a href="{{ section.blocks[0].settings.secondary_cta_url }}" class="c-button c-button--black c-button--ghost u-1/1 u-mt- u-mt0@mobile">{{ section.blocks[0].settings.secondary_cta_label }}</a>
+            {%- endif -%}
+        </div>
+    </div><div class="o-layout__item u-1/12 u-mb+">
+    </div><div class="o-layout__item u-6/12@mobile">
+        {%- assign card_size = 'square' -%}
+        {%- assign has_frame = true -%}
+        {%- assign frame_position = 'right' -%}
+        {%- assign frame_classes = 'gold-tall' -%}
+        {%- assign photo = section.blocks[0].settings.photo | img_url: '1000x1000' -%}
+        {%- assign classes = 'u-no-mw' -%}
+        {% include 'card' %}
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "About Josh 2018",
+    "blocks": [
+        {
+            "name": "About Josh 2018",
+            "type": "object",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "photo",
+                    "label": "Photo"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "textarea",
+                    "id": "text",
+                    "label": "Text"
+                },
+                {
+                    "type": "url",
+                    "id": "cta_url",
+                    "label": "CTA URL"
+                },
+                {
+                    "type": "text",
+                    "id": "cta_label",
+                    "label": "CTA Label"
+                },
+                {
+                    "type": "url",
+                    "id": "secondary_cta_url",
+                    "label": "Secondary CTA URL"
+                },
+                {
+                    "type": "text",
+                    "id": "secondary_cta_label",
+                    "label": "Secondary CTA Label"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

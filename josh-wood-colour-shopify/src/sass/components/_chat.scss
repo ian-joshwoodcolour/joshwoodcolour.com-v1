@@ -1,0 +1,240 @@
+$chat-max-height: 400px;
+$chat-input-border-color: $color-grey-light;
+$chat-input-height: 50px;
+$chat-input-image-height: 150px; 
+
+
+.c-chat {
+    @include gold-frame();
+    background-color: $color-white;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin-bottom: 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+    .c-chat__messages-container {
+        @include hide-scrollbar($color-white);
+        // display: flex;
+        // flex-direction: column;
+        flex-grow: 1;
+        justify-content: flex-end;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        padding-left: $global-spacing-small;
+        padding-right: $global-spacing-small;
+    }
+    
+    .c-chat__messages {
+        @include rem(padding-top, $global-spacing);
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+    }
+        .c-chat__message {
+            align-self: flex-start;
+            max-width: 80%;
+        }
+            .c-chat__message + .c-chat__message {
+                @include rem(margin-top, $global-spacing-small);
+            }
+
+        .c-chat__message--answer {
+            align-self: flex-end;
+        }
+
+        .c-chat__message--tip {
+            max-width: none;
+        }
+
+
+    .c-chat__bubble {
+        @include inuit-font-size($global-font-size);
+        @include rem('padding', $global-spacing-tiny $global-spacing-small);
+        will-change: transform;
+    }
+        .c-chat__bubble--question {
+            background-color: lighten($color-grey-light, 5%);
+            border-radius: 0 20px 20px 20px;
+            color: $color-black;
+        }
+        .c-chat__bubble--answer {
+            background-color: lighten($color-grey-dark, 10%);
+            border-radius: 20px 20px 0 20px;
+            color: $color-white;
+        }
+        .c-chat__bubble--tip {
+            background-color: $color-white;
+            border: 2px solid $color-grey-light;
+            border-radius: 20px;
+        }
+        .c-chat__bubble--minimised {
+            height: 43px;
+            overflow: hidden;
+        }
+            .c-chat__bubble--minimised:hover,
+            .c-chat__bubble--minimised:active {
+                height: auto;
+            }
+
+    .c-chat__input-container {
+        align-items: flex-end;
+        display: flex;
+        flex: 0 0 ($chat-input-height + ($global-spacing * 2));
+        height: ($chat-input-height + ($global-spacing * 2));
+        padding: $global-spacing-small;
+        position: relative;
+        transition: all .3s ease-in;
+        will-change: transition;
+    }
+        .c-chat__input-container--disabled {
+            // filter: blur(3px);
+        }
+            .c-chat__input-container--disabled .c-chat__input-option {
+                pointer-events: none;
+            }
+
+    .c-chat__input {
+        @include rem(padding-left, $global-spacing-tiny);
+        @include rem(padding-right, $global-spacing-tiny);
+        border: 1px solid $chat-input-border-color;
+        border-radius: 0;
+        font-family: inherit;
+        font-size: inherit;
+        min-height: $chat-input-height;
+        -webkit-appearance: none;
+        outline: none;
+        transition: $global-transition;
+        width: 100%;
+    }   
+        .c-chat__input:focus {
+            border-color: darken($chat-input-border-color, 20%);
+            box-shadow: 0 10px 40px $chat-input-border-color;
+        }
+
+        .c-chat__input.has-error {
+            background-color: lighten($color-coral, 20%);
+            border-color: $color-coral;
+        }
+
+    .c-chat__feedback {
+        @include rem(padding-left, $global-spacing-tiny);
+        @include rem(padding-right, $global-spacing-tiny);
+        background-color: lighten($color-coral, 20%);
+        border: 1px solid $color-coral;
+        bottom: 0;
+        height: 100%;
+        left: 0;
+        padding-top: $global-spacing-small;
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+    }
+
+    .c-chat__input-submit {
+        background-color: $color-grey;
+        border-radius: 100%;
+        height: $global-spacing;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        right: $global-spacing-small;
+        top: $global-spacing-small;
+        width: $global-spacing;
+    }
+        .c-chat__input-submit > svg {
+            fill: $color-white;
+            margin-top: 10px;
+            transform: rotate(270deg);
+        }
+
+    .c-chat__input-options {
+        // @include rem(padding-right, $global-spacing);
+        text-align: center;
+        white-space: nowrap;
+    }
+        .c-chat__input-option {
+            border-color: $chat-input-border-color;
+            flex-grow: 1;
+            height: $chat-input-height;
+            line-height: 3;
+            transition: none;
+            will-change: transform;
+        }
+        .c-chat__input-option:hover {
+            background-color: darken($color-white, 5%);
+        }
+
+        .c-chat__input-option--selected {
+            background-color: darken($color-white, 15%);
+        }
+
+        .c-chat__input-option--image {
+            border-radius: 100%;
+            height: $chat-input-image-height;
+            //overflow: hidden;
+            padding: 4px;
+            width: $chat-input-image-height;
+            &.c-chat__input-option--mb {
+                margin-bottom: 30px
+            }
+        }
+            .c-chat__input-option--image > img {
+                border-radius: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .c-chat__input-option--image > span {
+                display: block
+            }
+
+        .c-chat__input-option_image-text {
+            white-space: normal;
+            line-height: 20px;
+            margin-top: 10px;
+        }
+
+.c-chat__input-container--hidden {
+    flex: 0 0 $global-spacing-small;
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+/**
+ * Working on treating colour swatch options...not sure how best to deal with this
+ */
+.c-chat__input-container[data-question-name="CURCOLOURSELECT"],
+.c-chat__input-container[data-question-name="PERMAMBISELECT"],
+.c-chat__input-container[data-question-name="AMBICOLOURSELECT"] {
+    flex: 0 0 ($chat-input-image-height + ($global-spacing * 3));
+    height: ($chat-input-image-height + ($global-spacing * 3));
+}
+
+@include mq ($from: mobile) {
+    .c-chat__messages-container {
+        padding-left: $global-spacing;
+        padding-right: $global-spacing;
+    }
+
+    .c-chat__input-container {
+        padding: $global-spacing;
+        height: 160px;
+    }
+        .c-chat__input-option {
+            @include rem(padding-left, $global-spacing);
+            @include rem(padding-right, $global-spacing);
+        }
+        .c-chat__input-option--image {
+            padding: 4px;
+        }
+}
+
+@include mq ($until: mobile) {
+    .c-chat__input {
+        font-size: 16px;
+    }
+}

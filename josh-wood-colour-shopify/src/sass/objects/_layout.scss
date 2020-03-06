@@ -1,0 +1,223 @@
+/* Matrix/grid layouts
+   ====================================== */
+
+$layout-matrix-sizes: (
+    'huge': $global-spacing-huge,
+    'large': $global-spacing-large,
+    'small': $global-spacing-small
+);
+
+
+@each $layout-matrix-size, $layout-matrix-spacing in $layout-matrix-sizes {
+    /**
+     * 1. Cancel out the margin that's added to each layout item
+     * 2. Add a margin to each item for equal spacing
+     */
+    .o-layout--#{$layout-matrix-size}.o-layout--matrix {
+        // margin-bottom: ($layout-matrix-spacing * -1) !important; /* [1] */
+
+        > .o-layout__item {
+            margin-bottom: $layout-matrix-spacing !important; /* [2] */
+        }
+    }
+}
+
+@include mq ($until: tablet) {
+    .o-layout--huge {
+        margin-left: ($global-spacing-large * -1);
+
+        > .o-layout__item {
+            padding-left: $global-spacing-large;
+        }
+    }
+}
+
+@include mq ($until: mobile) {
+    .o-layout--huge.o-layout--matrix > .o-layout__item {
+        margin-bottom: $global-spacing-large !important;
+    }
+}
+
+
+
+/* Offset margins for layout items
+   (assuming 3 cols in the layout)
+   ====================================== */
+
+.o-layout--offset-tops {
+    > .o-layout__item {
+        margin-bottom: ($global-spacing * 5);
+        margin-bottom: 5vw;
+    }
+}
+
+@include mq ($from: tabletSmall) {
+    .o-layout--offset-tops {
+        > .o-layout__item:nth-child(3n+1) {
+            transform: translateY(($global-spacing * 2));
+            transform: translateY(2vw);
+        }
+        > .o-layout__item:nth-child(3n+2) {
+            transform: translateY(($global-spacing * 5));
+            transform: translateY(5vw);
+        }
+        > .o-layout__item:nth-child(3n+3) {
+            transform: translateY(0);
+        }
+
+        > .o-layout__item:nth-child(3n+3) {
+            margin-bottom: ($global-spacing * 10);
+            margin-bottom: 10vw;
+        }
+    }
+}
+
+@include mq ($from: mobile, $until: tabletSmall) {
+    .o-layout--offset-tops {
+        > .o-layout__item:nth-child(2n+2) {
+            transform: translateY(($global-spacing * 3));
+        }
+
+        > .o-layout__item:nth-child(2n+2) {
+            margin-bottom: ($global-spacing * 4);
+            margin-bottom: 10vw;
+        }
+    }
+}
+
+@include mq ($until: mobile) {
+    .o-layout--offset-tops > .o-layout__item {
+        margin-bottom: $global-spacing-large !important;
+    }
+}
+
+
+@include mq ($until: mobile) {
+    .o-layout--left-right-cols {
+        margin-left: ($global-spacing * -1);
+        width: calc(100% + #{$global-spacing * 2});
+
+        > .o-layout__item:nth-child(even) {
+            padding-left: $global-spacing-huge;
+        }
+        > .o-layout__item:nth-child(odd) {
+            padding-left: 0;
+            padding-right: $global-spacing-huge;
+        }
+    }
+}
+
+
+/* Offset layout items when used in a product grid
+   ====================================== */
+
+@include mq ($from: mobile, $until: tabletSmall) {
+    .o-layout--products {
+        margin-left: ($global-spacing-large * -1) !important;
+        margin-bottom: ($global-spacing * 4);
+        margin-bottom: 4vw;
+
+        > .o-layout__item {
+            margin-bottom: $global-spacing-large;
+            padding-left: $global-spacing-large !important;
+        }
+
+        > .o-layout__item:nth-child(odd) {
+            transform: translateY(($global-spacing * 3));
+            transform: translateY(4vw);
+        }
+
+        > .o-layout__item:nth-child(even) {
+            transform: translateY(($global-spacing * 8));
+            transform: translateY(10vw);
+        }
+    }
+}
+
+@include mq ($from: mobile) {
+    /**
+     * Good for up to 4 products
+     */
+    .o-layout--products {
+        margin-bottom: ($global-spacing * 4);
+        margin-bottom: 4vw;
+        
+        > .o-layout__item:nth-child(2) {
+            transform: translateY(($global-spacing * 3));
+            transform: translateY(4vw);
+        }
+
+        > .o-layout__item:nth-child(3) {
+            transform: translateY(($global-spacing * 8));
+            transform: translateY(9vw);
+        }
+
+        > .o-layout__item:nth-child(4) {
+            transform: translateY(($global-spacing * 5)) translateX(($global-spacing * 4));
+            transform: translateY(8vw) translateX(8vw);
+        }
+    }
+
+    /**
+     * Good for up to 8 products, assuming a grid of 3 columns
+     */
+    .o-layout--products2 {
+        margin-bottom: ($global-spacing * 4);
+        margin-bottom: 4vw;
+
+        > .o-layout__item:nth-child(1) {
+            transform: translateY(($global-spacing * 4));
+            transform: translateY(5vw);
+        }
+
+        > .o-layout__item:nth-child(3) {
+            transform: translateY(($global-spacing * 5) * -1);
+            transform: translateY(-6vw);
+        }
+
+        > .o-layout__item:nth-child(4) {
+            transform: translateY(($global-spacing * 6));
+            transform: translateY(8vw);
+        }
+
+        > .o-layout__item:nth-child(5) {
+            transform: translateY(($global-spacing * 4));
+            transform: translateY(5vw);
+        }
+
+        > .o-layout__item:nth-child(6) {
+            transform: translateY(($global-spacing * 3) * -1);
+            transform: translateY(-3vw);
+        }
+    }
+        .o-layout--products2[data-size="1"] {
+            margin-bottom: (($global-spacing * 4) * -1);
+            margin-bottom: -4vw;
+
+            > .o-layout__item:nth-child(1) {
+                transform: translateY(($global-spacing * 6) * -1);
+                transform: translateY(-8vw);
+            }
+        }
+        .o-layout--products2[data-size="2"] {
+            margin-bottom: (($global-spacing * 4) * -1);
+            margin-bottom: -4vw;
+
+            > .o-layout__item:nth-child(1) {
+                transform: translateY(($global-spacing * 2) * -1);
+                transform: translateY(-2vw);
+            }
+
+            > .o-layout__item:nth-child(2) {
+                transform: translateY(($global-spacing * 6) * -1);
+                transform: translateY(-8vw);
+            }
+        }
+        .o-layout--products2[data-size="4"] {
+            > .o-layout__item:nth-child(4) {
+                margin-left: 33.3%;
+                transform: translateY(($global-spacing * 4)) translateY(($global-spacing * 4) * -1);
+                transform: translateY(4vw) translateX(-10vw);
+            }
+        }
+}

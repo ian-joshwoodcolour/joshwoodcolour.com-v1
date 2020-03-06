@@ -1,0 +1,67 @@
+.c-svg {
+    height: $global-spacing;
+    width: $global-spacing;
+}
+.c-svg--large {
+    height: $global-spacing-large;
+    width: $global-spacing-large;
+}
+
+
+.c-svg--fluid {
+    height: auto;
+    width: 100%;
+}
+
+
+.c-svg--white,
+.c-svg--white * {
+    fill: $color-white;
+}
+
+.c-svg--black,
+.c-svg--black * {
+    fill: $color-black;
+}
+
+.c-svg--currentcolor,
+.c-svg--currentcolor * {
+    fill: currentColor;
+}
+
+
+.c-svg--w34 {
+    height: 34px;
+    width: 34px;
+}
+
+.c-svg--w18 {
+    height: 18px;
+    width: 18px;
+}
+.c-svg--w16 {
+    height: 16px;
+    width: 16px;
+}
+.c-svg--w14 {
+    height: 14px;
+    width: 14px;
+}
+.c-svg--w12 {
+    height: 12px;
+    width: 12px;
+}
+
+
+.c-svg-jw-logo {
+    height: 52px;
+    width: 80px;
+}
+
+
+.c-svg-fill--blonde {
+    fill: $color-blonde;
+}
+.c-svg-fill--brunette {
+    fill: $color-brunette;
+}

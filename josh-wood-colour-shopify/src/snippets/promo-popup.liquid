@@ -1,0 +1,100 @@
+{%- if settings.promo_popup_active -%}
+    <div class="c-modal c-modal--promo js-modal u-hide" data-modal="promo-popup">
+        <div class="c-modal__wrapper u-p u-p+@mobile u-shadow t-white u-flex@mobile js-modal-wrapper">
+            <div class="c-modal__layout o-layout u-stack-layout@mobile u-flex@mobile">
+                <div class="o-layout__item u-7/12@mobile c-modal__image-container">
+                    <div class="c-modal__image" style="background-image: url('{{ settings.promo_popup_image | img_url: '800x' }}');"></div>
+                </div><div class="o-layout__item u-5/12@mobile u-flex@mobile u-direction-column u-justify-between">
+                    <div class="c-modal__content-container u-flex@mobile u-pl@mobile u-direction-column u-justify-center u-will-change js-promo-popup-wrapper">
+                        <div class="u-heading u-h3 u-mb- u-mb@mobile" role="heading">{{ settings.promo_popup_title }}</div>
+
+                        <div class="js-promo-popup-form-container">
+                            {%- if settings.promo_popup_text -%}
+                                <p class="u-mb">{{ settings.promo_popup_text }}</p>
+                            {%- endif -%}
+
+                            {%- if settings.promo_popup_email_capture_active -%}
+                                <form action="{{ settings.mailchimp_newsletter_post_url }}" method="post" class="js-promo-popup-form">
+                                    <input type="email" name="{{ settings.mailchimp_newsletter_email_field_name }}" placeholder="Your email address" class="c-form__input u-1/1" required aria-label="Your email address">
+                                    <input type="hidden" name="{{ settings.mailchimp_newsletter_key }}">
+
+                                    <div class="u-font-size-12 u-leading-14 u-color-grey u-mv-">
+                                        {{ settings.promo_popup_footnote }}
+                                    </div>
+                                    <div class="c-form__field">
+                                        <div class="u-relative">
+                                            <input type="checkbox" id="newsletter_confirm_popup" name="" class="c-form__checkbox u-mr--" required>
+                                            <label class="c-form__label u-font-size-12 u-leading-14 u-color-grey u-flex" for="newsletter_confirm_popup">
+                                                <span>{{- settings.promo_popup_email_capture_terms_label -}}</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="c-form__field">
+                                        <div class="js-promo-popup-feedback u-color-coral u-weight-bold u-font-size-14 u-leading-14 u-fade-in"></div>
+                                    </div>
+
+                                    <button class="c-button c-button--black u-1/1 u-mt" type="submit">{{ settings.promo_popup_email_capture_submit_label }}</button>
+                                    <button class="c-button c-button--white u-color-grey u-1/1 u-p0 u-mt- js-modal-promo-popup-close u-hide@mobile" type="button">No thanks</button>
+                                </form>
+                            {%- else -%}
+                                {%- if settings.promo_popup_primary_cta_label and settings.promo_popup_primary_cta_url -%}
+                                    <a href="{{ settings.promo_popup_primary_cta_url }}" class="c-button c-button--black u-1/1 js-promo-popup-primary-cta u-mb-">
+                                        {{ settings.promo_popup_primary_cta_label }}
+                                    </a>
+                                {%- endif -%}
+                                {%- if settings.promo_popup_secondary_cta_label and settings.promo_popup_secondary_cta_url -%}
+                                    <a href="{{ settings.promo_popup_secondary_cta_url }}" class="c-button c-button--black c-button--ghost u-1/1 u-mt- u-mt0@mobile js-promo-popup-secondary-cta">
+                                        {{ settings.promo_popup_secondary_cta_label }}
+                                    </a>
+                                {%- endif -%}
+                            {%- endif -%}
+                        </div>
+
+                        {%- if settings.promo_popup_email_capture_active -%}
+                            <div class="js-promo-popup-form-success u-hide">
+                                <p>{{ settings.promo_popup_email_capture_success_text }}</p>
+
+                                {%- if settings.promo_popup_email_capture_success_discount -%}
+                                    <input text="text" class="u-border-grey-2 u-p u-heading u-h5 u-1/1 u-text-center js-copy-target" value="{{- settings.promo_popup_email_capture_success_discount -}}">
+                                    <button class="c-button c-button--white u-color-grey u-pt0 u-pb- u-text-center u-font-size-14 u-1/1 u-will-change js-copy" data-clipboard-text="{{- settings.promo_popup_email_capture_success_discount -}}" data-clipboard-target=".js-copy-target">
+                                        Copy to clipboard
+                                    </button>
+                                {%- endif -%}
+
+                                {%- if settings.promo_popup_primary_cta_label and settings.promo_popup_primary_cta_url -%}
+                                    <a href="{{ settings.promo_popup_primary_cta_url }}" class="c-button c-button--black u-1/1 js-promo-popup-primary-cta u-mb-">
+                                        {{ settings.promo_popup_primary_cta_label }}
+                                    </a>
+                                {%- endif -%}
+                            </div>
+                        {%- endif -%}
+                    </div>
+
+                    {%- unless settings.promo_popup_email_capture_active -%}
+                        <footer class="u-flex-end u-font-size-12 u-color-grey u-mt u-mt+@mobile u-pl@mobile">
+                            {{ settings.promo_popup_footnote }}
+                        </footer>
+                    {%- endunless -%}
+                </div>
+            </div>
+
+            {%- assign modal_class = 'promo-popup-close' -%}
+            {%- assign modal_name = 'promo-popup' -%}
+            {% include 'modal-close-button' %}
+            {%- assign modal_class = 'close' -%}
+        </div>
+    </div>
+
+    <script>
+    window.globalData.promoPopup = {
+        cookieDuration: '{{ settings.promo_popup_cookie_duration | default: 0 }}',
+        isActive: {{ settings.promo_popup_active }},
+        isEmailCapture: {{ settings.promo_popup_email_capture_active }},
+        modalTimeout: {{ settings.promo_popup_modal_timeout | default: 0 | times: 1000 }},
+        primaryCTAURL: '{{ settings.promo_popup_primary_cta_url }}',
+        secondaryCTAURL: '{{ settings.promo_popup_secondary_cta_url }}',
+        title: '{{ settings.promo_popup_title }}'
+    };
+    </script>
+    <script src="{{ 'promo-popup.js' | asset_url }}" async defer></script>
+{%- endif -%}

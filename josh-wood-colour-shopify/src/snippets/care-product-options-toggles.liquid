@@ -1,0 +1,34 @@
+<div class="o-layout u-mt {{ toggle_container_classes }} js-care-select">
+  <div class="o-layout__item u-mb u-no-wrap">
+    <strong class="u-block u-mb-- u-heading u-spacing-0">Select Colour:</strong>
+    <button class="c-button c-button--round c-button--small c-button--no-block c-button--{% if default_care_colour == 'blonde' %}selected{% else %}selectable{% endif %} js-care-colour-selector u-mr--" data-colour="blonde" type="button">
+      <svg class="c-svg c-svg-fill--blonde c-svg--w16 u-mr-- u-text-inherit" viewbox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="16"/></svg>
+      Blonde
+    </button>
+    <button class="c-button c-button--round c-button--small c-button--no-block c-button--{% if default_care_colour == 'brown' %}selected{% else %}selectable{% endif %} js-care-colour-selector" data-colour="brown" type="button">
+      <svg class="c-svg c-svg-fill--brunette c-svg--w16 u-mr-- u-text-inherit" viewbox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="16"/></svg>
+      Brunette
+    </button>
+  </div>
+  <div class="o-layout__item u-no-wrap">
+    <strong class="u-block u-mb-- u-heading u-spacing-0">
+      Select&nbsp;
+      {%- if product.title contains 'Shade Shot' -%}
+        Shade
+      {%- else -%}
+        Type
+      {%- endif -%}:
+    </strong>
+    {% for associated_product in associated_products %}
+      {%- if product.title contains 'Shade Shot' -%}
+        {%- assign type_title = associated_product.title | replace: 'Shade Shot Gloss', ''  -%}
+      {%- else -%}
+        {%- assign type_title = associated_product.title | replace: ' Shade Shot', '' | replace: ' Blonde', '' | replace: ' Brunette', '' | replace: ' Shampoo', ''  | replace: ' Conditioner', '' -%}
+      {%- endif -%}
+
+      <button type="button" class="c-button c-button--round c-button--small c-button--no-block c-button--{% if product.title == associated_product.title %}selected{% else %}selectable{% endif %} u-mr-- js-care-type-selector" data-tags="{{ associated_product.tags }}" data-product-id="{{ associated_product.id }}" data-product-type="{{ type_title }}" style="display: {% if associated_product.tags contains default_care_colour %}inline-block{% else %}none{% endif %};">
+        {{ type_title }}
+      </button>
+    {% endfor %}
+  </div>
+</div>

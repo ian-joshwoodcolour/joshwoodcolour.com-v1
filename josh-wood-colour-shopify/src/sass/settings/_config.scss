@@ -1,0 +1,52 @@
+///* ========================================================================
+//   #CONFIG
+//   ======================================================================== */
+
+// A map of global config settings. Define any project-level configuration,
+// feature switches, etc. in here.
+
+$inuit-config: (
+  env: dev,
+  healthcheck: false,
+  debug: true,
+);
+
+// You can access data in this map using the following function:
+//
+// inuit-config(<key>)
+//
+// Example usage:
+//
+// @if (inuit-config(debug) == true) { ...  }
+
+@function inuit-config($key) {
+  @return map-get($inuit-config, $key);
+}
+
+$inuit-fractions: 1 12;
+
+
+$inuit-global-font-size: 15px;
+$inuit-global-line-height: 27px;
+$inuit-font-size-h1: 70px;
+$inuit-font-size-h2: 48px;
+$inuit-font-size-h3: 36px;
+$inuit-font-size-h4: 30px;
+$inuit-font-size-h5: 22px;
+$inuit-font-size-h6: 18px;
+
+$global-spacing: $inuit-global-spacing-unit;
+$global-spacing-small: round($inuit-global-spacing-unit * $inuit-global-spacing-unit-factor-small);
+$global-spacing-tiny: round($inuit-global-spacing-unit * $inuit-global-spacing-unit-factor-tiny);
+$global-spacing-large: round($inuit-global-spacing-unit * $inuit-global-spacing-unit-factor-large);
+$global-spacing-huge: round($inuit-global-spacing-unit * $inuit-global-spacing-unit-factor-huge);
+
+$inuit-wrapper-width: 1300px;
+
+$mq-breakpoints: (
+    mobileSmall:  540px,
+    mobile: 741px,
+    tabletSmall: 769px,
+    tablet: 1025px,
+    desktop: 1300px
+);

@@ -1,0 +1,20 @@
+$section-responsive-spacing: 6vmin;
+
+.o-section {
+    @include rem(padding-bottom, $global-spacing-huge);
+    @include rem(padding-top, $global-spacing-large);
+    padding-bottom: calc(#{$global-spacing} + #{$section-responsive-spacing});
+    padding-top: calc(#{$global-spacing} + #{$section-responsive-spacing});
+}
+
+// .o-section + .shopify-section > .o-section, {
+main > .o-section:first-of-type {
+    padding-top: calc(#{$global-spacing} + #{($section-responsive-spacing / 2)});
+}
+
+
+// .shopify-section + .shopify-section > .o-section,
+// .o-section + .shopify-section:empty + .o-section,
+// .o-section + .o-section {
+//     padding-top: 0;
+// }

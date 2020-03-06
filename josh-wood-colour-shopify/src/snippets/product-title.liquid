@@ -1,0 +1,11 @@
+<h1 class="u-h3 u-heading {% unless IS_CARE_COLLECTION or IS_SHADE_SHOT_PLUS_COLLECTION %}js-product-name{% endunless %}" itemprop="name">
+  {%- if IS_SHADE_SHOT_PLUS_COLLECTION -%}
+    Permanent Colour and Shade Shot Plus
+  {%- elsif product.type == 'Shade Shot' -%}
+    Shade Shot Gloss
+  {%- elsif IS_CARE_COLLECTION -%}
+    {{ product.type }}
+  {%- else -%}
+    {{ product.title }}
+  {%- endif -%}
+</h1>

@@ -1,0 +1,11 @@
+<button type="{% if IS_SHADE_SHOT_PLUS_COLLECTION %}button{% else %}submit{% endif %}" name="add" class="c-button c-button--black c-button--block {{ button_classes }} js-add" data-product-id="{{ product.id }}"
+data-variant-id="{{ product.selected_or_first_available_variant.id }}" data-handle="{{ product.handle }}" data-source="{{ button_source }}" data-price="{{ product.price }}" {%- if product.available != true or product.selected_or_first_available_variant.inventory_quantity == 0 -%}disabled="disabled"{%- endif -%}>
+    {%- if product.available != true or product.selected_or_first_available_variant.inventory_quantity == 0 -%}
+        {{ 'products.product.sold_out' | t }}
+    {%- else -%}
+        {{ 'products.product.add_to_cart' | t }}
+        {%- if button_has_price -%}
+            ({{ product.price | money_without_trailing_zeros }})
+        {%- endif -%}
+    {%- endif -%}
+</button>

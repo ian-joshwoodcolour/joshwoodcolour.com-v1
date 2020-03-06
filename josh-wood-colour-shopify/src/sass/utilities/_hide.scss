@@ -1,0 +1,21 @@
+$hide-breakpoints: mobile, tabletSmall, tablet;
+
+
+.u-hide {
+    @include inuit-hidden-visually();
+}
+
+
+@each $hide-breakpoint in $hide-breakpoints {
+    @include mq ($from: $hide-breakpoint) {
+        .u-hide\@#{$hide-breakpoint} {
+            @include inuit-hidden-visually();
+        }
+    }
+
+    @include mq ($until: $hide-breakpoint) {
+        .u-show\@#{$hide-breakpoint} {
+            @include inuit-hidden-visually();
+        }
+    }
+}

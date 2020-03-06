@@ -1,0 +1,40 @@
+<div class="o-layout u-stack-layout@mobile u-flex@mobile">
+    <div class="o-layout__item u-7/12@mobile">
+        {%- assign card_size = 'shorter' -%}
+        {%- assign has_frame = true -%}
+        {%- assign frame_position = 'left' -%}
+        {%- assign frame_classes = 'gold' -%}
+        {%- if featured_photo -%}
+            {%- assign photo = featured_photo | img_url: '1000x700' | crop: 'center' -%}
+            {%- assign photo = 'https://cdn.shopify.com/s/files/1/2233/0251/files/girls-feature_18bf0c1e-a600-4a94-838d-28e7fc36b213.jpg?7643183164032774664' -%}
+        {%- else -%}
+            {%- assign photo = 'placeholder-image.jpg' | asset_url -%}
+        {%- endif -%}
+        {%- assign classes = 'u-no-mw' -%}
+        {% include 'card' %}
+    </div><div class="o-layout__item u-5/12@mobile u-flex u-direction-column u-justify-center">
+        <div class="u-pl+@mobile">
+            <div class="u-align-items-start u-color-grey">
+                {%- if featured_tags -%}
+                    {%- assign article_tags = featured_tags -%}
+                    {% include 'article-tags' -%}
+                {%- endif -%}
+            </div>
+
+            <a href="{{ featured_cta_url }}">
+                <h2 class="u-heading u-weight-bold u-h3 u-mt-- u-mb">{{ featured_title }}</h2>
+            </a>
+
+            <p>{{ featured_text }}</p>
+        
+            {%- if featured_cta_label and featured_cta_url -%}
+                <a href="{{ featured_cta_url }}" class="c-icon-link u-mt">
+                    {{ featured_cta_label }}
+
+                    {%- assign classes = 'c-svg c-svg--currentcolor c-svg--w18 u-ml-' -%}
+                    {% include 'right-arrow-icon' %}
+                </a>
+            {%- endif -%}
+        </div>
+    </div>
+</div>

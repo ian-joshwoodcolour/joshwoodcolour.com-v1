@@ -1,0 +1,46 @@
+.c-style-guide {
+    display: flex;
+    min-height: 100vh;
+}
+    .c-style-guide__left {
+        align-items: flex-start;
+        background-color: darken($color-white, 3%);
+        border-right: 2px solid $color-grey-light;
+        display: flex;
+        flex-direction: column;
+        left: 0;
+        height: 100vh;
+        overflow-y: scroll; /* [3] */
+        -webkit-overflow-scrolling: touch;
+        padding: $global-spacing-large $global-spacing;
+        position: fixed;
+        touch-action: manipulation;
+        width: 400px;
+    }
+        .c-style-guide__logo {
+            height: 70px;
+            position: absolute;
+            width: 100px;
+        }
+
+        .c-style-guide__nav {
+            margin-top: 120px;
+        }
+
+
+    .c-style-guide__right {
+        align-items: stretch;
+        display: flex;
+        flex-direction: column;
+        margin-left: calc(300px + #{$global-spacing-huge});
+        overflow: hidden;
+        padding: $global-spacing-large;
+        width: 100%;
+    }
+
+    .c-style-guide__section {
+        border-top: 2px solid $color-grey-light;
+        margin-bottom: $global-spacing-huge;
+        margin-top: $global-spacing-huge;
+        padding-top: $global-spacing-huge;
+    }

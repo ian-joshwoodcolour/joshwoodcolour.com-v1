@@ -1,0 +1,119 @@
+{%- assign product_url = '' -%}
+{%- assign collection_url = '' -%}
+{%- assign background_colour = '' -%}
+{%- assign background_image = '' -%}
+{%- assign badge_theme = '' -%}
+{%- assign badge_text = '' -%}
+{%- assign text = '' -%}
+{%- assign text_colour = '' -%}
+
+{%- for block in section.blocks -%}
+    {%- if block.settings.product_url == product.url -%}
+        {%- assign product_url = block.settings.product_url -%}
+        {%- assign collection_url = block.settings.collection_url -%}
+        {%- assign background_colour = block.settings.background_colour -%}
+        {%- if block.settings.background_image != blank -%}
+            {%- assign background_image = block.settings.background_image | img_url: 'x240' -%}
+        {%- endif -%}
+        {%- assign text_colour = block.settings.text_colour -%}
+        {%- assign badge_theme = block.settings.badge_theme -%}
+        {%- assign badge_text = block.settings.badge_text -%}
+        {%- assign text = block.settings.text | escape | newline_to_br | strip_newlines-%}
+        {%- break -%}
+    {%- endif -%}
+{%- endfor -%}
+
+<section class="u-transition js-product-promo-banner" role="banner" style="background-color: {{ background_colour }}; background-image: url('{% if background_image != blank %}{{ background_image | img_url: 'x240' }}{% endif %}'); display: {% if product_url != blank %}block{% else %}none{% endif %}; background-repeat: no-repeat; background-size: cover;">
+    <div class="o-wrapper u-pv u-flex u-justify-center u-align-items-center">
+        <div class="u-badge u-transition u-mr js-product-promo-banner-badge" data-theme="{{ badge_theme }}">{{ badge_text }}</div>
+        <div class="u-heading u-h5 u-mv-@mobile u-transition js-product-promo-banner-text" data-colour="{{ text_colour }}">{{ text }}</div>
+    </div>
+</section>
+
+<script>
+window.globalData.productPromoBanners = [
+    {%- for block in section.blocks -%}
+        {%- assign collection_matched = false -%}
+        {%- for collection in product.collections -%}
+            {%- if block.settings.collection_url contains collection.handle -%}
+                {%- assign collection_matched = true -%}
+                {%- break -%}
+            {%- endif -%}
+        {%- endfor -%}
+        {%- if collection_matched -%}
+            {
+                productURL: "{{ block.settings.product_url }}",
+                collectionURL: "{{ block.settings.collection_url }}",
+                backgroundColour: "{{ block.settings.background_colour }}",
+                backgroundImage: "{% if block.settings.background_image != blank %}{{ block.settings.background_image | img_url: 'x240' }}{% endif %}",
+                badgeTheme: "{{ block.settings.badge_theme }}",
+                badgeText: "{{ block.settings.badge_text }}",
+                text: "{{ block.settings.text | escape | newline_to_br | strip_newlines }}",
+                textColour: "{{ block.settings.text_colour }}",
+            },
+        {%- endif -%}
+    {%- endfor -%}
+];
+</script>
+ 
+{% schema %}
+{
+    "name": "Product promo banner",
+    "blocks": [
+        {
+            "name": "Banner content",
+            "type": "object",
+            "settings": [
+                {
+                    "type": "url",
+                    "id": "product_url",
+                    "label": "Product"
+                },
+                {
+                    "type": "url",
+                    "id": "collection_url",
+                    "label": "Collection"
+                },
+                {
+                    "type": "color",
+                    "id": "background_colour",
+                    "label": "Background colour"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "background_image",
+                    "label": "Background image"
+                },
+                {
+                    "type": "select",
+                    "id": "text_colour",
+                    "label": "Text colour",
+                    "options": [
+                        {"value": "white", "label": "White"},
+                        {"value": "black", "label": "Black"}
+                    ]
+                },
+                {
+                    "type": "select",
+                    "id": "badge_theme",
+                    "label": "Badge style",
+                    "options": [
+                        {"value": "black", "label": "Black with white text"},
+                        {"value": "white", "label": "White with black text"}
+                    ]
+                },
+                {
+                    "type": "text",
+                    "id": "badge_text",
+                    "label": "Badge text"
+                },
+                {
+                    "type": "textarea",
+                    "id": "text",
+                    "label": "Banner text"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,142 @@
+<div class="c-form__field u-flex">
+    <div class="u-6/12">
+        <label class="c-form__label" for="AddressFirstName_{{ form.id }}">{{ 'customer.addresses.first_name' | t }}</label>
+        <input
+            type="text"
+            class="c-form__input u-1/1"
+            name="address[first_name]"
+            id="AddressFirstName_{{ form.id }}"
+            value="{{ form.first_name }}"
+            autocapitalize="words"
+            required
+        >
+    </div>
+    <div class="u-6/12 u-ml-">
+        <label class="c-form__label" for="AddressLastName_{{ form.id }}">{{ 'customer.addresses.last_name' | t }}</label>
+        <input
+            type="text"
+            class="c-form__input u-1/1"
+            name="address[last_name]"
+            id="AddressLastName_{{ form.id }}"
+            value="{{ form.last_name }}"
+            autocapitalize="words"
+            required
+        >
+    </div>
+</div>
+
+<div class="c-form__field">
+    <label class="c-form__label" for="AddressCompany_{{ form.id }}">{{ 'customer.addresses.company' | t }}</label>
+    <input
+        type="text"
+        class="c-form__input u-1/1"
+        name="address[company]"
+        id="AddressCompany_{{ form.id }}"
+        value="{{ form.company }}"
+        autocapitalize="words"
+    >
+</div>
+
+<div class="c-form__field">
+    <label class="c-form__label" for="AddressAddress1_{{ form.id }}">{{ 'customer.addresses.address1' | t }}</label>
+    <input
+        type="text"
+        class="c-form__input u-1/1"
+        name="address[address1]"
+        id="AddressAddress1_{{ form.id }}"
+        value="{{ form.address1 }}"
+        autocapitalize="words"
+        required
+    >
+</div>
+
+<div class="c-form__field">
+    <label class="c-form__label" for="AddressAddress2_{{ form.id }}">{{ 'customer.addresses.address2' | t }}</label>
+    <input
+        type="text"
+        class="c-form__input u-1/1"
+        name="address[address2]"
+        id="AddressAddress2_{{ form.id }}"
+        value="{{ form.address2 }}"
+        autocapitalize="words"
+    >
+</div>
+
+<div class="c-form__field">
+    <label class="c-form__label" for="AddressCity_{{ form.id }}">{{ 'customer.addresses.city' | t }}</label>
+    <input
+        type="text"
+        class="c-form__input u-1/1"
+        name="address[city]"
+        id="AddressCity_{{ form.id }}"
+        value="{{ form.city }}"
+        autocapitalize="words"
+        required
+    >
+</div>
+
+<div class="c-form__field">
+    <label class="c-form__label" for="AddressCountry_{{ form.id }}">{{ 'customer.addresses.country' | t }}</label>
+    <div class="custom-select custom-select--grey-border t-white"> 
+        <select
+            name="address[country]"
+            class="u-1/1"
+            id="AddressCountry_{{ form.id }}"
+            class="address-country-option"
+            data-form-id="{{ form.id }}"
+            data-default="{{ form.country }}"
+            required
+        >
+            {{ country_option_tags }}
+        </select>
+    </div>
+</div>
+
+<div class="c-form__field">
+    <div id="AddressProvinceContainer_{{ form.id }}" style="display: none">
+        <label class="c-form__label" for="AddressProvince_{{ form.id }}">{{ 'customer.addresses.province' | t }}</label>
+        <div class="custom-select t-white">
+            <select
+                name="address[province]"
+                id="AddressProvince_{{ form.id }}"
+                data-default="{{ form.province }}"
+            >
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="c-form__field">
+    <label class="c-form__label" for="AddressZip_{{ form.id }}">{{ 'customer.addresses.zip' | t }}</label>
+    <input
+        type="text"
+        class="c-form__input"
+        name="address[zip]"
+        id="AddressZip_{{ form.id }}"
+        value="{{ form.zip }}"
+        autocapitalize="characters"
+        required
+    >
+</div>
+
+<div class="c-form__field">
+    <label class="c-form__label" for="AddressPhone_{{ form.id }}">{{ 'customer.addresses.phone' | t }}</label>
+    <input
+        type="tel"
+        class="c-form__input"
+        name="address[phone]"
+        id="AddressPhone_{{ form.id }}"
+        value="{{ form.phone }}"
+        pattern="[0-9\-]*"
+        required
+    >
+</div>
+
+<div class="c-form__field">
+    {{ form.set_as_default_checkbox }}
+
+    <label class="c-form__label" for="address_default_address_{{ form.id }}">{{ 'customer.addresses.set_default' | t }}</label>
+</div>
+
+
+<button type="submit" class="c-button c-button--black c-button--wide u-mt">Submit</button>

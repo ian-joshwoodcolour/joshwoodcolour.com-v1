@@ -1,0 +1,150 @@
+$quote-tabs-max-width: 800px;
+$quote-tab-opacity--inactive: 0.3;
+$quote-tab-opacity--hover: 0.6;
+
+
+.c-quote-tabs__quotes {
+    overflow: hidden;
+}
+
+/**
+ * 1. Hide all quotes by default
+ */
+.c-quote-tabs__quote {
+    display: none; /* [1] */
+}
+    /**
+     * 1. Show active quotes
+     */
+    .c-quote-tabs__quote--active {
+        display: block; /* [1] */
+    }
+
+
+/**
+ * 1. Center within the tabs' parent container
+ */
+.c-quote-tabs__tabs {
+    display: flex;
+    margin-left: auto; /* [1] */
+    margin-right: auto; /* [1] */
+    max-width: $quote-tabs-max-width;
+}
+    /**
+     * 1. Ensure the cursor is always in 'hover' state
+     * 2. Allow the tabs to take up more space if available
+     * 3. Dim the buttons if they are not active
+     */
+    .c-quote-tabs__tab {
+        cursor: pointer; /* [1] */
+        display: inline-block;
+        flex-grow: 1; /* [2] */
+        justify-content: space-between;
+        opacity: $quote-tab-opacity--inactive; /* [3] */
+        outline: none;
+        padding: 0;
+        transition: $global-transition;
+        will-change: opacity;
+    }
+        /**
+         * 1. Add left spacing between buttons
+         */
+        .c-quote-tabs__tab + .c-quote-tabs__tab {
+            margin-left: $global-spacing-large; /* [1] */
+            margin-left: 15vmin;
+        }
+
+        /**
+         * 1. Show a hover state so the logos don't appear 'disabled'
+         */
+        .c-quote-tabs__tab:hover,
+        .c-quote-tabs__tab:active {
+            opacity: $quote-tab-opacity--hover;
+            transform: translateY(-2px);
+        }
+
+        /**
+         * 1. Show the button at full opacity when it is selected
+         * 2. Prevent any interactive cursor state
+         */
+        .c-quote-tabs__tab--active {
+            opacity: 1; /* [1] */
+            pointer-events: none; /* [2] */
+        }
+
+
+@include mq ($from: mobileSmall) {
+    /**
+     * 1. Increase the spacing between buttosn when we have more space
+     */
+    .c-quote-tabs__tab + .c-quote-tabs__tab {
+        margin-left: $global-spacing-huge; /* [1] */
+    }
+    
+    .c-quote-tabs__tab {
+        justify-content: center;
+    }
+}
+
+@include mq ($until: mobileSmall) {
+    /**
+     * 1. Only show 3 buttons max on smaller mobile devices
+     */
+    .c-quote-tabs__panel:nth-child(n+4),
+    .c-quote-tabs__tab:nth-child(n+4) {
+        display: none; /* [1] */
+    }
+}
+
+
+
+
+// FINISH THIS
+
+
+$quote-tabs-max-width: 800px;
+$quote-tab-opacity--inactive: 0.3;
+$quote-tab-opacity--hover: 0.6;
+
+
+/**
+ * 1. Center within the tabs' parent container
+ */
+.c-quote-tabs__tabs {
+    display: flex;
+    justify-content: center;
+    margin-left: auto; /* [1] */
+    margin-right: auto; /* [1] */
+    max-width: $quote-tabs-max-width;
+}
+/**
+ * 1. Ensure the cursor is always in 'hover' state
+ * 2. Allow the tabs to take up more space if available
+ * 3. Dim the buttons if they are not active
+ */
+.c-quote-tabs__tab2 {
+    background-color: $color-grey-light;
+    cursor: pointer; /* [1] */
+    display: inline-block;
+    border-radius: 100%;
+    height: $global-spacing-tiny;
+    padding: 0;
+    text-indent: -9999px;
+    transition: $global-transition;
+    width: $global-spacing-tiny;
+}
+/**
+ * 1. Show a hover state so the logos don't appear 'disabled'
+ */
+.c-quote-tabs__tab2:hover,
+.c-quote-tabs__tab2:active,
+.c-quote-tabs__tab2.is-active {
+    background-color: $color-primary;
+}
+
+/**
+ * 1. Increase the spacing between buttosn when we have more space
+ */
+.c-quote-tabs__tab2 + .c-quote-tabs__tab2 {
+    margin-left: $global-spacing-tiny; /* [1] */
+}

@@ -1,0 +1,3 @@
+.t-primary {
+    @include theme($color-primary, $color-white);
+}

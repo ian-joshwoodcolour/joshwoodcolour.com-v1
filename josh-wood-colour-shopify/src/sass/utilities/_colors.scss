@@ -1,0 +1,22 @@
+$text-colors: (
+    'white': $color-white,
+    'black': $color-black,
+    'grey': $color-grey,
+    'grey-dark': $color-grey-dark,
+    'coral': $color-coral,
+    'shamrock': $color-shamrock
+);
+
+@each $text-color-name, $text-color-color in $text-colors {
+    .u-color-#{$text-color-name} {
+        color: $text-color-color !important;
+    }
+}
+
+
+[data-colour="black"] {
+    color: $color-black;
+}
+[data-colour="white"] {
+    color: $color-white;
+}

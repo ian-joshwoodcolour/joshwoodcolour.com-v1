@@ -1,0 +1,47 @@
+<div class="c-modal c-modal--cart-summary js-modal u-hide" data-modal="cart-summary">
+    <div id="cart-container" class="c-modal__wrapper u-p u-shadow t-white js-modal-wrapper">
+        <header class="c-modal__header u-heading u-h5 u-weight-bold u-mb" role="heading">
+            <a href="/cart"><span class="js-cart-count">{{ cart.item_count }}</span> items</a>
+        </header>
+
+        <ul class="o-ui-list c-modal__scroller js-cart-summary-modal-items">
+            {%- if cart.item_count > 0 -%}
+                {%- for item in cart.items -%}
+                    {%- assign cart_summary = true -%}
+                    {% include 'cart-item' -%}
+                {%- endfor -%}
+            {%- else -%}
+                <li class="o-ui-list__item">{{ 'cart.general.empty' | t }}</li>
+            {%- endif -%}
+        </ul>
+
+        <footer class="c-modal__footer">
+            <div class="u-mt">
+                {% include 'cart-discount-and-total-values' %}
+            </div>
+
+            <a href="/cart" class="c-button c-button--black u-1/1 u-mt">
+                View cart
+            </a>
+            <a href="/collections/all" class="c-button c-button--black c-button--ghost u-1/1 u-mt- js-modal-close" data-modal="cart-summary">
+                {{ 'cart.general.continue_browsing_html' | t }}
+            </a>
+            <a href="/cart" class="c-button c-button--black u-1/1 u-hide">
+                Checkout
+            </a>
+
+            <div class="u-mt">
+                {% include 'faq-and-returns-cta' %}
+            </div>
+        </footer>
+    </div>
+
+    {%- assign modal_name = 'cart-summary' -%}
+    {% include 'modal-close-button' %}
+</div>
+
+<script type="text/template" data-cart-summary-template>
+{%- assign cart_summary = true -%}
+{%- assign cart_summary_template = true -%}
+{% include 'cart-item' -%}
+</script>

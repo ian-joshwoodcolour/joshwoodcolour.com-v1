@@ -1,0 +1,42 @@
+<div class="o-layout o-layout--large u-stack-layout@mobile">
+    <div class="o-layout__item u-6/12@mobile">
+        <div class="c-card c-card--default c-card--framed-right-gold-small">
+            <div class="c-card__frame u-parallax" data-rellax-percentage="0.5" data-rellax-speed="1"></div>
+            <div class="c-card__image-wrapper">
+                <div style="background-image: url({{ section.blocks[0].settings.photo_1 | img_url: '700x900' }})" class="c-card__image"></div>
+            </div>
+        </div>
+    </div><div class="o-layout__item u-1/12@mobile">
+    </div><div class="o-layout__item u-5/12@mobile">
+        <div class="c-card c-card--short u-spacing-top-8">
+            <div class="c-card__image-wrapper">
+                <div style="background-image: url({{ section.blocks[0].settings.photo_2 | img_url: '700x650' }})" class="c-card__image"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Salon Photo Section",
+    "blocks": [
+        {
+            "name": "Salon Photos content",
+            "type": "object",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "photo_1",
+                    "label": "Photo #1 (Framed)"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "photo_2",
+                    "label": "Photo #2"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,47 @@
+<div class="c-card c-card--{{ card_size | default: 'default' }} {% if has_frame %}c-card--framed-{{ frame_position | default: 'left' }}{% if frame_classes %}-{{ frame_classes }}{% endif %}{% endif %} {% if card_row == true %}c-card--row{% endif %} {% if classes %}{{ classes }}{% endif %}">
+    {%- if has_frame -%}
+        <div class="c-card__frame js-frame u-parallax" data-rellax-percentage="{%- if frame_classes contains 'tall' -%}0.2{%- else -%}0.5{%- endif -%}" data-rellax-speed="1"></div>
+    {%- endif -%}
+
+    {%- if title != blank and card_row == true -%}
+        <div class="c-card__title c-card__title--{{ title_position }} {%- if has_title_parallax -%}u-parallax{%- endif -%}" data-rellax-percentage="0.1" data-rellax-speed="-0.2">
+            <h2 class="u-h3 u-heading">{{ title }}</h2>
+
+            {%- if text != blank -%}
+                <p class="u-mt">{{ text }}</p>
+            {%- endif -%}
+        </div>
+    {%- endif -%}
+
+    <div class="c-card__image-wrapper">
+        {%- if title != blank and card_row != true -%}
+            <div class="c-card__title c-card__title--{{ title_position }} {%- if has_title_parallax -%}u-parallax js-parallax{%- endif -%}" data-rellax-percentage="0.1" data-rellax-speed="-0.2">
+                <h1 class="u-h2 u-heading">{{ title }}</h1>
+
+                {%- if subtitle != blank -%}
+                    <span>{{ subtitle }}</span>
+                {%- endif -%}
+            </div>
+        {%- endif -%}
+
+        {%- if title_white != blank and card_row != true -%}
+            <div class="c-card__title-white u-color-white c-card__title--white">
+                <h1 class="u-h2 u-heading">{{ title_white }}</h1>
+            </div>
+        {%- endif -%}
+
+        <div class="c-card__image js-image {% if photo_lazyload == true and disable_photo_lazyload == blank %}u-lazyload u-fade-intersected js-monitor{% endif %}" style="background-image: url({{ photo }}); background-position: {{ photo_position | default: 'center center' }};"></div>
+
+        {%- if has_signature -%}
+            <div class="c-card__signature">
+                {%- include 'josh-signature' -%}
+            </div>
+        {%- endif -%}
+
+        {%- if has_video -%}
+            <div class="c-button c-button--white c-button--no-block c-card__video-icon u-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="c-svg c-svg--black"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+        {%- endif -%}
+    </div>
+</div>

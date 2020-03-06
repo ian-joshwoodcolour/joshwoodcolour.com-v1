@@ -1,0 +1,13 @@
+@mixin theme ($background-color, $text-color, $link-color: $text-color) {
+    background-color: $background-color;
+    color: $text-color;
+
+    a:not([class]) {
+        color: $link-color;
+    }
+        a:not([class]):hover,
+        a:not([class]):focus {
+            color: hover-color($link-color);
+        }
+}
+iframe[src="//localhost:3000/preview_bar"] { display:none; }

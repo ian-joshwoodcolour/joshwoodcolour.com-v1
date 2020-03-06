@@ -1,0 +1,9 @@
+<div class="u-p u-border-grey-1 u-shadow">
+    {% include 'cart-discount-and-total-values' %}
+
+    <button type="submit" name="checkout" class="c-button c-button--black c-button--block u-1/1 u-mv js-cart-submit">
+        {{ 'cart.general.checkout' | t }}
+    </button>
+
+    {% include 'faq-and-returns-cta' %}
+</div>

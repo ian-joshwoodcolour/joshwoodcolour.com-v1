@@ -1,0 +1,4 @@
+<div class="u-text-center u-mt u-mt+@mobile u-fade-in js-cart-empty-message" {% if cart.item_count > 0 %}style="display: none;"{% endif %}>
+    <p>{{ 'cart.general.empty' | t }}</p>
+    <a href="/collections/all" class="c-button c-button--black u-mt">{{ 'cart.general.continue_browsing_html' | t }}</a>
+</div>

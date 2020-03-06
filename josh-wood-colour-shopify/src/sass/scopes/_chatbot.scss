@@ -1,0 +1,243 @@
+$chatbot-ui-height: 550px;
+
+
+.s-chatbot {
+    /**
+     * 1. Don't let the chatbot window appear on top of the page header
+     * 2. Have a short chat window, otherwise the user has to manually scroll down to the text input
+     */
+    background-color: rgba(#fafafa, 0.95);
+    height: 100%;
+    left: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: ($global-highest-z-index + 3); /* [2] */
+
+
+    /**
+     * 1. When the chatbot is initialised, it doesn't add any classes to our wrapper element, it only adds
+     * inline styles.
+     * 2. When it has been added, remove the max-width used on vanilla forms.
+     */
+    &[style*="position"] { /* [1] */
+        max-width: none; /* [2] */
+    }
+
+    /**
+     * 1. Hide the vanilla form
+     */
+    form {
+        @include inuit-hidden-visually(); /* [1] */
+    }
+
+
+    .s-chatbot__close {
+        box-shadow: 0 0 40px 10px $color-white;
+        font-size: 14px;
+        left: 50%;
+        top: 30px;
+        position: absolute;
+        transform: translateX(-50%);
+        z-index: 2;
+
+        svg {
+            margin-left: 2px;
+            margin-top: -2px;
+        }
+    }
+    
+
+    /**
+     * Style the chat's UI elements
+     */
+    .conversational-form {
+        background-color: $color-white;
+        border-image-slice: 1;
+        border-image-source: linear-gradient(325deg, #ffe9c8, #f3dab1 17%, #f3dab1 17%, #f2d9b0 18%, #ead0a2 28%, #fff4dd 48%, #e1c894 63%, #fbebc7 86%, #ebd49d); /* [1] */
+        border-style: solid;
+        border-width: 6px;
+        height: 70%;
+        left: 0;
+        margin: 0 auto;
+        max-width: 737px;
+        top: 15%;
+        -webkit-overflow-scrolling: touch;
+        touch-action: manipulation;
+        width: 70%;
+        z-index: 1;
+
+
+        & * {
+            font-family: $global-font-family-body;
+            font-size: $inuit-global-font-size;
+        }
+
+
+        /**
+         * 1. Remove the padding that's used to accomodate avatars
+         */
+        cf-chat-response {
+            padding-left: 0; /* [1] */
+            padding-right: 0; /* [1] */
+
+            @include mq ($until: mobile) {
+                max-width: 95%;
+            }
+        }
+
+        /**
+         * 1. Remove avatars
+         */
+        thumb {
+            display: none; /* [1] */
+        }
+
+        /**
+         * The bot's responses
+         */
+        cf-chat-response text > p {
+            background-color: lighten($color-grey-light, 5%);
+            color: $color-black;
+        }
+
+        /**
+         * The user's responses
+         */
+        cf-chat-response.user text > p {
+            background-color: lighten($color-grey-dark, 10%);
+            color: $color-white;
+        }
+
+
+        /**
+         * The 'submit' button/icon
+         */
+        cf-input-button {
+            border-color: $color-grey-light;
+        }
+        cf-input-button:focus,
+        cf-input-button:hover {
+            background-color: $color-grey-light;
+            border-color: $color-grey-light;
+        }
+        .cf-icon-progress {
+            background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMCAzMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTYuMzEzIDIydi05Ljg4OGw0LjUzNyA0LjUzOEwyMiAxNS41IDE1LjUgOSA5IDE1LjVsMS4xNSAxLjE1IDQuNTM3LTQuNTM4VjIyIiBmaWxsPSIjNDQ0IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4=);
+        }
+
+
+        /**
+         * The wrapper element for the user's input
+         */
+        cf-input[tag-type="group"] {
+            margin-top: $global-spacing-small;
+        }
+            /**
+             * The user's response options
+             */
+            .cf-button {
+                background-color: $color-white;
+                border-color: $color-grey-dark;
+                color: $color-grey-dark;
+                font-family: $global-font-family-bold;
+
+                &:hover,
+                &:active {
+                    background-color: $color-grey-light;
+                }
+            }
+                .cf-button cf-radio {
+                    display: none;
+                }
+
+            /**
+             * The user's free text input
+             */
+            cf-input input,
+            textarea {
+                border: 1px solid $color-grey-light;
+                color: $color-grey-dark;
+                font-size: 16px;
+                height: 50px;
+                margin-top: $global-spacing-small;
+            }
+
+        cf-chat scrollable::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    /**
+     * Option list shadows
+     */
+    cf-list-button:nth-child(2)::before {
+        background-image: linear-gradient(to right, rgba($color-white, 0) 0, $color-white 100%);
+        margin-left: -50%;
+        width: 150%;
+    }
+
+    /**
+     * Option list icon
+     */
+    cf-list-button::after {
+        background-color: $color-black;
+        background-position: center center;
+        background-size: auto 14px;
+        border-radius: 100%;
+        box-shadow: 0 0 40px 10px $color-white;
+        height: $global-spacing;
+        padding: 0;
+        width: $global-spacing;
+    }
+        cf-list-button:nth-child(1)::after {
+            background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyB2aWV3Qm94PSIwIDAgNiAxMCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4gICAgPGcgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+ICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTIzMC4wMDAwMDAsIC01NjcuMDAwMDAwKSIgZmlsbD0iI2ZmZmZmZiI+ICAgICAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNzM4LjAwMDAwMCwgMTc4LjAwMDAwMCkiPiAgICAgICAgICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLjAwMDAwMCwgMzQwLjAwMDAwMCkiPiAgICAgICAgICAgICAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDY2LjAwMDAwMCwgMC4wMDAwMDApIj4gICAgICAgICAgICAgICAgICAgICAgICA8cG9seWdvbiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyOS4wMDAwMDAsIDU0LjAwMDAwMCkgcm90YXRlKC0xODAuMDAwMDAwKSB0cmFuc2xhdGUoLTI5LjAwMDAwMCwgLTU0LjAwMDAwMCkgIiBwb2ludHM9IjI2IDUwLjE1Mzg0NjIgMjcuMTI1IDQ5IDMyIDU0IDI3LjEyNSA1OSAyNiA1Ny44NDYxNTM4IDI5Ljc1IDU0Ij48L3BvbHlnb24+ICAgICAgICAgICAgICAgICAgICA8L2c+ICAgICAgICAgICAgICAgIDwvZz4gICAgICAgICAgICA8L2c+ICAgICAgICA8L2c+ICAgIDwvZz48L3N2Zz4=);
+            background-position: 7px center;
+            left: 2px;
+        }
+        cf-list-button:nth-child(2)::after {
+            background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyB2aWV3Qm94PSIwIDAgNiAxMCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4gICAgPGcgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+ICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTIzMC4wMDAwMDAsIC01NjcuMDAwMDAwKSIgZmlsbD0iI2ZmZmZmZiI+ICAgICAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNzM4LjAwMDAwMCwgMTc4LjAwMDAwMCkiPiAgICAgICAgICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLjAwMDAwMCwgMzQwLjAwMDAwMCkiPiAgICAgICAgICAgICAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDY2LjAwMDAwMCwgMC4wMDAwMDApIj4gICAgICAgICAgICAgICAgICAgICAgICA8cG9seWdvbiBwb2ludHM9IjI2IDUwLjE1Mzg0NjIgMjcuMTI1IDQ5IDMyIDU0IDI3LjEyNSA1OSAyNiA1Ny44NDYxNTM4IDI5Ljc1IDU0Ij48L3BvbHlnb24+ICAgICAgICAgICAgICAgICAgICA8L2c+ICAgICAgICAgICAgICAgIDwvZz4gICAgICAgICAgICA8L2c+ICAgICAgICA8L2c+ICAgIDwvZz48L3N2Zz4=);
+            left: $global-spacing-small;
+        }
+
+
+    @include mq ($until: mobile) {
+        .conversational-form {
+            height: 100%;
+            left: 0;
+            top: 0;
+            width: 100%;
+        }
+
+        cf-chat {
+            margin-bottom: 0;
+        }
+
+        scrollable {
+            padding-bottom: $global-spacing-tiny;
+        }
+
+        textarea {
+            font-size: 16px;
+            height: 50px !important;
+            margin-top: 0;
+        }
+    }
+
+    @media only screen and (max-height: 500px) and (orientation: landscape) {
+        cf-chat-response {
+            font-size: 14px;
+            padding-top: $global-spacing-tiny;
+            min-width: 180px;
+            max-width: 90%;
+        }
+
+        cf-input-control-elements {
+            cf-radio-button {
+                height: 34px;
+                line-height: .65;
+                margin-bottom: 0;
+            }
+        }
+    }
+}

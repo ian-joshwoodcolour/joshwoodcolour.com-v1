@@ -1,0 +1,20 @@
+$ui-list-border-color: $color-grey-light;
+$ui-list-item-padding: $global-spacing;
+
+
+.o-ui-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+    .o-ui-list__item {
+        border-bottom: 1px solid $ui-list-border-color;
+        padding-bottom: $ui-list-item-padding;
+        padding-top: $ui-list-item-padding;
+    }
+    .o-ui-list__item:first-child {
+        // border-top: 1px solid $ui-list-border-color;
+    }
+    .o-ui-list__item:last-child {
+        border: none;
+    }

@@ -1,0 +1,123 @@
+<div class="c-modal c-modal--flush js-modal u-hide" data-modal="shade-comparison">
+    <div class="c-modal__wrapper t-white u-p u-p+@mobile u-flex u-direction-column u-justify-center@mobile js-modal-wrapper">
+        {%- assign modal_name = 'shade-comparison' -%}
+        {% include 'modal-close-button' %}
+
+        <div class="u-weight-bold u-spacing-0 u-align-center@mobile">
+            <div class="u-heading u-h4" role="heading">
+                Your result from <span class="js-shade-number"></span>
+            </div>
+
+            <div class="u-flex@mobile u-justify-center u-mt-">
+                {% include 'consultation-teaser-text' %}
+            </div>
+        </div>
+
+        <div class="o-layout o-layout u-flex@mobile u-flex-grow u-justify-center c-shade-comparison-container u-mv u-mv+@mobile">
+            <div class="o-layout__item u-4/12 c-shade-comparison u-text-center js-shade-comparison" data-product="{{ block.settings.product }}">
+                <strong class="js-shade-colour-light"></strong>
+                <div class="c-shade-comparison__comparison u-mt--">
+                    <div class="c-shade-comparison__shade c-shade-comparison__shade--before js-shade-dark-before" style="background-image: url('{{ block.settings.dark_before_image | img_url: '900x' }}');"></div>
+                    <div class="c-shade-comparison__shade c-shade-comparison__shade--after js-shade-dark-after" style="background-image: url('{{ dark_after_image | img_url: '1200x' }}');"></div>
+                </div>
+            </div><div class="o-layout__item u-4/12 c-shade-comparison u-text-center js-shade-comparison" data-product="{{ block.settings.product }}">
+                <strong class="js-shade-colour-medium"></strong>
+                <div class="c-shade-comparison__comparison u-mt--">
+                    <div class="c-shade-comparison__shade c-shade-comparison__shade--before js-shade-medium-before" style="background-image: url('{{ block.settings.medium_before_image | img_url: '900x' }}');"></div>
+                    <div class="c-shade-comparison__shade c-shade-comparison__shade--after js-shade-medium-after" style="background-image: url('{{ medium_after_image | img_url: '1200x' }}');"></div>
+                </div>
+            </div><div class="o-layout__item u-4/12 c-shade-comparison u-text-center js-shade-comparison" data-product="{{ block.settings.product }}">
+                <strong class="js-shade-colour-dark"></strong>
+                <div class="c-shade-comparison__comparison u-mt--">
+                    <div class="c-shade-comparison__shade c-shade-comparison__shade--before js-shade-light-before" style="background-image: url('{{ block.settings.light_before_image | img_url: '900x' }}');"></div>
+                    <div class="c-shade-comparison__shade c-shade-comparison__shade--after js-shade-light-after" style="background-image: url('{{ light_after_image | img_url: '1200x' }}');"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+window.globalData.shadeComparisons = {
+    {%- for block in section.blocks -%}
+        '{{ block.settings.product }}': {
+            light_colour_label: '{{ block.settings.light_colour_label }}',
+            medium_colour_label: '{{ block.settings.medium_colour_label }}',
+            dark_colour_label: '{{ block.settings.dark_colour_label }}',
+            dark_before_image: '{{ block.settings.dark_before_image | img_url: '900x' }}',
+            medium_before_image: '{{ block.settings.medium_before_image | img_url: '900x' }}',
+            light_before_image: '{{ block.settings.light_before_image | img_url: '900x' }}',
+            dark_after_image: '{{ block.settings.dark_after_image | img_url: '1200x' }}',
+            medium_after_image: '{{ block.settings.medium_after_image | img_url: '1200x' }}',
+            light_after_image: '{{ block.settings.light_after_image | img_url: '1200x' }}'
+        },
+    {%- endfor -%}
+};
+</script>
+
+{% schema %}
+{
+    "name": "Permanent Shade Compare",
+    "blocks": [
+        {
+            "name": "Comparison content",
+            "type": "object",
+            "settings": [
+                {
+                    "type": "product",
+                    "id": "product",
+                    "label": "Product"
+                },
+                {
+                    "type": "text",
+                    "id": "light_colour_label",
+                    "label": "Light colour label",
+                    "default": "Light"
+                },
+                {
+                    "type": "text",
+                    "id": "medium_colour_label",
+                    "label": "Medium colour label",
+                    "default": "Medium"
+                },
+                {
+                    "type": "text",
+                    "id": "dark_colour_label",
+                    "label": "Dark colour label",
+                    "default": "Dark"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "dark_before_image",
+                    "label": "Dark (Before) Image"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "medium_before_image",
+                    "label": "Medium (Before) Image"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "light_before_image",
+                    "label": "Light (Before) Image"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "dark_after_image",
+                    "label": "Dark (After) Image"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "medium_after_image",
+                    "label": "Medium (After) Image"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "light_after_image",
+                    "label": "Light (After) Image"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

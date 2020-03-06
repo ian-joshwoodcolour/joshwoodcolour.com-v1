@@ -1,0 +1,154 @@
+{%- assign product_matched = false -%}
+{%- assign photo_count = 0 -%}
+
+{% include 'product-collection-url' %}
+
+{%- for block in section.blocks -%}
+    {%- if product_collection_url contains block.settings.collection_url -%}
+        {%- if block.settings.ssp_product_url != blank -%}
+            {%- if block.settings.product_url contains product.url or block.settings.ssp_product_url contains product.url -%}
+                {%- assign product_matched = block.settings -%}
+                {% break %}
+            {%- endif -%}
+        {%- elsif product.url contains block.settings.product_url -%}
+            {%- assign product_matched = block.settings -%}
+            {% break %}
+        {%- endif -%}
+    {%- endif -%}
+{%- endfor -%}
+
+<div class="u-relative">
+    <ul class="c-gallery js-product-carousel">
+        {%- if product_matched != false -%}
+            {%- for i in (1..4) -%}
+                {%- assign photo = 'photo_' | append: i -%}
+                {%- assign caption = 'photo_' | append: i | append: '_description' -%}
+                {%- assign photo_source = product_matched[photo] | img_url: 'x1000' -%}
+                {%- if product_matched[photo] != blank -%}
+                    {%- assign photo_count = photo_count | plus: 1 %}
+                {%- endif -%}
+                <li class="c-gallery__item js-product-carousel-photo {% if i > 1 and product_matched[photo] == blank %}u-hide{% endif %}" {% if i == 1 %}style="background-image: url('{{ photo_source }}');"{% else %}data-flickity-bg-lazyload="{{ photo_source }}"{% endif %}>
+                    <div class="c-gallery__caption js-product-carousel-caption {% if product_matched[caption] == blank %}u-hide{% endif %}">
+                        {{ product_matched[caption] | strip_newlines}}
+                    </div>
+                </li>
+            {%- endfor -%}
+        {%- else -%}
+            <li class="c-gallery__item js-product-carousel-photo js-product-image" style="background-image: url('{{ product.featured_image | img_url: 'x1000' }}');"></li>
+        {%- endif -%}
+    </ul>   
+</div>
+
+<nav class="c-gallery-nav u-fade-in u-mt js-product-carousel-nav" style="display: {% if photo_count > 1 %}flex{% else %}none{% endif %}">
+    {%- for i in (1..4) -%}
+        {%- assign photo = 'photo_' | append: i -%}
+        {%- assign caption = 'photo_' | append: i | append: '_description' -%}
+        <button type="button" class="c-gallery-nav__button js-product-carousel-button {% if i == 1 %}is-active{% endif %}" style="background-image: url({{ product_matched[photo] | img_url: '70x70', crop: 'center' }}); display: {% if product_matched[photo] == blank %}none{% else %}inline-block{% endif %}" data-index="{{ i | minus: 1 }}"></button>
+    {%- endfor -%}
+    <button type="button" class="c-gallery-nav__button c-gallery-nav__button--video js-product-carousel-video js-modal-open" data-modal="product-gallery-video" style="display: {% if product_matched.video == blank %}none{% else %}inline-block{% endif %}; opacity: 1 !important;">
+
+        <svg class="c-button__icon c-svg--w14" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 119.43 136.84"><path d="M117.29 65.42c2.86 1.65 2.86 4.35 0 6L5.2 136.14c-2.86 1.65-5.2.3-5.2-3V3.7C0 .4 2.34-.95 5.2.7z" fill="#252525"/></svg>
+    </button>
+</nav>
+
+<script>
+window.globalData.productGalleries = [
+    {%- for block in section.blocks -%}
+        {%- if product_collection_url contains block.settings.collection_url -%}
+            {
+                collectionURL: "{{ block.settings.collection_url }}",
+                productURL: "{{ block.settings.product_url }}",
+                sspProductURL: "{{ block.settings.ssp_product_url }}",
+                photos: [
+                    {%- for i in (1..4) -%}
+                        {%- assign photo = 'photo_' | append: i -%}
+                        {%- assign caption = 'photo_' | append: i | append: '_description' -%}
+                        {%- if block.settings[photo] != blank -%}
+                            {
+                                photo: '{{ block.settings[photo] | img_url: 'x1000' }}',
+                                thumbnail: '{{ block.settings[photo] | img_url: '70x70', crop: 'center' }}',
+                                caption: "{{ block.settings[caption] }}"
+                            },
+                        {%- endif -%}
+                    {%- endfor -%}
+                ],
+                video: '{{ block.settings.video }}'
+            },
+        {%- endif -%}
+    {%- endfor -%}
+];
+</script>
+
+{% schema %}
+{
+    "name": "Product gallery",
+    "blocks": [
+        {
+            "name": "Content",
+            "type": "object",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "photo_1",
+                    "label": "Photo 1"
+                },
+                {
+                    "type": "text",
+                    "id": "photo_1_description",
+                    "label": "Description"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "photo_2",
+                    "label": "Photo 2"
+                },
+                {
+                    "type": "text",
+                    "id": "photo_2_description",
+                    "label": "Photo 2 description"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "photo_3",
+                    "label": "Photo 3"
+                },
+                {
+                    "type": "text",
+                    "id": "photo_3_description",
+                    "label": "Photo 3 description"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "photo_4",
+                    "label": "Photo 4"
+                },
+                {
+                    "type": "text",
+                    "id": "photo_4_description",
+                    "label": "Photo 4 description"
+                },
+                {
+                    "type": "textarea",
+                    "id": "video",
+                    "label": "Video"
+                },
+                {
+                    "type": "url",
+                    "id": "product_url",
+                    "label": "Product"
+                },
+                {
+                    "type": "url",
+                    "id": "ssp_product_url",
+                    "label": "SSP Product"
+                },
+                {
+                    "type": "url",
+                    "id": "collection_url",
+                    "label": "Collection"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

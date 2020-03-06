@@ -1,0 +1,62 @@
+$image-feed-max-items: 8;
+$image-feed-max-items--tablet: 6;
+$image-feed-max-items--mobile: 4;
+
+
+@mixin imageFeedItems($items) {
+    $item-size: (100 / $items);
+
+    .c-image-feed__item {
+        height: 0;
+        padding-bottom: calc(#{$item-size}#{'%'} - #{$global-spacing-small});
+        width: calc(#{$item-size}#{'%'} - #{$global-spacing-small});
+    }
+        .c-image-feed__item:nth-child(n + #{$items + 1}) {
+            display: none;
+        }
+}
+
+.c-image-feed {
+    max-width: 100%;
+    overflow: hidden;
+}
+    .c-image-feed__list {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+        .c-image-feed__item {
+            flex: 1 0 auto;
+            position: relative;
+            transition: $global-transition;
+        }
+            .c-image-feed__item + .c-image-feed__item {
+                margin-left: $global-spacing-small !important;
+            }
+
+.c-image-feed__item > a {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    will-change: transform;
+}
+
+
+@include imageFeedItems($image-feed-max-items);
+
+@include mq($until: tablet) {
+    @include imageFeedItems($image-feed-max-items--tablet);
+}
+
+@include mq($until: mobile) {
+    @include imageFeedItems($image-feed-max-items--mobile);
+
+    .c-image-feed__item {
+        height: 85px !important;
+    }
+}

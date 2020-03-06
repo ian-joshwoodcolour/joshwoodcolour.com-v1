@@ -1,0 +1,35 @@
+{%- assign back_button_label = 'All articles' -%}
+{%- assign back_button_url = '/blogs/tips-tricks' -%}
+{% include 'back-button' %}
+
+<section class="o-section o-wrapper o-wrapper--article">
+    <article role="article" itemscope itemtype="http://schema.org/Article">
+        <h1 class="u-heading u-h2 u-mb+" itemprop="headline">{{ article.title }}</h1>
+
+        <div class="s-editorial s-blogstudio js-iframe-container" itemprop="articleBody">
+            {{ article.content }}
+        </div>
+
+        <meta itemprop="author" content="{{ article.author }}">
+        <meta itemprop="datePublished" content="{{ article.created_at | date: '%Y-%m-%dT%H:%M:%S.%L%z' }}">
+        <meta itemprop="image" content="https:{{ article | img_url: '800x' }}">
+    </article>
+</section>
+
+
+<section class="o-section o-wrapper js-related-products u-hide">
+    {%- assign related_products_metafields = article.metafields.related_products -%}
+    {%- assign related_product_slugs = '' -%}
+    {%- for field in related_products_metafields -%}
+        {%- assign slug = field | last | handle -%}
+        {%- assign related_product_slugs = related_product_slugs | append: slug | append: ',' -%}
+    {%- endfor -%}
+    {%- assign related_product_slugs = related_product_slugs | split: ',' -%}
+    {% include 'featured-products' %}
+</section>
+
+<section class="o-section o-wrapper js-related-articles u-hide">
+    {%- assign current_article_tags = article.tags -%}
+    {%- assign current_article_title = article.title -%}
+    {% include 'related-articles' %}
+</section>

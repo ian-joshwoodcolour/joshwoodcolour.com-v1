@@ -1,0 +1,5 @@
+{%- for collection in product.collections -%}
+    {%- if collection.handle != 'permanent-colour' and collection.handle != 'care' and collection.handle != 'root-concealers' and collection.handle != 'permanent-colour-for-shade-shot-plus' -%}
+        {%- assign product_collection_url = collection.url -%} 
+    {%- endif -%}
+{%- endfor -%}

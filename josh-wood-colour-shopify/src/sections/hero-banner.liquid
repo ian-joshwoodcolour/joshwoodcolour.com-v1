@@ -1,0 +1,77 @@
+<div class="c-hero-banner-carousel js-hero-banner-carousel">
+    {%- for block in section.blocks -%}
+        {%- if block.settings.page contains page.url or template.name == 'index' and block.settings.page == '/pages/home' -%}
+            {%- assign background_color = block.settings.photo_background_color -%}
+            {%- if block.settings.photo_1 != blank -%}
+                {%- assign background_image = block.settings.photo_1 | img_url: '1200x800' -%}
+                {%- assign background_image_large = block.settings.photo_1 | img_url: '2000x800' -%}
+            {%- endif -%}
+            {%- assign title = block.settings.title -%}
+            {%- assign text = block.settings.text -%}
+            {%- assign primary_cta_url = block.settings.primary_cta_url -%}
+            {%- assign primary_cta_label = block.settings.primary_cta_label -%}
+            {%- assign secondary_cta_url = block.settings.secondary_cta_url -%}
+            {%- assign secondary_cta_label = block.settings.secondary_cta_label -%}
+            {% include 'hero-banner' %}
+        {%- endif -%}
+    {%- endfor -%}
+</div>
+
+{% schema %}
+{
+    "name": "Hero Banner",
+    "blocks": [
+        {
+            "name": "Hero banners",
+            "type": "object",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "photo_1",
+                    "label": "Photo"
+                },
+                {
+                    "type": "color",
+                    "id": "photo_background_colour",
+                    "label": "Main background Colour"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "textarea",
+                    "id": "text",
+                    "label": "Text"
+                },
+                {
+                    "type": "url",
+                    "id": "primary_cta_url",
+                    "label": "Primary CTA URL"
+                },
+                {
+                    "type": "text",
+                    "id": "primary_cta_label",
+                    "label": "Primary CTA Label"
+                },
+                {
+                    "type": "url",
+                    "id": "secondary_cta_url",
+                    "label": "Secondary CTA URL"
+                },
+                {
+                    "type": "text",
+                    "id": "secondary_cta_label",
+                    "label": "Secondary CTA Label"
+                },
+                {
+                    "type": "url",
+                    "id": "page",
+                    "label": "Page to feature on"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

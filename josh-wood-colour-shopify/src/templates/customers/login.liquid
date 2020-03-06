@@ -1,0 +1,108 @@
+<section class="o-section o-wrapper">
+    <div class="u-mw-450 u-m-auto">
+        <div class="js-login-container">
+            <div class="u-mb u-mb+@desktop u-pb u-pb+@desktop u-border-bottom-grey-2">
+                <h1 class="u-heading u-h3 u-mb u-mb+@mobile">{{ 'customer.login.title' | t }}</h1>
+
+                {% form 'customer_login' %}
+                    {%- if form.errors -%}
+                        <div class="s-form">
+                            {{ form.errors | default_errors }}
+                        </div>
+                    {%- endif -%}
+
+                    <div class="c-form__field">
+                        <input
+                            type="email"
+                            name="customer[email]"
+                            id="CustomerEmail"
+                            class="c-form__input u-1/1 {% if form.errors contains 'email' %}c-form__input--error{% endif %}"
+                            placeholder="{{ 'customer.login.email' | t }}"
+                            spellcheck="false"
+                            autocomplete="off"
+                            autocapitalize="off"
+                            autofocus
+                        >
+                    </div>
+            
+                    {%- if form.password_needed -%}
+                        <div class="c-form__field">
+                            <div class="c-form__inline-link">
+                                <input
+                                    type="password"
+                                    autocomplete="off"
+                                    name="customer[password]"
+                                    id="CustomerPassword"
+                                    class="c-form__input u-1/1 {% if form.errors contains 'password' %}c-form__input--error{% endif %}"
+                                    placeholder="{{ 'customer.login.password' | t }}"
+                                >
+                                
+                                <a href="#recover" id="recover-toggle" class="c-form__link js-visibility-toggle" id="recover-toggle" aria-controls="recover" aria-expanded="false" role="tab" data-hides=".js-login-container">{{ 'customer.login.forgot_password' | t }}</a>
+                            </div>
+                        </div>
+                    {%- endif -%}
+
+                    <button type="submit" class="c-button c-button--black u-1/1 u-mt">
+                        {{ 'customer.login.sign_in' | t }}
+                    </button>
+                {% endform %}
+            </div>
+        </div>
+
+        <div id="recover" class="u-overflow-hidden u-pb u-pb+@desktop u-border-bottom-grey-2" id="recover" aria-labelledby="recover-toggle" aria-hidden="true" role="tabpanel" style="display: none;">
+            <h2 class="u-heading u-h3 u-mb">{{ 'customer.recover_password.title' | t }}</h2>
+            <p class="u-mb">{{ 'customer.recover_password.subtext' | t }}</p>
+
+            {% form 'recover_customer_password' %}
+                {%- if form.errors -%}
+                    <div class="s-form">
+                        {{ form.errors | default_errors }}
+                    </div>
+                {%- endif -%}
+
+                <div class="c-form__field">
+                    <input
+                        type="email"
+                        name="email"
+                        id="RecoverEmail"
+                        class="c-form__input u-1/1 {% if form.errors contains 'email' %}c-form__input--error{% endif %}"
+                        placeholder="{{ 'customer.recover_password.email' | t }}"
+                        spellcheck="false"
+                        autocomplete="off"
+                        autocapitalize="off"
+                    >
+                </div>
+        
+                {%- if form.password_needed -%}
+                    <div class="c-form__field">
+                        <div class="c-form__inline-link">
+                            <input type="password"
+                                name="customer[password]"
+                                id="CustomerPassword"
+                                class="c-form__input u-1/1 u-mt- {% if form.errors contains 'password' %}c-form__input--error{% endif %}"
+                                placeholder="{{ 'customer.login.password' | t }}">
+                            
+                            <a href="#recover" id="RecoverPassword" class="c-form__link">{{ 'customer.login.forgot_password' | t }}</a>
+                        </div>
+                    </div>
+                {%- endif -%}
+
+                <button type="submit" class="c-button c-button--black u-1/1 u-mt">
+                    {{ 'customer.recover_password.submit' | t }}
+                </button>
+
+                <a href="/account/login" class="c-button c-button--black c-button--ghost u-1/1 u-mt-">
+                    Cancel
+                </a>
+            {% endform %}
+        </div>
+
+        <div class="u-mt u-mt+@desktop u-text-center">
+            <h2 class="u-heading u-h6 u-spacing-0 u-weight-bold u-mb">{{ 'customer.register.title' | t }}</h2>
+            
+            <a href="/account/register" class="c-button c-button--black  c-button--ghost u-text-center u-1/1 u-mt0">
+                {{ 'customer.register.submit' | t }}
+            </a>
+        </div>
+    </div>
+</section>

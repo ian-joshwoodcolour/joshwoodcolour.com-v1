@@ -1,0 +1,95 @@
+{%- assign total_discount = 0 -%}
+{%- for discount in item.discounts -%}
+    {%- assign total_discount = total_discount | plus: discount.amount -%}
+{%- endfor -%}
+{%- if total_discount > 0 -%}
+    {%- assign has_discount = true -%}
+    {%- if total_discount == item.original_line_price -%}
+        {%- assign item_discount = 'FREE' -%}
+    {%- else -%}
+        {%- assign item_discount = item.line_price | money_without_trailing_zeros -%}
+    {%- endif -%}
+{%- else -%}
+    {%- assign has_discount = false -%}
+{%- endif -%}
+<li class="o-ui-list__item u-pv0 js-cart-item" data-variant-id="{{ item.variant.id }}">
+    <div class="u-flex {% unless cart_summary == true %}u-pv{% endunless %}{% if cart_summary == true %}u-pv-{% endif %}">
+        <div class="c-product__image--cart u-flex-100 u-pt--">
+            <a href="{%- if cart_summary_template == true -%}[CART_ITEM_URL]{%- else -%}{{ item.url }}{%- endif -%}" class="u-block">
+                <img src="{%- if cart_summary_template == true -%}[CART_ITEM_IMAGE]{%- else -%}{{ item.product.featured_image | img_url: '200x' }}{%- endif -%}s" alt="The {{ item.title }} product">
+            </a>
+        </div>
+        <div class="u-pl- u-1/1">
+            <div class="u-flex@tablet u-justify-between u-align-items-top">
+                <a href="{%- if cart_summary_template == true -%}[CART_ITEM_URL_2]{%- else -%}{{ item.url }}{%- endif -%}">
+                    <span class="u-heading u-spacing-0 u-h6">
+                        {%- if cart_summary_template == true -%}
+                            [CART_ITEM_TITLE]
+                        {%- else -%}
+                            {{ item.product.title }} 
+                            {%- if item.quantity > 1 -%}
+                                <span class="u-font-size-14">(x{{ item.quantity }})</span>
+                            {%- endif -%}
+                        {%- endif -%}
+                    </span>
+                </a>
+
+                <br class="u-show@tablet">
+
+                <strong class="u-heading u-text-right u-h6 u-spacing-0 {% if has_discount %}u-mw-100{% else %}u-mw-50{% endif %} js-price-{{ item.variant.id }}" aria-label="You have {{ item.quantity }} of this item in your cart at {{ item.price | money_without_trailing_zeros }}{% if item.quantity > 1 %} each{% endif %}" title="You have {{ item.quantity }} of this item in your cart at {{ item.price | money_without_trailing_zeros }}{% if item.quantity > 1 %} each{% endif %}">
+                    {%- if cart_summary_template == true -%}
+                        [CART_ITEM_DISCOUNT_PRICE]
+                        [CART_ITEM_PRICE]
+                    {%- else -%}
+                        {%- if has_discount -%}
+                            <span class="u-color-grey u-strike">{{ item.original_line_price | money_without_trailing_zeros }}</span>&nbsp; 
+                            {{ item_discount }}
+                        {%- else -%}
+                            {{ item.line_price | money_without_trailing_zeros }}
+                        {%- endif -%}
+                    {%- endif -%}
+                </strong>
+            </div>
+
+            <div class="u-weight-light u-font-size-14">
+                {%- if cart_summary_template == true -%}
+                    [CART_ITEM_TYPE]
+                {%- else -%}
+                    {{ item.product.type }}
+                {%- endif -%}
+            </div>
+
+            <div class="js-discounts-{{ item.variant.id }}">
+                {%- if cart_summary_template == true -%}
+                    [CART_ITEM_DISCOUNT_LABEL]
+                {%- else -%}
+                    {%- if item.discounts.size -%}
+                        {%- for discount in item.discounts -%}
+                            <span class="u-label">{{ discount.title }}</span>
+                        {%- endfor -%}
+                    {%- endif -%}
+                {%- endif -%}
+            </div>
+
+            {%- unless cart_summary == true -%}
+                <div class="u-flex u-align-items-top u-mt-">
+                    <a href="#" data-url="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="c-button c-button--grey-light c-button--ghost c-button--danger c-button--cart-item u-color-black js-remove" data-variant-id="{{ item.variant.id }}" data-properties='{% if item.properties != blank %}{{ item.properties | json }}{% endif %}' data-title="{{ item.title }}">
+                        {{ 'cart.general.remove' | t }}
+                    </a>
+    
+                    <div class="custom-select custom-select--small custom-select--bare c-button c-button--grey-light c-button--ghost c-button--cart-item u-ph- u-color-black u-ml-">
+                        <select name="id" class="js-item-quantity" data-variant-id="{{ item.variant.id }}">
+                            {%- assign total_quantity = 5 -%}
+                            {%- if item.quantity > 5 -%}
+                                {%- assign total_quantity = item.quantity -%}
+                            {%- endif -%}
+                            {%- for i in (1..total_quantity) -%}
+                                <option value="{{ i }}"{% if i == item.quantity %} selected="selected"{% endif %}>{{ i }}</option>
+                            {%- endfor -%}
+                        </select>
+                    </div>
+                </div>
+            {%- endunless -%}
+        </div>
+    </div>
+</li>

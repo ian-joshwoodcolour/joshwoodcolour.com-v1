@@ -1,0 +1,27 @@
+{%- if collection.handle == 'all' -%}
+    {%- include 'list-collections' -%}
+{%- else -%}
+    {%- assign back_button_label = 'All products' -%}
+    {%- assign back_button_url = '/collections/all' -%}
+    {%- include 'back-button' -%}
+
+    <section id="concealer-products" class="o-section o-wrapper">
+        {%- if collection.handle == 'permanent-colour' -%}
+            {%- assign card_size = 'wide' -%}
+            {%- assign sub_collections = 'permanent-colour-products' | split: '|' -%}
+        {%- elsif collection.handle == 'care-range' -%}
+            {%- assign card_size = 'default' -%}
+            {%- assign sub_collections = 'shampoo|conditioner|shade-shot|everything-mask' | split: '|' -%}
+        {%- elsif collection.handle == 'root-concealers' -%}
+            {%- assign card_size = 'default' -%}
+            {%- assign sub_collections = 'blending-brush|root-marker|root-smudger|tinted-dry-shampoo' | split: '|' -%}
+        {%- endif -%}
+
+        {%- if sub_collections -%}
+            {%- assign all_collections = collections -%}
+            {% include 'collection-list' %}
+        {%- else -%}
+            <p>Sorry we can't find what you're looking for.</p>
+        {%- endif -%}
+    </section>
+{%- endif -%}

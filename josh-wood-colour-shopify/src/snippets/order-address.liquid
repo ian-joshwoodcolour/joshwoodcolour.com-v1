@@ -1,0 +1,21 @@
+{%- if address.name != blank -%}
+    <strong>{{ address.name }}</strong><br>
+{%- endif -%}
+{%- if address.company != blank -%}
+    {{ address.company }}<br>
+{%- endif -%}
+{%- if address.street != blank -%}
+    {{ address.street }}<br>
+{%- endif -%}
+{%- if address.city != blank -%}
+    {{ address.city }},&nbsp;
+{%- endif -%}
+{%- if address.zip != blank -%}
+    {{ address.zip }}
+{%- endif -%}
+{%- if address.city != blank or address.zip != blank -%}
+    <br>
+{%- endif -%}
+{%- if address.country != blank -%}
+    {{ address.country }}
+{%- endif -%}

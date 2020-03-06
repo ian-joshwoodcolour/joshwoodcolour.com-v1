@@ -1,0 +1,26 @@
+<section class="o-wrapper">
+    {% section 'consultation-tool-intro' %}
+</section>
+
+<div class="c-modal c-modal--chat c-modal--flush@mobile js-modal u-hide" data-modal="consultation">
+    <div class="c-modal__wrapper wide t-white js-modal-wrapper u-rounded u-flex u-direction-column u-justify-center" style="overflow: hidden;">
+        {% include 'consultation-modal-content' %}
+    </div>
+</div>
+
+<script>
+window.globalData.shadeSwatchImages = {
+    '2-0': '{{ 'swatch-2-0.jpg' | asset_img_url: '350x' }}',
+    '3-0': '{{ 'swatch-3-0.jpg' | asset_img_url: '350x' }}',
+    '4-0': '{{ 'swatch-4-0.jpg' | asset_img_url: '350x' }}',
+    '5-0': '{{ 'swatch-5-0.jpg' | asset_img_url: '350x' }}',
+    '5-5': '{{ 'swatch-5-5.jpg' | asset_img_url: '350x' }}',
+    '6-0': '{{ 'swatch-6-0.jpg' | asset_img_url: '350x' }}',
+    '6-5': '{{ 'swatch-6-5.jpg' | asset_img_url: '350x' }}',
+    '7-0': '{{ 'swatch-7-0.jpg' | asset_img_url: '350x' }}',
+    '7-5': '{{ 'swatch-7-5.jpg' | asset_img_url: '350x' }}',
+    '8-0': '{{ 'swatch-8-0.jpg' | asset_img_url: '350x' }}',
+    '8-5': '{{ 'swatch-8-5.jpg' | asset_img_url: '350x' }}',
+    '9-0': '{{ 'swatch-9-0.jpg' | asset_img_url: '350x' }}'
+};
+</script>

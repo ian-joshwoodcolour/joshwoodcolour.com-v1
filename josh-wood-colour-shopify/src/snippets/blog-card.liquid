@@ -1,0 +1,34 @@
+<div class="{{ container_classes }}">
+    <a href="{{ article_url }}" title="{{ article_title }}" class="u-block">
+        {%- assign card_size = 'default' -%}
+        {%- assign has_frame = false -%}
+        {%- assign classes = 'c-card--no-max c-card--hover' -%}
+        {%- if article_photo -%}
+            {%- assign photo = article_photo | img_url: '800x1000' -%}
+        {%- else -%}
+            {%- assign photo = 'placeholder-image.jpg' | asset_url -%}
+        {%- endif -%}
+        {%- if forloop and forloop.index < 4 -%}
+            {%- assign photo_lazyload = 'false' -%}
+        {%- else -%}
+            {%- assign photo_lazyload = true -%}
+        {%- endif -%}
+        {%- assign has_video = has_video -%}
+        {% include 'card' %}
+    </a>
+        
+    {%- if article_title != blank or article_tags != blank -%}
+        <div class="u-mt u-ph">
+            {%- if article_title -%}
+                <div class="u-mb-- u-color-grey">
+                    {% include 'article-tags' -%}
+                </div>
+            {%- endif -%}
+            {%- if article_title -%}
+                <a href="{{ article_url }}">
+                    <h3 class="u-h5">{{ article_title }}</h3>
+                </a>
+            {%- endif -%}
+        </div>
+    {%- endif -%}
+</div>

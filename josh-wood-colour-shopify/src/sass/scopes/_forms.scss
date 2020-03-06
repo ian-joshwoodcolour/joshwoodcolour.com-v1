@@ -1,0 +1,67 @@
+.s-form {
+    max-width: 800px;
+
+
+    label,
+    fieldset > p {
+        display: block;
+        font-family: $global-font-family-bold;
+        font-size: $inuit-font-size-h6;
+        margin-bottom: $global-spacing;
+        margin-top: $global-spacing;
+    }
+        fieldset > p {
+            margin-bottom: 0;
+        }
+        fieldset > label {
+            display: inline-block;
+            font-family: $global-font-family-body;
+            margin-top: 0;
+        }
+        fieldset > label + label {
+            margin-left: $global-spacing-large;
+        }
+        fieldset > label input {
+            margin-left: $global-spacing-small;
+        }
+
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        @include rem(padding-left, $form-field-horizontal-padding);
+        @include rem(padding-right, $form-field-horizontal-padding);
+        border: 1px solid $form-field-border-color;
+        font-family: $global-font-family-bold;
+        font-size: inherit;
+        min-height: $form-field-height;
+        // max-width: 600px;
+        -webkit-appearance: none;
+        width: 100%;
+    }
+
+    button[type="submit"],
+    input[type="submit"] {
+        @include rem(padding, $global-spacing-small $global-spacing);
+        align-self: flex-start;
+        background-color: $color-black;
+        border: 1px solid $color-black;
+        border-radius: $global-radius;
+        color: $color-white;
+        cursor: pointer;
+        display: inline-block;
+        font: inherit;
+        font-family: $global-font-family-bold;
+        margin: 0;
+        text-align: center;
+        transition: $global-transition;
+        vertical-align: middle;
+    }
+
+    .errors {
+        color: $color-coral;
+        font-family: $global-font-family-bold;
+        margin-left: $global-spacing-small;
+        margin-bottom: $global-spacing;
+    }
+}

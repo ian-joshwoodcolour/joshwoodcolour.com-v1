@@ -1,0 +1,25 @@
+<div class="custom-select custom-select--center js-preload-interaction">
+    <select name="id" class="js-associated-products-dropdown">
+        {%- for associated_product in associated_products -%}
+            {%- assign title = associated_product.title -%}
+            {%- if IS_SHADE_SHOT_PLUS_COLLECTION -%}
+                {%- assign title = associated_product.title | replace: 'Permanent Colour ', '' -%}
+            {%- endif -%}
+            {%- if associated_product.tags contains 'blonde' -%}
+                {%- assign associated_product_colour = 'blonde' -%}
+            {%- else -%}
+                {%- assign associated_product_colour = 'brown' -%}
+            {%- endif -%}
+            <option
+                {% if associated_product.title == product.title or associated_product.url == selected_associated_product %}selected="selected"{% endif  %}
+                value="{{ associated_product.selected_or_first_available_variant.id }}"
+                data-product-id="{{ associated_product.id }}"
+                data-handle="{{ associated_product.handle }}"
+                data-price="{{ associated_product.price }}"
+                data-colour="{{ associated_product_colour }}"
+            >{{ title }}{%- if associated_product.available != true or associated_product.selected_or_first_available_variant.inventory_quantity == 0 -%}
+                        ({{ 'products.product.sold_out' | t }})
+                    {%- endif -%}</option>
+        {%- endfor -%}
+    </select>
+</div>

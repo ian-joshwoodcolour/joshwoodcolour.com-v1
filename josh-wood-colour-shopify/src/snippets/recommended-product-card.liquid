@@ -1,0 +1,12 @@
+<a href="{{ recommendation.url }}" class="c-recommended-products__item u-text-center">
+    <div class="c-recommended-products__image js-recommendation-{{ recommendation_number }}-image" style="background-image: url('{{ recommendation.featured_image | img_url: '600x700', crop: 'center' }}');"></div>
+
+    <div class="u-p">
+        <div class="u-weight-bold u-mb-- js-recommendation-{{ recommendation_number }}-title">
+            {{ recommendation.title }}
+        </div>
+        <div class="js-recommendation-{{ recommendation_number }}-price">
+            £{{ recommendation.price | divided_by: 100 }}
+        </div>
+    </div>
+</a>

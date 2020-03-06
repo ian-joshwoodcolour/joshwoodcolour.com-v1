@@ -1,0 +1,23 @@
+button {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    display: inherit;
+    font-family: inherit;
+    font-size: 100%;
+    text-align: inherit;
+}
+    /**
+     * 1. Fix an 'active' state style in Safari
+     */
+    button:active {
+        color: currentColor; /* [1] */
+    }
+
+
+button[disabled] {
+    opacity: 0.3 !important;
+    pointer-events: none;
+}

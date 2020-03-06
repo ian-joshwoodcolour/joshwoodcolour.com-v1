@@ -1,0 +1,204 @@
+$hero-banner-min-height: 300px;
+$hero-banner-min-height--large: 60vmin;
+$hero-banner-navigation-spacing: 70px;
+$hero-banner-text-color: $color-white;
+$hero-banner-home-logo-size: 220px;
+
+
+/**
+ * 1. Contain the background image
+ */
+.c-hero-banner {
+    position: relative; /* [2] */
+}
+    .c-hero-banner__image {
+        background-color: $global-image-placeholder-color;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: $hero-banner-min-height;
+        overflow: hidden;
+        z-index: 0
+    }
+
+    /**
+     * 1. Align items vertically in the center
+     * 2. Allow the content to wrap on new lines
+     * 3. Position in the center
+     * 5. Layer the content above the background image
+     */
+    .c-hero-banner__wrapper {
+        @include rem(padding-bottom, $global-spacing);
+        @include rem(padding-top, $global-spacing);
+        align-items: center; /* [1] */
+        display: flex;
+        flex-wrap: wrap; /* [2] */
+        margin-bottom: (($global-spacing * 1.5) * -1);
+        margin-left: auto; /* [3] */
+        margin-right: auto; /* [3] */
+        max-width: 100%;
+        padding-left: $global-spacing;
+        padding-right: $global-spacing;
+        z-index: 1;
+
+    }
+
+
+@include mq ($until: mobile) {
+    .c-hero-banner__wrapper {
+        margin-bottom: 0;
+
+    }
+    .c-hero-banner {
+        &--has-anchor-links {
+            .c-hero-banner__wrapper{
+                 padding-top: 0;
+                 padding-bottom: 0
+            }
+
+        }
+    }
+
+    .c-hero-banner__image {
+        background-position: 80% center;
+    }
+}
+
+@include mq ($until: tablet) {
+    .c-hero-banner__image {
+        background-position: 70% center;
+    }
+}
+
+
+@include mq ($from: mobile) {
+    /**
+     * 1. Align the banner's content vertically in the center
+     */
+    .c-hero-banner {
+        align-items: center; /* [1] */
+        display: flex;
+        min-height: $hero-banner-min-height--large;
+        &--has-anchor-links {
+            min-height: $hero-banner-min-height;
+            height: $hero-banner-min-height;
+            .c-hero-banner__image {
+                top: -8px;
+                background-position: inherit;
+            }
+            .c-hero-banner__wrapper {
+                padding-left: 48px;
+                padding-right: 48px;
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+    }
+        .c-hero-banner__wrapper {
+            @include rem(padding-bottom, $global-spacing-huge);
+            @include rem(padding-top, $hero-banner-navigation-spacing);
+            color: $hero-banner-text-color;
+        }
+
+        .c-hero-banner__image {
+            bottom: 0;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            width: 100%;
+        }
+
+        .c-hero-banner__content {
+            max-width: 550px;
+        }
+        .c-hero-banner__content > p {
+            max-width: 80%;
+        }
+
+    .c-hero-banner-carousel {
+        min-height: $hero-banner-min-height--large;
+        &.full-height {
+            min-height: 100vmin;
+            .c-hero-banner {
+                min-height: 100vmin;
+            }
+        }
+    }
+}
+
+
+.c-hero-banner > .u-sticky-placeholder {
+    display: none;
+}
+
+.c-hero-banner-carousel {
+    .flickity-prev-next-button {
+        background-color: transparent !important;
+
+        * {
+            fill: $color-white !important;
+        }
+    }
+
+    .flickity-prev-next-button {
+        top: calc(#{$hero-banner-min-height / 2} - #{22 / 2}px);
+    }
+
+    .flickity-page-dots {
+        bottom: $global-spacing;
+    }
+
+    .dot {
+        background-color: $color-white !important;
+        height: $global-spacing-tiny !important;
+        width: $global-spacing-tiny !important;
+    }
+}
+
+@include mq ($until: mobile) {
+    .c-hero-banner:nth-child(n+2) {
+        display: none;
+    }
+    &.flickity-enabled .c-hero-banner:nth-child(n+2) {
+        display: block;
+    }
+}
+
+@include mq ($from: mobile) {
+    .c-hero-banner-carousel {
+        height: $hero-banner-min-height;
+        overflow: hidden;
+
+        .flickity-prev-next-button {
+            top: 50%;
+
+            &.previous {
+                left: $global-spacing;
+            }
+            &.next {
+                right: $global-spacing;
+            }
+        }
+    }
+}
+
+
+@include mq ($until: mobile) {
+    .c-hero-banner--small .c-hero-banner__image{
+        height: 160px;
+    }
+}
+
+@include mq ($from: mobile) {
+    .c-hero-banner--small {
+        min-height: 150px;
+    }
+}
+
+svg.icon-line {
+    width: 43px;
+    position: relative;
+    bottom: 12px;
+    margin-right: 20px;
+    display: inline-block;
+}

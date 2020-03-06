@@ -1,0 +1,84 @@
+<div class="o-layout o-layout--large">
+    <div class="o-layout__item u-3/12@mobile u-show@mobile js-overlapped-images">
+        <div class="c-card c-card--default">
+            <div class="c-card__image-wrapper u-parallax" data-rellax-percentage="0.5" data-rellax-speed="0.5">
+                <div style="background-image: url({{ section.blocks[0].settings.photo_1 | img_url: '500x650' }})" class="c-card__image"></div>
+            </div>
+        </div>
+
+        <div class="c-card c-card--default c-card--overlap">
+            <div class="c-card__image-wrapper u-parallax" data-rellax-percentage=".225" data-rellax-speed="1">
+                <div style="background-image: url({{ section.blocks[0].settings.photo_2 | img_url: '500x650' }})" class="c-card__image"></div>
+            </div>
+        </div>
+    </div><div class="o-layout__item u-3/12">
+    </div><div class="o-layout__item u-6/12@mobile">
+        <div class="u-pl++@mobile u-mb+">
+            <h3 class="u-heading u-mb">{{ section.blocks[0].settings.title }}</h3>
+
+            <p>{{ section.blocks[0].settings.text }}</p>
+
+            {%- if cta_label and cta_text -%}
+                <a href="{{ section.blocks[0].settings.cta_url }}" class="c-button c-button--black u-mt">
+                    {{ section.blocks[0].settings.cta_label }}
+                </a>
+            {%- endif -%}
+        </div>
+
+        <div class="c-card c-card--short c-card--no-max u-spacing-top-4 u-pr+ u-pr0@mobile">
+            <div class="c-card__image-wrapper u-parallax" data-rellax-percentage="0.5" data-rellax-speed="0.75">
+                <div style="background-image: url({{ section.blocks[0].settings.photo_3 | img_url: '800x650' }})" class="c-card__image"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Salon Space Section",
+    "blocks": [
+        {
+            "name": "Salon Space content",
+            "type": "object",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "photo_1",
+                    "label": "Photo #1"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "photo_2",
+                    "label": "Photo #2"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "photo_3",
+                    "label": "Photo #3"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "textarea",
+                    "id": "text",
+                    "label": "Text"
+                },
+                {
+                    "type": "url",
+                    "id": "cta_url",
+                    "label": "CTA URL"
+                },
+                {
+                    "type": "text",
+                    "id": "cta_label",
+                    "label": "CTA Label"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

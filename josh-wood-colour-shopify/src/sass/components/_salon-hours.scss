@@ -1,0 +1,55 @@
+.c-salon-hours__item {
+    position: relative;
+}
+    .c-salon-hours__day {
+        @include heading();
+        @include inuit-font-size(12px, false);
+        color: $color-grey;
+        font-family: $global-font-family-body;
+        letter-spacing: 1px;
+        margin-bottom: $global-spacing-tiny;
+        text-transform: uppercase;
+    }
+
+    .c-salon-hours__time {
+        @include inuit-font-size(20px, false);
+        letter-spacing: 1px;
+    }
+
+
+.c-salon-hours__item--framed::before {
+    @include gold-frame();
+    animation: fadeIn 1s;
+    content: '';
+    height: calc(100% + #{$global-spacing-huge});
+    left: 0;
+    position: absolute;
+    top: 0;
+    transform: translateX((($global-spacing / 2) * -1))
+               translateY((($global-spacing-huge / 2) * -1));
+    width: calc(100% + #{$global-spacing});
+}
+
+
+@include mq ($until: mobile) {
+    .c-salon-hours__item:nth-child(n-1) {
+        margin-bottom: $global-spacing;
+    }
+
+    .c-salon-hours__item--framed::before {
+        height: calc(100% + #{$global-spacing});
+        transform: translateX((($global-spacing + 6px) * -1))
+                   translateY((($global-spacing / 2) * -1));
+    }
+}
+
+@include mq ($from: mobile) {
+    .c-salon-hours {
+        display: flex;
+        flex-wrap: nowrap;
+        text-align: center;
+    }
+        .c-salon-hours .o-layout__item:last-child {
+            margin-top: $global-spacing;
+        }
+}

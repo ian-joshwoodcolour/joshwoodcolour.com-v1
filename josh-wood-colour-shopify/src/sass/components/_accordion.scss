@@ -1,0 +1,36 @@
+$accordion-toggle-icon-size: 20px;
+
+
+.c-accordion {
+    overflow: hidden;
+}
+    .c-accordion__toggle {
+        cursor: pointer;
+        font-family: $global-font-family-bold;
+        font-size: $inuit-font-size-h6;
+        padding-left: 0;
+        padding-right: $global-spacing;
+        outline: none;
+        width: 100%;
+    }
+        .c-accordion__toggle-icon {
+            height: $accordion-toggle-icon-size;
+            float: right;
+            margin-right: ($global-spacing * -1);
+            margin-top: 2px;
+            transition: transform $global-transition-speed $global-transition-easing;
+            width: $accordion-toggle-icon-size;
+            will-change: transform;
+        }
+
+        .c-accordion__toggle[aria-expanded="true"] .c-accordion__toggle-icon {
+            transform: rotate(135deg);
+        }
+
+    .c-accordion__content {
+        display: none;
+        opacity: 0;
+        transition: opacity ($global-transition-speed * 3),
+                    transform ($global-transition-speed * 3);
+        transform: translateY(12px);
+    }

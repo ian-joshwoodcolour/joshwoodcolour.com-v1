@@ -1,0 +1,15 @@
+.c-care-teaser {
+    background-position: 0% 70%;
+    background-size: auto 200%;
+    min-height: 500px;
+    height: 70vw;
+}
+
+
+@include mq ($until: mobile) {
+    .c-care-teaser {
+        background-size: auto 130%;
+        min-height: 900px;
+        background-position: 55% 63%;
+    }
+}

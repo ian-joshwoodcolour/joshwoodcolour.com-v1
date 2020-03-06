@@ -1,0 +1,66 @@
+{%- assign back_button_label = 'Log in' -%}
+{%- assign back_button_url = '/account/login' -%}
+{% include 'back-button' %}
+
+<section class="o-section o-wrapper">
+    <div class="u-mw-450 u-m-auto">
+        <h1 class="u-heading u-h3 u-mb u-mb+@mobile">Create an account</h1>
+
+        {% form 'create_customer' %}
+            {%- if form.errors -%}
+                <div class="s-form">
+                    {{ form.errors | default_errors }}
+                </div>
+            {%- endif -%}
+            
+            <div class="c-form__field">
+                <div class="u-flex">
+                    <input
+                        type="text"
+                        name="customer[first_name]"
+                        id="FirstName"
+                        class="c-form__input u-1/1 {% if form.errors contains 'first_name' %}c-form__input--error{% endif %}"
+                        placeholder="{{ 'customer.register.first_name' | t }}"
+                        autofocus
+                        {% if form.first_name %}value="{{ form.first_name }}"{% endif %}
+                    >
+                    <input
+                        type="text"
+                        name="customer[last_name]"
+                        id="LastName"
+                        class="c-form__input u-1/1 u-ml- {% if form.errors contains 'last_name' %}c-form__input--error{% endif %}"
+                        placeholder="{{ 'customer.register.last_name' | t }}"
+                        {% if form.last_name %}value="{{ form.last_name }}"{% endif %}
+                    >
+                </div>
+            </div>
+            <div class="c-form__field">
+                <input
+                    type="email"
+                    name="customer[email]"
+                    id="Email"
+                    class="c-form__input u-1/1 {% if form.errors contains 'email' %}c-form__input--error{% endif %}"
+                    placeholder="{{ 'customer.register.email' | t }}"
+                    value="{% if form.email %}{{ form.email }}{% endif %}"
+                    spellcheck="false"
+                    autocomplete="off"
+                    autocapitalize="off"
+                >
+            </div>
+            <div class="c-form__field">
+                <input type="password"
+                    name="customer[password]"
+                    id="CreatePassword"
+                    class="c-form__input u-1/1 {% if form.errors contains 'password' %}c-form__input--error{% endif %}"
+                    placeholder="{{ 'customer.register.password' | t }}"
+                >
+            </div>
+
+            <p class="u-mt u-font-size-14 u-leading-14 u-color-grey-dark">{{ settings.form_consent_checkbox_label }}</p>
+
+            <button type="submit" class="c-button c-button--black u-1/1 u-mt">
+                {{ 'customer.register.submit' | t }}
+            </button>
+        {% endform %}
+    </div>
+</section>

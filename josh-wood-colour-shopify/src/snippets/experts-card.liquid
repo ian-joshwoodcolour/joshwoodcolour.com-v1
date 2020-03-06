@@ -1,0 +1,14 @@
+<div class="c-card c-card--default">
+    <div class="c-card__image-wrapper u-fade-intersected js-monitor">
+        <a href="{{ url }}" class="c-card__title c-card__title--{{ role_text_position }}">
+            <h2 class="u-h3 u-heading">{{ name }}</h2>
+            
+            {% if role != '' %}
+                {{ role }}
+            {% else %}
+                <br>
+            {% endif %}
+        </a>
+        <a href="{{ url }}" style="background-image: url({{ image | img_url: '330x430' }}); background-position: top center;" class="c-card__image"></a>
+    </div>
+</div>

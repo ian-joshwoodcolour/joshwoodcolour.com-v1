@@ -1,0 +1,24 @@
+{%- comment - %}
+This is pretty much the same layout used to list blogs for the index page – would be good to figure out how to just use one template
+{%- endcomment -%}
+
+{%- assign counter = 0 -%}
+{%- assign counter_max = 3 -%}
+{%- assign last_related_article_title = '' -%}
+
+<h2 class="u-heading u-h3 u-mb u-fade-intersected js-monitor js-related-article-header">Related articles</h2>
+
+<div class="o-layout o-layout--huge o-layout--matrix o-layout--offset-tops o-layout--left-right-cols">
+    {%- for related_article in blogs.advice.articles -%}<!--
+    -->{%- for tag in related_article.tags -%}<!--
+        -->{%- if current_article_tags contains tag and related_article.title != current_article_title and related_article.title != last_related_article_title and counter < counter_max -%}<!--
+            -->{%- assign counter = counter | plus: 1 -%}<!--
+            -->{%- assign last_related_article_title = related_article.title -%}<!--
+            --><div class="o-layout__item u-6/12@mobile u-4/12@tabletSmall u-fade-in js-related-article">
+                {%- assign article = related_article -%}
+                {%- include 'article-card' -%}
+            </div><!--
+        -->{%- endif -%}<!--
+    -->{%- endfor -%}<!--
+-->{%- endfor -%}
+</div>

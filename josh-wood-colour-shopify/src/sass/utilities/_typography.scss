@@ -1,0 +1,136 @@
+.u-heading {
+    @include heading();
+}
+
+.u-h4,
+.u-h6 {
+    line-height: 1.4;
+}
+
+
+.u-font-size-14 {
+    @include inuit-font-size(14px, false);
+}
+.u-font-size-12 {
+    @include inuit-font-size(12px, false);
+}
+.u-font-size-10 {
+    @include inuit-font-size(10px, false);
+    line-height: 0.8;
+}
+
+
+.u-numeral {
+    font-size: calc(#{$inuit-font-size-h1} + 4vmin) !important;
+
+    @include mq ($from: mobile) {
+        font-size: calc(#{$inuit-font-size-h1} + 7vmin);
+    }
+}
+
+
+.u-weight-light {
+    font-family: $global-font-family-light;
+}
+.u-weight-regular {
+    font-family: $global-font-family-body;
+}
+.u-weight-bold {
+    font-family: $global-font-family-bold;
+}
+
+
+.u-text-top {
+    vertical-align: text-top;
+}
+.u-text-baseline {
+    vertical-align: baseline;
+}
+.u-text-sub {
+    vertical-align: sub;
+}
+.u-text-inherit {
+    vertical-align: inherit;
+}
+.u-text-center {
+    text-align: center;
+}
+.u-text-left {
+    text-align: left;
+}
+.u-text-right {
+    text-align: right;
+}
+
+
+.u-case-upper {
+    text-transform: uppercase;
+}
+.u-case-capitalize {
+    text-transform: capitalize;
+}
+
+
+.u-spacing-1 {
+    letter-spacing: 1px;
+}
+.u-spacing-0 {
+    letter-spacing: 0;
+}
+
+.u-leading-inherit {
+    line-height: inherit;
+}
+
+.u-leading-14 {
+    line-height: 1.4;
+}
+
+
+.u-lead {
+    @include inuit-font-size(($inuit-global-font-size * 1.2), false);
+}
+
+
+.u-label, .u-label-menu {
+    @include inuit-font-size(12px, false);
+    color: $color-grey;
+    font-family: $global-font-family-bold;
+    text-transform: uppercase;
+    &-menu {
+        @include inuit-font-size(13px, false);
+        letter-spacing: 2.6px;
+        &:hover, &.active {
+            color: black;
+            border-bottom: 1px solid $color-black;
+        }
+        &.active a {
+            cursor: default;
+        }
+    }
+}
+
+
+.u-no-wrap {
+    white-space: nowrap;
+}
+
+
+@include mq ($from: mobile) {
+    .u-align-right\@mobile {
+        text-align: right;
+    }
+
+    .u-align-center\@mobile {
+        text-align: center;
+    }
+}
+
+
+.u-underline {
+    text-decoration: underline;
+}
+
+.u-strike {
+    text-decoration: line-through;
+}

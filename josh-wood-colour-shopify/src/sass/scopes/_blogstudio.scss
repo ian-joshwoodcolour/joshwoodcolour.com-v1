@@ -1,0 +1,238 @@
+.s-blogstudio {
+    * {
+        font-family: $global-font-family-body !important;
+        font-size: inherit !important;
+        line-height: inherit !important;
+    }
+    strong, b { 
+        font-family: $global-font-family-bold !important;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-weight: inherit !important;
+        margin-top: 0 !important;
+        padding-bottom: 0 !important;
+        padding-top: 0 !important;
+        text-transform: none !important;
+    }
+
+    h1 {
+      @include inuit-font-size($inuit-font-size-h3, 1.2, true);
+    }
+
+    h2 {
+      @include inuit-font-size($inuit-font-size-h3, 1.2, true);
+    }
+
+    h3 {
+      @include inuit-font-size($inuit-font-size-h4, 1.2, true);
+    }
+
+    h4 {
+      @include inuit-font-size($inuit-font-size-h5, 1.2, true);
+    }
+
+    h5 {
+      @include inuit-font-size($inuit-font-size-h6, 1.2, true);
+    }
+
+    h6 {
+      @include inuit-font-size($inuit-font-size-h6, 1.2, true);
+    }
+
+    a {
+        color: currentColor !important;
+        font-family: $global-font-family-bold !important;
+        text-decoration: none !important;
+    }
+
+    img {
+        margin-bottom: $global-spacing !important;
+        margin-top: $global-spacing !important;
+    }
+
+    figure img {
+        width: 100% !important;
+    }
+    figure > img {
+        margin-top: 0 !important;
+    }
+    figure > img + figcaption p {
+        color: $color-grey-dark !important;
+        font-size: 12px !important;
+        font-style: italic !important;
+        line-height: 1.3 !important;
+        margin-top: $global-spacing * -1 !important;
+    }
+
+    img:first-child {
+        margin-top: 0 !important;
+    }
+
+    .sse-center * {
+        text-align: left !important;
+    }
+
+    .sse-embed-responsive > .c-responsive-video {
+        margin-top: 0 !important;
+    }
+
+    .sse-quote {
+        margin-bottom: $global-spacing-large !important;
+        margin-top: $global-spacing-large !important;
+    }
+    .sse-quote > i {
+        left: 50% !important;
+        margin-left: -5px !important;
+        top: $global-spacing * -1 !important;
+    }
+    .sse-quote > p {
+        font-size: 24px !important;
+        line-height: 1.4 !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        text-align: center !important;
+        width: 85% !important;
+    }
+
+
+    /**
+     * The main container for Blog Studio content
+     */
+    .is-container {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .is-container > p:first-of-type {
+        @include inuit-font-size(($inuit-global-font-size * 1.2), false);
+    }
+
+    .is-container > p > img {
+        clear: both !important;
+        display: block !important;
+        margin-bottom: $global-spacing !important;
+        margin-top: $global-spacing !important;
+    }
+
+    .sse-row {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    .sse-row > .sse-column {
+        padding-left: 0 !important;
+        padding-right: $global-spacing !important;
+    }
+    .sse-row.sse-clearfix + .sse-row.sse-clearfix {
+        margin-top: $global-spacing !important;
+    }
+
+    .sse-image-gallery,
+    .sse-column.sse-full {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+
+    /**
+     * Video embeds
+     */
+    .sse-embed-responsive {
+        margin-bottom: 0 !important;
+        margin-top: 0 !important;
+    }
+
+    /**
+     * CTA buttons
+     */
+    .sse-btn {
+        @include rem(padding, $global-spacing-small $global-spacing);
+        background-color: $color-black !important;
+        border: 1px solid !important;
+        border-radius: $global-radius !important;
+        color: $color-white !important;
+        cursor: pointer !important;
+        display: inline-block !important;
+        font: inherit !important;
+        font-family: $global-font-family-bold !important;
+        outline: none !important;
+        text-align: center !important;
+        transition: $global-transition !important;
+        vertical-align: middle !important;
+    }
+
+    /**
+     * Carousel pagination
+     */
+    .slick-dots {
+        bottom: $global-spacing-large * -1 !important;
+    }
+    .slick-dots button {
+        text-indent: -9999px !important;
+    }
+
+    .slick-arrow {
+        color: transparent !important;
+    }
+
+
+    /**
+     * Media components
+     */
+    div[data-component] {
+        margin-bottom: $global-spacing !important;
+        margin-top: $global-spacing !important;
+    }
+
+
+    @include mq ($from: mobile) {
+        .is-container > p > img {
+            margin-bottom: $global-spacing-large !important;
+            margin-top: $global-spacing-large !important;
+        }
+    }
+
+    @include mq ($until: tablet) {
+        h1 {
+            @include inuit-font-size($inuit-font-size-h3 * 0.6, 1.2, true);
+        }
+
+        h2 {
+            @include inuit-font-size($inuit-font-size-h3 * 0.8, 1.2, true);
+        }
+
+        h3 {
+            @include inuit-font-size($inuit-font-size-h4 * 0.85, 1.2, true);
+        }
+
+        h4 {
+            @include inuit-font-size($inuit-font-size-h5 * 0.85, 1.2, true);
+        }
+
+        h5 {
+            @include inuit-font-size($inuit-font-size-h6 * 0.85, 1.2, true);
+        }
+
+        h6 {
+            @include inuit-font-size($inuit-font-size-h6 * 0.85, 1.2, true);
+        }
+    }
+
+    @include mq ($until: mobile) {
+        /**
+         * Multi-column layouts
+         */
+        .sse-row > .sse-column + .sse-column {
+            margin-top: $global-spacing !important;
+        }
+
+        .sse-row > .sse-column {
+            padding-right: 0 !important;
+        }
+    }
+}

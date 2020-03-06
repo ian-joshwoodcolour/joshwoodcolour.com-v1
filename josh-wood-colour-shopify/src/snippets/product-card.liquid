@@ -1,0 +1,18 @@
+<a href="{{ product.url }}" title="{{ product.title }}">
+    {%- assign card_size = card_size -%}
+    {%- assign classes = 'c-card--no-max c-card--h3-heading u-mb' -%}
+    {%- assign photo = product.images[0] | img_url: '800x1000' -%}
+    {%- if product.metafields.titles.strapline != blank -%}
+        {%- assign title = product.metafields.titles.strapline -%}
+    {%- else -%}
+        {%- assign title = '' -%}
+    {%- endif -%}
+    {%- assign title_position = 'left' -%}
+    {%- assign has_title_parallax = true -%}
+    {% include 'card' %}
+    
+    <div class="u-text-center">
+        <h3 class="u-h6 u-mb--">{{ product.title }}</h3>
+        &pound;{{ product.price | divided_by: 100 }}
+    </div>
+</a>

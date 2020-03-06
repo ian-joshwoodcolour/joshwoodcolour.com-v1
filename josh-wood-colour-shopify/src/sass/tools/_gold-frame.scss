@@ -1,0 +1,6 @@
+@mixin gold-frame ($border-width: 6px) {
+    border-image-slice: 1;
+    border-image-source: linear-gradient(325deg, #ffe9c8, #f3dab1 17%, #f3dab1 17%, #f2d9b0 18%, #ead0a2 28%, #fff4dd 48%, #e1c894 63%, #fbebc7 86%, #ebd49d); /* [1] */
+    border-style: solid;
+    border-width: $border-width;
+}

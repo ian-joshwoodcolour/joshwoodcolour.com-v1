@@ -1,0 +1,30 @@
+@mixin hide-scrollbar ($scrollbar-color) {
+    &::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+        -webkit-appearance: none;
+        -webkit-border-radius: 100px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $scrollbar-color;
+        -webkit-border-radius: 100px;
+    }
+
+    &::-webkit-scrollbar-thumb:vertical {
+        background: $scrollbar-color;
+        -webkit-border-radius: 100px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $scrollbar-color;
+        border: none;
+        -webkit-border-radius: 100px;
+    }
+
+    &::-webkit-scrollbar-thumb:vertical:active {
+        background: $scrollbar-color;
+        border: none;
+        -webkit-border-radius: 100px;
+    }
+}

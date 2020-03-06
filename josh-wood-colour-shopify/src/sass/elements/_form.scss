@@ -1,0 +1,18 @@
+form {
+    margin: 0;
+}
+
+input,
+select {
+    border-radius: 0;
+    -webkit-appearance: none;
+}
+
+
+@include mq ($until: mobile) {
+    input,
+    textarea,
+    select {
+        font-size: 16px !important;
+    }
+}

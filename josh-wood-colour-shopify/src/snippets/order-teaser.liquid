@@ -1,0 +1,24 @@
+<a href="{{ order.customer_url }}" class="u-heading u-h5">
+    {% include 'order-fulfillment-label' %}
+</a>
+
+<ul class="o-list-inline o-list-inline--persist u-mt">
+    <li class="o-list-inline__item">
+        <div class="u-label">Order</div>
+        <a href="{{ order.customer_url }}">{{ order.name }}</a>
+    </li>
+    <li class="o-list-inline__item">
+        <div class="u-label">Date</div>
+        {{ order.created_at | date: format: 'month_day_year' }}
+    </li>
+    <li class="o-list-inline__item">
+        <div class="u-label">Total</div>
+        {{ order.total_price | money_without_trailing_zeros }}
+    </li>
+</ul>
+
+<div class="u-mt c-swipeable">
+    {%- for line_item in order.line_items -%}
+        <a href="{{ order.customer_url }}" class="u-inline-block u-square u-square--150 u-bg-cover u-inline-block {% unless forloop.first %}u-ml-{% endunless %}" style="background-image: url({{ line_item.product.featured_image | img_url: '300x' }});"></a>
+    {%- endfor -%}
+</div>

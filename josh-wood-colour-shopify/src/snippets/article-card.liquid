@@ -1,0 +1,11 @@
+{%- assign article_photo = article.image -%}
+{%- assign article_title = article.title -%}
+{%- assign article_tags = article.tags -%}
+{%- assign article_url = article.url -%}
+{%- if article.content contains 'iframe' -%}
+    {%- assign has_video = true -%}
+{%- else -%}
+    {%- assign has_video = false -%}
+{%- endif -%}
+{%- assign photo_lazyload = true -%}
+{%- include 'blog-card' -%}

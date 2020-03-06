@@ -1,0 +1,58 @@
+{%- if section.blocks[0].settings.product != blank -%}
+    {%- assign recommended_product = all_products[section.blocks[0].settings.product] -%}
+    <div class="o-layout u-flex@mobile">
+        <div class="o-layout__item u-7/12@mobile u-flex@mobile u-direction-column u-justify-center">
+            <h3 class="u-heading u-mb">{{ section.blocks[0].settings.title }}</h3>
+
+            <p>{{ section.blocks[0].settings.text }}</p>
+
+            <ul class="o-list-inline@mobile u-mt u-mt+@mobile">
+                <li class="o-list-inline__item">
+                    <a href="/cart/add/?id={{ recommended_product.selected_or_first_available_variant.id }}" class="c-button c-button--black js-quick-add" data-product-id="{{ recommended_product.id }}" data-variant-id="{{ recommended_product.selected_or_first_available_variant.id }}" data-source="Product recommendation" data-handle="{{ recommended_product.handle }}" data-price="{{ recommended_product.price }}">
+                        {{ 'products.product.add_to_cart' | t }} ({{ recommended_product.price | money_without_trailing_zeros }})
+                    </a>
+                </li>
+                <li class="o-list-inline__item">
+                    <a href="{{ recommended_product.url }}" class="c-button">
+                        Learn more
+                    </a>
+                </li>
+            </ul>
+        </div><div class="o-layout__item u-1/12@mobile u-mb">
+        </div><div class="o-layout__item u-4/12@mobile">
+            {%- assign collection_url = recommended_product.url -%}
+            {%- assign collection_photo = recommended_product.featured_image -%}
+            {% include 'collection-card' %}
+        </div>
+    </div>
+{%- endif -%}
+ 
+{% schema %}
+{
+    "name": "Everything Mask recommend",
+    "blocks": [
+        {
+            "name": "Recommendation content",
+            "type": "object",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "product",
+                    "id": "product",
+                    "label": "Product"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "textarea",
+                    "id": "text",
+                    "label": "Text"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

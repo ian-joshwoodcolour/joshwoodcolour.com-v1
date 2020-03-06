@@ -1,0 +1,17 @@
+{
+  "all": true,
+  "include": [
+    "src/js/**/*.js"
+  ],
+  "exclude": [
+    "src/flow-typed",
+    "**/test/**/*"
+  ],
+  "report-dir": "test/report",
+  "reporter": [
+    "html",
+    "text"
+  ],
+  "sourceMap": false,
+  "instrument": false
+}

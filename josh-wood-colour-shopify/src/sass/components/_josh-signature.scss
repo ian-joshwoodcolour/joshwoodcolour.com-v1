@@ -1,0 +1,19 @@
+.c-josh-signature__img {
+    background-color: transparent;
+    display: block;
+    height: auto;
+    margin-bottom: ($global-spacing-small * -1);
+    width: 120px;
+}
+    // .c-josh-signature__svg > path {
+    //     animation: animateSignature 5s linear forwards;
+    //     stroke-dasharray: 1000;
+    //     stroke-dashoffset: 1000;
+    // }
+
+
+// @keyframes animateSignature {
+//     to {
+//         stroke-dashoffset: 0;
+//     }
+// }

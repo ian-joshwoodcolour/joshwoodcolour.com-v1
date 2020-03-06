@@ -1,0 +1,588 @@
+$card-frame-size: 6px;
+$card-frame-spacing: $global-spacing-large;
+$card-frame-spacing--title: $global-spacing-huge;
+$card-frame-spacing--responsive: 12%;
+$card-frame-spacing--responsive--title: 16%;
+$card-max-width: 500px;
+$card-max-width--huge: 700px;
+$card-background-colour: $color-grey-lightest;
+$card-ratios: (
+    default: 130%,
+    wide: 52%,
+    short: 80%,
+    shorter: 360px,
+    tall: 170%,
+    square: 100%
+);
+
+
+/**
+ * 1. Contain a frame if it is used
+ */
+.c-card {
+    display: block;
+    position: relative; /* [3] */
+    max-width: $card-max-width;
+    will-change: transform;
+    transition: $global-transition;
+    z-index: 1;
+
+    @include mq ($until: mobile) {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+}
+    .c-card__inner {
+        position: relative;
+        z-index: 2;
+    }
+
+    .c-card__image-wrapper {
+        background-color: $card-background-colour;
+        height: 0;
+        position: relative;
+        width: 100%;
+        z-index: 2;
+    }
+
+    .c-card__image {
+        background-color: $global-image-placeholder-color;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        bottom: 0;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        transition: $global-transition;
+        width: 100%;
+    }
+
+
+/* Sizes
+   ====================================== */
+
+@each $card-ratio-name, $card-ratio-size in $card-ratios {
+    .c-card--#{$card-ratio-name} > .c-card__image-wrapper {
+        padding-bottom: $card-ratio-size;
+    }
+}
+
+@include mq ($until: mobile) {
+    .c-card--shorter > .c-card__image-wrapper {
+        padding-bottom: 70%;
+    }
+}
+
+.c-card--no-max {
+    max-width: none;
+}
+
+
+
+/* Frames
+   ====================================== */
+
+/**
+ * We use single classes for frames that include multiple variations.
+ * The base class is `.c-card--framed`, and available options (hyphen separated) are:
+ * - Any:
+ *    - gold
+ *    - tall
+ *    - short
+ * - One of:
+ *    - left
+ *    - right
+ */
+
+.c-card[class*="c-card--framed"] {
+    margin-bottom: $card-frame-spacing;
+
+    /**
+     * 2. 'Pull' the bottom of the frame up so its shorter than the container
+     * 3. Add spacing to the right of the container
+     * 4. 'Pull' the frame above the container
+     * 5. Set the max width based on the size of the frame spacing
+     */
+    .c-card__frame,
+    .c-card__frame::before {
+        content: '';
+        height: 100%;
+        position: absolute;
+        top: 0; /* [4] */
+        width: 100%;
+        z-index: 1;
+
+        @include mq ($until: mobile) {
+            width: calc(100% + #{$global-spacing + $card-frame-size});
+        }
+    }
+    .c-card__frame::before {
+        border: $card-frame-size solid $color-grey-light;
+    }
+}
+    .c-card[class*="c-card--framed-left"] {
+        margin-right: $card-frame-spacing;
+
+        .c-card__frame::before {
+            right: 0;
+        }
+
+        .c-card__image-wrapper {
+            transform: translateX($card-frame-spacing)
+                       translateY($card-frame-spacing);
+        }
+            &.c-card--flush .c-card__image-wrapper {
+                width: calc(100% + #{$card-frame-spacing});
+            }
+
+        @include mq ($until: tablet) {
+            margin-right: ($card-frame-spacing / 1.7);
+
+            .c-card__image-wrapper {
+                transform: translateX($card-frame-spacing--responsive)
+                           translateY($card-frame-spacing--responsive);
+            }
+                &.c-card--flush .c-card__image-wrapper {
+                    width: calc(100% + #{$card-frame-spacing--responsive});
+                }
+        }
+    }
+
+    .c-card[class*="c-card--framed-right"] {
+        margin-left: $card-frame-spacing;
+
+        .c-card__frame::before {
+            left: 0;
+        }
+
+        .c-card__image-wrapper {
+            transform: translateX(($card-frame-spacing * -1))
+                       translateY($card-frame-spacing);
+        }
+            &.c-card--flush .c-card__image-wrapper {
+                width: calc(100% + #{$card-frame-spacing});
+            }
+
+        @include mq ($until: tablet) {
+            margin-left: ($card-frame-spacing / 1.7);
+
+            .c-card__image-wrapper {
+                transform: translateX(($card-frame-spacing--responsive * -1))
+                           translateY($card-frame-spacing--responsive);
+            }
+                &.c-card--flush .c-card__image-wrapper {
+                    width: calc(100% + #{$card-frame-spacing--responsive});
+                }
+        }
+    }
+
+    .c-card[class*="-gold"] {
+        .c-card__frame::before {
+            @include gold-frame();
+        }
+    }
+
+    .c-card[class*="-tall"] {
+        margin-bottom: $card-frame-spacing;
+
+        .c-card__frame::before {
+            height: calc(100% + #{($card-frame-spacing * 2)});
+
+            @include mq ($until: mobile) {
+                height: calc(100% + #{($card-frame-spacing--responsive * 2)});
+            }
+        }
+
+        &.c-card[class*="c-card--framed-left"] {
+            .c-card__image-wrapper {
+                transform: translateX($card-frame-spacing)
+                           translateY(($card-frame-spacing / 2));
+            }
+
+            @include mq ($until: tablet) {
+                .c-card__image-wrapper {
+                    transform: translateX($card-frame-spacing--responsive)
+                               translateY(($card-frame-spacing--responsive / 2));
+                }
+            }
+        }
+
+        &.c-card[class*="c-card--framed-right"] {
+            .c-card__image-wrapper {
+                transform: translateX(($card-frame-spacing * -1))
+                           translateY(($card-frame-spacing / 2));
+            }
+
+            @include mq ($until: tablet) {
+                .c-card__image-wrapper {
+                    transform: translateX(($card-frame-spacing--responsive * -1))
+                               translateY(($card-frame-spacing--responsive / 2));
+                }
+            }
+        }
+    }
+
+    @include mq ($until: mobile) {
+        .c-card[class*="c-card--framed-left"],
+        .c-card[class*="c-card--framed-right"] {
+            .c-card__image-wrapper {
+                width: calc(100% + #{$card-frame-spacing--responsive});
+            }
+        }
+    }
+
+    .c-card[class*="-small"] {
+        margin-bottom: ($card-frame-spacing / 1.5);
+
+        .c-card__frame::before {
+            height: calc(100% - #{$card-frame-spacing * 2});
+        }
+    }
+
+
+/**
+ * One-off modifications
+ */
+.c-card--square[class*="-tall"] {
+    .c-card__image-wrapper {
+        // height: calc(100% + #{($card-frame-spacing / 2) + $global-spacing});
+        // width: calc(100% + #{$card-frame-spacing}) !important;
+        // left: ($global-spacing * -1);
+        // width: 100%;
+    }
+
+    @include mq ($until: mobile) {
+        margin-left: 0;
+    }
+}
+
+
+
+/* Titles
+   ====================================== */
+
+$card-title-indent: ($card-frame-spacing--title * 2.5);
+$card-title-indent-ratio: 0.7;
+
+.c-card__title {
+    font-family: $global-font-family-light;
+    position: absolute;
+    text-align: left;
+    bottom: calc(100% - 42px);
+    width: auto;
+    word-break: break-word;
+    z-index: 3;
+
+    @include mq ($until: mobile) {
+        // top: (($card-frame-spacing--responsive / 2) * -1);
+        width: (100 * ($card-title-indent-ratio * 2))#{'%'};
+    }
+}
+    .c-card__title--right {
+        right: ($global-spacing * -1);
+
+        @include mq ($until: tabletSmall) {
+            left: ($global-spacing * -1);
+        }
+    }
+
+    .c-card__title--left {
+        left: ($global-spacing * -1);
+
+        @include mq ($until: tabletSmall) {
+            left: $global-spacing-large;
+        }
+    }
+
+    .c-card__title--white {
+        left: 50%;
+        padding-top: 50%;
+        position: relative;
+        z-index: 1;
+        transform: translate(-50%, -25%);
+        text-align: center;
+    }
+
+    .c-card[class*="c-card--framed"] {
+        .c-card__title {
+            // top: (($card-frame-spacing / 2) * -1);
+            width: calc(150% - #{$card-title-indent});
+
+            @include mq ($until: tabletSmall) {
+                top: (($card-frame-spacing / 3) * -1);
+            }
+
+            @include mq ($until: mobileSmall) {
+                width: 80%;
+
+                /**
+                 * TODO: Fix this hack for the home page cardh
+                 */
+                .s-index & {
+                    .u-heading {
+                        margin: -10% 0 0 -10%;
+                        transform: scale(0.9);
+                        transform-origin: top left;
+                        width: 120%;
+                    }
+                }
+            }
+        }
+
+        .c-card__title--right {
+            right: ($card-title-indent * -1);
+
+            @include mq ($until: tabletSmall) {
+                right: ($card-frame-spacing--responsive * -1);
+            }
+        }
+
+        .c-card__title--left {
+            left: $card-title-indent;
+
+            @include mq ($until: tabletSmall) {
+                left: $card-frame-spacing--responsive;
+            }
+        }
+
+        &.c-card--title {
+            .c-card__frame,
+            .c-card__frame::before {
+                top: -3%;
+            }
+        }
+    }
+
+
+
+
+/* Row display
+   ====================================== */
+
+.c-card--row {
+    align-items: center;
+    display: flex;
+    margin-bottom: 0;
+    max-width: none;
+
+    .c-card__frame::before {
+        height: 80% !important;
+        left: 0;
+        margin-top: 0;
+        top: 50% !important;
+        transform: translateY(-50%);
+        width: calc(100% + #{$card-frame-spacing}) !important;
+    }
+
+    .c-card__title {
+        left: 0 !important;
+        padding-left: $global-spacing-huge;
+        padding-right: $global-spacing-huge;
+        position: relative !important;
+        top: 0 !important;
+    }
+
+    .c-card__image-wrapper.c-card__image-wrapper {
+        min-width: 280px;
+        transform: none;
+        width: 7%;
+    }
+
+    @include mq ($until: tablet) {
+        .c-card__title {
+            padding-left: $global-spacing-large;
+        }
+    }
+
+    @include mq ($until: mobile) {
+        & {
+            display: block;
+            margin-bottom: 0 !important;
+        }
+
+        .c-card__frame {
+            display: none;
+        }
+
+        .c-card__title {
+            margin-bottom: $global-spacing;
+            padding-left: 0;
+            padding-right: 0;
+            width: 100% !important;
+        }
+
+        .c-card__image-wrapper.c-card__image-wrapper {
+            margin-left: ($global-spacing * -1);
+            margin-right: ($global-spacing * -1);
+            padding-bottom: 100%;
+            width: calc(100% + #{$global-spacing * 2});
+        }
+    }
+}
+
+
+
+/* Signature
+   ====================================== */
+
+/**
+ * There is a one-off card that has Josh's signature in the bottom corner
+ */
+.c-card__signature {
+    bottom: $global-spacing;
+    left: $global-spacing;
+    position: absolute;
+    width: 140px;
+}
+
+
+/* Overlapping cards
+   ====================================== */
+
+.c-card--overlap {
+    transform: translateX(70%)
+               translateY(-25%);
+    z-index: 2;
+}
+
+/**
+ * TODO: FIx
+ */
+.c-card--overlap-2 {
+    margin-bottom: -115%;
+    transform: translateX(70%)
+               translateY(-75%);
+    z-index: 2;
+}
+    .c-card:hover,
+    .c-card:focus {
+        z-index: 3;
+    }
+
+
+
+/* Offset cards from left to right
+   (assuming they're in a layout grid)
+   ====================================== */
+
+@include mq ($until: mobile) {
+    .c-cards--h-offsets {
+        > .o-layout__item:nth-child(n+2) > .c-card {
+            padding-top: $global-spacing-large;
+        }
+
+        > .o-layout__item:nth-child(odd) > .c-card {
+            margin-left: $global-spacing;
+            padding-left: $global-spacing-large;
+        }
+
+        > .o-layout__item:nth-child(even) > .c-card {
+            // margin-left: ($global-spacing * -1);
+            padding-right: $global-spacing-large;
+        }
+    }
+}
+
+
+.c-card__frame--right-offset::before {
+    transform: translate(#{($card-frame-spacing * -1)});
+}
+
+
+
+/* A card with a group of images (Signature style on an experts detail page)
+   ====================================== */
+
+.c-card__image-group {
+
+}
+    .c-card__image-group > img {
+        margin-top: $global-spacing;
+        margin-left: $global-spacing;
+        width: 100%;
+    }
+
+@include mq ($from: mobile) {
+    .c-card__image-group {
+        display: flex;
+    }
+}
+
+
+.u-card-spacing {
+    height: 100px;
+
+    @include mq ($from: mobile) {
+        height: 200px;
+    }
+}
+
+
+.c-card--h3-heading .u-heading {
+    @include inuit-font-size($inuit-font-size-h3, false);
+    @include rem(max-width, 200px);
+    margin-left: 25%;
+
+    @include mq ($until: tablet) {
+        font-size: $inuit-font-size-h5 !important;
+        margin: 0;
+        margin-top: (($global-spacing * 2.8) * -1);
+        @include rem(max-width, 150px);
+    }
+}
+    .c-card--wide .c-card__title--left {
+        left: $global-spacing;
+    }
+
+.c-card--bg-contain .c-card__image {
+    background-size: contain;
+}
+
+
+@include mq ($until: mobile) {
+    .c-card--wide .c-card__image-wrapper {
+        padding-bottom: 130%;
+        width: 140%;
+    }
+}
+
+.c-card--hover:hover,
+.c-card--hover:active {
+    transform: translateY(-4px);
+}
+
+
+.c-card__video-icon {
+    bottom: $global-spacing;
+    height: 50px;
+    left: $global-spacing;
+    padding: 0;
+    position: absolute;
+    width: 50px;
+}
+    .c-card__video-icon .c-svg {
+        transform: translateX(0) translateY(50%);
+    }
+
+
+
+//
+
+
+/**
+ * A fix for lots of text being used in the Hero Card component, which causes long columns at smaller viewports
+ */
+@include mq ($from: mobile, $until: tablet) {
+    .c-hero-card-section__card {
+       float: left;
+       width: 100%;
+    }
+
+   .c-hero-card-section__copy {
+        float: right;
+        position: relative;
+        width: 35%;
+   }
+}

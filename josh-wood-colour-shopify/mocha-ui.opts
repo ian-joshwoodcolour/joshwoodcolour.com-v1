@@ -1,0 +1,5 @@
+ --reporter mochawesome
+ --reporter-options reportDir=test/report,reportFilename=ui-report,saveJson=false
+ --require babel-core/register
+ --require babel-polyfill test/ui/*.spec.js
+ --timeout 0

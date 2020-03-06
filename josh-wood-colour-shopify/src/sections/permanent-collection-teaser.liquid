@@ -1,0 +1,77 @@
+<div class="c-hero-card-section u-ph0">
+    {%- assign card_size = 'square' -%}
+    {%- assign has_frame = true -%}
+    {%- assign frame_classes = 'left' -%}
+    {%- assign has_title = false -%}
+    {%- assign photo = section.blocks[0].settings.photo | img_url: '800x1000' -%}
+    {%- assign classes = 'c-card--h3-heading c-hero-card-section__card' -%}
+    {% include 'card' %}
+
+    <div class="c-hero-card-section__copy u-mt0 u-pb+@mobile">
+        <h3 class="u-heading u-mb">{{ section.blocks[0].settings.title }}</h3>
+
+        <p>{{ section.blocks[0].settings.text }}</p>
+        
+        {%- if section.blocks[0].settings.cta_url and section.blocks[0].settings.cta_label -%}
+            <a href="{{ section.blocks[0].settings.cta_url }}" class="c-button c-button--black u-1/1 u-mt u-align-center">
+                {{ section.blocks[0].settings.cta_label }}
+            </a>
+        {%- endif -%}
+
+        {%- if section.blocks[0].settings.secondary_cta_url and section.blocks[0].settings.secondary_cta_label -%}
+            <a href="{{ section.blocks[0].settings.secondary_cta_url }}" class="c-button c-button--black c-button--ghost u-1/1 u-mt- u-align-center">
+                {{ section.blocks[0].settings.secondary_cta_label }}
+            </a>
+        {%- endif -%}
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Permanent Product Teaser",
+    "blocks": [
+        {
+            "name": "Teaser content",
+            "type": "object",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "photo",
+                    "label": "Photo"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "textarea",
+                    "id": "text",
+                    "label": "Text"
+                },
+                {
+                    "type": "url",
+                    "id": "cta_url",
+                    "label": "CTA URL"
+                },
+                {
+                    "type": "text",
+                    "id": "cta_label",
+                    "label": "CTA Label"
+                },
+                {
+                    "type": "url",
+                    "id": "secondary_cta_url",
+                    "label": "Secondary CTA URL"
+                },
+                {
+                    "type": "text",
+                    "id": "secondary_cta_label",
+                    "label": "Secondary CTA Label"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

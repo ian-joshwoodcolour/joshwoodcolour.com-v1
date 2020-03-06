@@ -1,0 +1,16 @@
+<section class="js-cart-collection" data-collection="{{ collection | handle }}">
+    <h2 class="u-heading u-h4 {% unless is_first_group %}u-mt u-mt+@mobile{% endunless %} u-hide js-heading">{{ collection }}</h2>
+
+    <ul class="o-ui-list u-mt">
+        {%- for item in cart.items -%}
+            {%- if collection == 'Permanent colour' and permanent_collections contains item.product.type -%}
+                {% include 'cart-item' %}
+            {%- elsif collection == 'Root concealers' and root_concealers_collections contains item.product.type -%}
+                {% include 'cart-item' %}
+            {%- elsif collection == 'Care range' and care_collections contains item.product.type -%}
+                {% include 'cart-item' %}
+            {%- endif -%}
+        {%- endfor -%}
+    </ul>
+</section>
+

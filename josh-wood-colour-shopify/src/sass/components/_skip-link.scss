@@ -1,0 +1,12 @@
+.c-skip-link {
+    margin-left: $global-spacing;
+    margin-top: $global-spacing;
+    opacity: 0;
+    position: absolute;
+    will-change: opacity;
+    z-index: ($global-highest-z-index + 10);
+}
+    .c-skip-link:hover,
+    .c-skip-link:focus {
+        opacity: 1;
+    }

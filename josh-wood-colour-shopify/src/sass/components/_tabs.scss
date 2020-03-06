@@ -1,0 +1,117 @@
+$tab-item-border-size: 2px;
+
+/**
+ * 1. Reset default list styles
+ */
+.c-tabs__list {
+    border-bottom: $tab-item-border-size solid $color-grey-light;
+    display: flex;
+    flex-direction: row;
+    list-style: none; /* [1] */
+    margin: 0; /* [1] */
+    padding: 0; /* [1] */
+}
+    /**
+     * 1. Allow the items to be displayed on a single line
+     */
+    .c-tabs__list-item {
+        display: inline-block; /* [1] */
+    }
+    .c-tabs__list-item + .c-tabs__list-item {
+        @include rem(margin-left, $global-spacing);
+    }
+
+    /**
+     * 1. Allow the item to consume all remaining space
+     * 2. Align content to the right
+     */
+    .c-tabs__list-item--right {
+        flex-grow: 1; /* [1] */
+        text-align: right; /* [2] */
+    }
+
+@include mq ($until: mobile) {
+    .c-tabs__list-item {
+        flex-grow: 1;
+        text-align: left;
+    }
+
+    .c-tabs__button {
+        width: 100%;
+    }
+}
+
+
+/**
+ * 1. Always show the button as interactive
+ * 2. Remove outline blur/border
+ * 3. Contain the active state element animation
+ * 4. Reset default button styles
+ * 5. Position the button above the tabs bottom border
+ */
+.c-tabs__button {
+    @include rem(padding-bottom, $global-spacing-tiny);
+    @include rem(padding-top, $global-spacing-tiny);
+    border-radius: 0;
+    color: $color-grey;
+    cursor: pointer; /* [1] */
+    display: inline-block;
+    font-family: $global-font-family-bold;
+    outline: none; /* [2] */
+    position: relative; /* [3] */
+    transition: $global-transition;
+    -webkit-appearance: none; /* [4] */
+    z-index: 2; /* [5] */
+}
+    .c-tabs__button::after {
+        background-color: $color-black;
+        bottom: ($tab-item-border-size * -1);
+        height: $tab-item-border-size;
+        content: '';
+        left: 0;
+        position: absolute;
+        transition: $global-transition;
+        width: 0;
+        z-index: 1;
+
+        @include mq ($until: mobile) {
+            bottom: (($tab-item-border-size * -1) - 1px);
+        }
+    }
+
+    /**
+     * 1. Prevent hover states or events on the active button
+     */
+    .c-tabs__button[aria-selected="true"] {
+        border-bottom-color: $color-black;
+        color: $color-black;
+        pointer-events: none; /* [1] */
+    }
+        .c-tabs__button[aria-selected="true"]::after {
+            width: 100%;
+        }
+
+
+.c-tabs__panel {
+    display: none;
+    opacity: 0;
+    transition: $global-transition;
+    will-change: opacity;
+}
+    .c-tabs__panel[aria-hidden="false"] {
+        animation: tabPanelEntrance ($global-transition-speed * 3);
+        animation-fill-mode: forwards;
+        display: block;
+        opacity: 1;
+    }
+
+@keyframes tabPanelEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY($global-spacing-tiny);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

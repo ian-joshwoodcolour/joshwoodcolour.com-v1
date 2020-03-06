@@ -1,0 +1,135 @@
+<footer class="c-page-footer u-pv u-pv++@mobile">
+    <div class="o-wrapper u-ph u-ph+@mobile">
+        <div id="menu" class="o-layout">
+            <div class="o-layout__item u-2/12@mobile u-text-top u-mb u-mb0@mobile">
+                <a href="/" aria-label="Go to the home page">
+                    {% assign classes = 'c-svg--currentcolor c-svg-jw-logo' %}
+                    {% include 'logo' %}
+                </a>
+            </div>
+            <div class="o-layout__item u-6/12 u-2/12@mobile u-text-top">
+                <ul class="o-list-bare">
+                    {%- for link in linklists.main-menu.links -%}
+                        {%- if link.title != 'Home' -%}
+                            <li class="o-list-bare__item">
+                                <a href="{{ link.url }}">
+                                    {{ link.title }}
+                                </a>
+                            </li>
+                        {%- endif -%}
+                    {%- endfor -%}
+                </ul>
+            </div>
+            <div class="o-layout__item u-6/12 u-4/12@mobile u-text-top">
+                <div class="o-layout">
+                    <div class="o-layout__item u-6/12@mobile">
+                        <ul class="o-list-bare">
+                            {%- for link in linklists.footer.links -%}
+                                <li class="o-list-bare__item">
+                                    <a href="{{ link.url }}" class="u-weight-light u-font-size-14">
+                                        {{ link.title }}
+                                    </a>
+                                </li>
+                            {%- endfor -%}
+                            <li class="o-list-bare__item">
+                                <a href="/pages/faqs" class="u-weight-light u-font-size-14 js-modal-open" data-modal="contact">
+                                    Contact us
+                                </a>
+                            </li>
+                        </ul>
+                    </div><div class="o-layout__item u-6/12@mobile">
+                        <ul class="o-list-bare">
+                            {%- for link in linklists.social-menu.links -%}
+                                <li class="o-list-bare__item">
+                                    <a href="{{ link.url }}" class="u-weight-light u-font-size-14" target="noopener">
+                                        {% assign icon_name = link.title | append: '-icon' %}
+                                        {% assign classes = 'c-svg c-svg--currentcolor c-svg--w12 u-mt-2 u-mr- u-text-top' %}
+                                        {% include icon_name %}
+                                        {{ link.title }}
+                                    </a>
+                                </li>
+                            {%- endfor -%}
+                        </ul>
+                    </div>
+                </div>
+            </div><div class="o-layout__item u-4/12@mobile u-align-right@mobile u-mt u-mt0@mobile">
+                <strong>Receive the latest news from Josh Wood</strong>
+                
+                <form action="{{ settings.mailchimp_newsletter_post_url }}" method="post">
+                    <div class="c-form c-form--row u-mt- u-1/1 u-pl+@desktop">
+                        <input type="email" name="{{ settings.mailchimp_newsletter_email_field_name }}" placeholder="Your email address" class="c-form__input u-align-right@mobile u-1/1 u-font-size-14" required aria-label="Your email address">
+                        <input type="hidden" name="{{ settings.mailchimp_newsletter_key }}">
+
+                        <button class="c-form__button" aria-label="Sign up">
+                            <svg class="c-svg c-svg--w16 u-h-auto" viewBox="0 0 13 4">
+                                <path d="M9.46 1.5H0v1h9.46V4L12 2 9.46 0"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="u-mt u-pl+@desktop u-o-7">
+                        <div class="u-relative">
+                            <input type="checkbox" id="newsletter-consent" class="c-form__checkbox u-mr--" name="{{ settings.mailchimp_newsletter_consent_field_name }}" required>
+
+                            <label class="c-form__label u-font-size-12 u-leading-14 u-color-grey-dark" for="newsletter-consent">{{ settings.form_consent_checkbox_label }}</label>
+                        </div>
+                    </div>
+                </form>
+                
+                <div class="u-font-size-12 u-color-grey u-mt u-mt@mobile">
+                    &copy; {{ 'layout.footer.copyright' | t }} {{ 'now' | date: "%Y" }} | All Rights Reserved.
+                </div>
+            </div>
+        </ul>        
+    </div>
+</footer>
+
+<div class="c-overlay-nav js-overlay-nav">
+    <div class="c-overlay-nav__inner js-overlay-nav-inner">
+        <nav class="c-overlay-nav__nav c-overlay-nav__nav--main u-pt+ u-pb">
+            {%- for link in linklists.main-menu.links -%}
+                {%- if link.title != 'Home' -%}
+                    <a href="{{ link.url }}" class="c-overlay-nav__link">
+                        {{ link.title }}
+                    </a>
+                {%- endif -%}
+            {%- endfor -%}
+            {%- if customer -%}
+                <a href="/account" class="c-overlay-nav__link">{{ 'customer.account.title' | t }}</a>
+            {%- else -%}
+                <a href="/account/login" class="c-overlay-nav__link">{{ 'customer.login.sign_in' | t }}</a>
+            {%- endif -%}
+            <div class="u-consultation-link-break"></div>
+            {%- for link in linklists.feature-menu.links -%}
+                <a href="{{ link.url }}" class="c-button c-button--black c-button--round c-button--thin c-button--no-block u-mt- u-mt@mobile">
+                    {{ link.title }}
+                </a>
+            {%- endfor -%}
+        </nav>
+
+        <nav class="c-overlay-nav__nav u-mt">
+            <div class="c-overlay-nav__cols">
+                {%- for link in linklists.footer.links -%}
+                    <a href="{{ link.url }}" class="u-font-size-14">
+                        {{ link.title }}
+                    </a><br>
+                {%- endfor -%}
+                <a href="/pages/faqs" class="u-font-size-14 js-modal-open" data-modal="contact">
+                    Contact us
+                </a>
+            </div>
+            <div class="c-overlay-nav__footer u-mv u-justify-center">
+                {%- for link in linklists.social-menu.links -%}
+                    <a href="{{ link.url }}" target="noopener" class="u-mr" aria-label="{{ link.title }}">
+                        {% assign icon_name = link.title | append: '-icon' %}
+                        {% assign classes = 'c-svg c-svg--black c-svg--w12' %}
+                        {% include icon_name %}
+                    </a>
+                {%- endfor -%}
+
+                <div class="u-font-size-12 u-mt-@mobile">
+                    &copy; {{ 'layout.footer.copyright' | t }} {{ 'now' | date: "%Y" }} | All Rights Reserved.
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>

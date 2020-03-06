@@ -1,0 +1,30 @@
+<section class="c-hero-banner u-1/1">
+    <div class="c-hero-banner__image js-sticky-threshold"></div>
+    <style>
+
+.c-hero-banner__image { background-image: url('{{ 'hero.png' | asset_url }}'); } @media only screen and (min-width: 46.0525em) { .c-hero-banner__image[data-slide="{{ title | handle }}"] { background-image: url({{ background_image_large }}); }}
+
+</style>
+    <div class="c-hero-banner__wrapper o-wrapper u-1/1 u-pl u-pl+@tablet">
+        <div class="c-hero-banner__content">
+            <h1 class="u-heading u-h3 u-mb+ u-color-black">
+                I firmly believe everybody deserves the best quality, expert created hair colour -  wherever
+                <div class="u-flex u-justify-between">
+                    they are
+                    <div class="u-text-right">
+                        {% include 'icon-line' %}<img src="{{ 'josh-signature.png' | asset_img_url: '240x' }}" alt="" class="c-josh-signature__img u-inline-block">
+                    </div>
+                </div>
+            </h1>
+            <div class="u-flex@tablet u-align-center">
+                <a class="c-button c-button--big c-button--black u-border-black-1 u-mb" href="/collections/all/">
+                    Shop now
+                </a>
+                <a class="c-button c-button--big c-button--white u-ml@desktop u-border-black-1 js-modal-open" data-modal="consultation">
+                    Start My Consultation
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="u-sticky-placeholder js-sticky-placeholder"></div>
+</section>

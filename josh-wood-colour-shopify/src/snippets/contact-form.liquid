@@ -1,0 +1,57 @@
+<div class="c-modal c-modal--auto-grow js-modal u-hide" data-modal="contact">
+    <div class="c-modal__wrapper u-shadow u-p u-p+@mobile t-white js-modal-wrapper">
+        {%- assign modal_name = 'contact' -%}
+        {% include 'modal-close-button' %}
+    
+        <div class="u-heading u-h3 u-mb" role="heading">{{ settings.contact_form_title }}</div>
+        <p class="u-mb+">{{ settings.contact_form_text }}</p>
+
+        <form action="#" class="c-form js-contact-form">
+            <div class="c-form__field">
+                <label class="u-weight-bold u-block u-mb-" for="subject">{{ settings.contact_form_reason_label }}</label>
+                <div class="custom-select custom-select--grey-border">
+                    <select name="subject" id="subject" required>
+                        {%- assign contact_form_reasons = settings.contact_form_reasons | newline_to_br | split: '<br />' -%}
+                        {%- for contact_form_reason in contact_form_reasons -%}
+                            {%- assign tag_and_title = contact_form_reason | split: ' - ' -%}
+                            <option value="{{ tag_and_title[0] | strip_newlines }}">{{ tag_and_title[1] }}</option>
+                        {%- endfor -%}
+                    </select>
+                </div>
+            </div>
+            <div class="c-form__field u-flex">
+                <input type="text" name="first_name" class="c-form__input u-1/1" placeholder="First name" required>
+                <input type="text" name="last_name" class="c-form__input u-1/1 u-ml-" placeholder="Last name" required>
+            </div>
+            <div class="c-form__field">
+                <input type="email" name="email" class="c-form__input u-1/1" placeholder="Email" required>
+            </div>
+            <div class="c-form__field">
+                <input type="text" name="order_number" class="c-form__input u-1/1" placeholder="Order number (if applicable)">
+            </div>
+            <div class="c-form__field">
+                <textarea name="description" class="c-form__input c-form__input--multiline u-1/1" placeholder="{{ settings.contact_form_message_placeholder }}" required></textarea>
+            </div>
+            <div class="c-form__field u-mb">
+                <div class="u-relative">
+                    <input type="checkbox" id="contact-consent" class="c-form__checkbox u-mr--" name="" required>
+
+                    <label class="c-form__label u-font-size-12 u-leading-14 u-color-grey-dark" for="contact-consent">{{ settings.form_consent_checkbox_label }}</label>
+                </div>
+            </div>
+            <div class="c-form__field u-weight-bold u-text-right">
+                <div class="js-contact-feedback-error u-color-coral u-fade-in"></div>
+            </div>
+            <div class="c-form__field u-text-right">
+                <button type="submit" class="c-button c-button--black c-button--wide">Submit your details</button>
+            </div>
+        </form>
+
+        <div class="js-contact-feedback-success u-heading u-spacing-0 u-fade-in"></div>
+    </div>
+</div>
+
+
+<script>
+window.globalData.contactSuccessMessage = '{{ settings.contact_form_success_message }}';
+</script>

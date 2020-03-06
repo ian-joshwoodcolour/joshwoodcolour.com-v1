@@ -1,0 +1,91 @@
+<div class="o-layout u-stack-layout@mobile u-flex@mobile u-align-center">
+        <div class="o-layout__item u-flex u-direction-column u-align-items-center u-justify-center">
+            <h6 class="u-case-upper">Discover Our Products</h6>
+            <h2 class="u-heading u-mb u-mt@mobile">Colour, Conceal & Care</h2>
+            <p class="u-text-center u-mb+">Permanent Colour Kits, Root Concealers and Care for glossy
+                <br/>colour, full coverage and fantastic condition.</p>
+            <div class="o-layout__item o-layout o-layout--large">
+                <div class="c-card--row u-mb u-justify-center">
+                    <a class="o-layout__item u-3/12@desktop" href="/collections/#permanent-colour-products">
+                        {%- assign card_size = 'square' -%}
+                        {%- assign photo = 'permanent-colors.png' | asset_url -%}
+                        {%- assign title_white = 'Permanent Colours' -%}
+                        {% include 'card' %}
+                    </a>
+                    <a class="o-layout__item u-3/12@desktop" href="/collections/#root-concealers-products">
+                        {%- assign photo = 'root-concealers.png' | asset_url -%}
+                        {%- assign title_white = 'Root Concealers' -%}
+                        {% include 'card' %}
+                    </>
+                    <a class="o-layout__item u-3/12@desktop" href="/collections/#care-range-products">
+                        {%- assign photo = 'care-range.png' | asset_url -%}
+                        {%- assign title_white = 'Care Range' -%}
+                        {% include 'card' %}
+                    </a>
+                </div>
+                <div class="c-card--row u-mb u-justify-center">
+                    <a class="o-layout__item u-3/12@desktop">
+                        {%- assign photo = 'https://cdn.shopify.com/s/files/1/2372/2545/files/RootMarker_Application_Blonde.gif?15762' -%}
+                        {%- assign title_white = blank -%}
+                        {% include 'card' %}
+                    </a>
+                    <a class="o-layout__item u-3/12@desktop" href="/collections/">
+                        {%- assign photo = 'all-products.png' | asset_url -%}
+                        {%- assign title_white = 'All Products' -%}
+                        {% include 'card' %}
+                    </a>
+                    <a class="o-layout__item u-3/12@desktop">
+                        {%- assign photo = 'https://cdn.shopify.com/s/files/1/2372/2545/files/BlendingBrush_Model.gif?15762' -%}
+                        {%- assign title_white = blank -%}
+                        {% include 'card' %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% schema %}
+
+{
+        "name": "Home Page Intro",
+        "blocks": [
+            {
+                "name": "Intro content",
+                "type": "object",
+                "limit": 1,
+                "settings": [
+                    {
+                        "type": "image_picker",
+                        "id": "photo",
+                        "label": "Photo"
+                    }, {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Title"
+                    }, {
+                        "type": "textarea",
+                        "id": "text",
+                        "label": "Text"
+                    }, {
+                        "type": "url",
+                        "id": "cta_url",
+                        "label": "CTA URL"
+                    }, {
+                        "type": "text",
+                        "id": "cta_label",
+                        "label": "CTA Label"
+                    }, {
+                        "type": "url",
+                        "id": "secondary_cta_url",
+                        "label": "Secondary CTA URL"
+                    }, {
+                        "type": "text",
+                        "id": "secondary_cta_label",
+                        "label": "Secondary CTA Label"
+                    }
+                ]
+            }
+        ]
+    }
+
+{% endschema %}

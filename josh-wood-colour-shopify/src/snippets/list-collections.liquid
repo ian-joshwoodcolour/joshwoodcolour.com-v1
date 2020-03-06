@@ -1,0 +1,41 @@
+<div>
+        {% section 'shop-intro-banner' %}
+    </div>
+    <div id="permanent-colour-products"></div>
+
+    <section class="o-section o-wrapper">
+        {%- assign card_size = 'short' -%}
+        {%- assign collection = collections.permanent-colour -%}
+        {%- assign sub_collections = 'permanent-colour-products|permanent-colour-and-shade-shot-plus' | split: '|' -%}
+        {%- assign all_collections = collections -%}
+        {%- assign disable_photo_lazyload = true -%}
+        {%- include 'collection-list' -%}
+        <div id="root-concealers-products"></div>
+    </section>
+
+    <section class="o-section o-wrapper u-pt@mobile">
+        {%- assign card_size = 'default' -%}
+        {%- assign collection = collections.root-concealers -%}
+        {%- assign sub_collections = 'blending-brush|root-marker|root-smudger|tinted-dry-shampoo' | split: '|' -%}
+        {%- assign all_collections = collections -%}
+        {%- assign disable_photo_lazyload = false -%}
+        {%- include 'collection-list' -%}
+        <div id="care-range-products"></div>
+    </section>
+
+    {%- comment -%}
+Keep this empty div to prevent adjacent sections having their top padding removed.
+We need the extra padding since the products are offset with transforms.
+{%- endcomment -%}
+    <div></div>
+
+    <section class="o-section o-wrapper u-pt++@mobile">
+        {%- assign card_size = 'default' -%}
+        {%- assign collection = collections.care-range -%}
+        {%- assign sub_collections = 'shampoo|conditioner|everything-mask|shade-shot' | split: '|' -%}
+        {%- assign all_collections = collections -%}
+        {%- assign disable_photo_lazyload = false -%}
+        {%- include 'collection-list' -%}
+    </section>
+
+    {% section 'consultation-tool-teaser' %}

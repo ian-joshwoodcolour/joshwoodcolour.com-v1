@@ -1,0 +1,11 @@
+<nav class="c-filter-nav">
+    <ul class="o-list-inline c-filter-nav__nav u-pt0">
+        {%- for tag in blog.all_tags -%}
+            {%- unless tag == 'Featured' or tag == 'featured' -%}
+                <li class="o-list-inline__item c-filter-nav__item u-pt0">
+                    <a href="/blogs/{{ blog.handle }}/tagged/{{ tag | handle }}" class="c-button c-button--black c-button--block u-1/1 {% unless current_tags contains tag %}c-button--ghost{% endunless %}">{{ tag }}</a>
+                </li>
+            {%- endunless -%}
+        {%- endfor -%}
+    </ul>
+</nav>

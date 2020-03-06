@@ -1,0 +1,72 @@
+{
+  "env": {
+    "production": {
+      "presets": [
+        ["env", {
+          "modules": false,
+          "targets": {
+            "browsers": [
+              "Chrome >= 49",
+              "Firefox >= 45",
+              "Safari >= 9.1",
+              "IE >= 10",
+              "Edge >= 14",
+              "iOS >= 9.3",
+              "Android >= 4.4.4",
+              "last 2 versions"
+            ]
+          }
+        }],
+        "stage-0",
+        "react"
+      ]
+    },
+    "development": {
+      "presets": [
+        ["env", {
+          "modules": false,
+          "targets": {
+            "browsers": [
+              "Chrome >= 49",
+              "Firefox >= 45",
+              "Safari >= 9.1",
+              "IE >= 10",
+              "Edge >= 14",
+              "iOS >= 9.3",
+              "Android >= 4.4.4",
+              "last 2 versions"
+            ]
+          }
+        }],
+        "stage-0",
+        "react"
+      ]
+    },
+    "test": {
+      "plugins": ["istanbul"],
+      "presets": [
+        ["env", {
+          "targets": {
+            "browsers": [
+              "Chrome >= 49",
+              "Firefox >= 45",
+              "Safari >= 9.1",
+              "IE >= 10",
+              "Edge >= 14",
+              "iOS >= 9.3",
+              "Android >= 4.4.4",
+              "last 2 versions"
+            ]
+          }
+        }],
+        "stage-0",
+        "react"
+      ]
+    }
+  },
+  "plugins": [
+    "transform-async-to-generator",
+    "transform-object-assign",
+    "transform-flow-comments"
+  ]
+}

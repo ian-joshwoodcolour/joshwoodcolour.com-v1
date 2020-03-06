@@ -1,0 +1,13 @@
+/**
+ * If there is no Hero Banner used, we need to make up for the position of the fixed header
+ */
+.s-no-hero .c-header-spacer {
+    @include rem(margin-top, 24px);
+}
+
+
+@include mq ($from: $global-page-header-breakpoint) {
+    .s-no-hero .c-header-spacer {
+        @include rem(margin-top, $global-page-header-height - 2px);
+    }
+}

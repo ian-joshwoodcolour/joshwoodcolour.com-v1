@@ -1,0 +1,32 @@
+<section class="c-hero-banner u-1/1">
+    <div class="c-hero-banner__image js-banner-image js-sticky-threshold" data-slide="{{ title | handle }}"></div>
+    <style>.c-hero-banner__image[data-slide="{{ title | handle }}"] { background-image: url({{ background_image }}) } @media only screen and (min-width: 46.0525em) { .c-hero-banner__image[data-slide="{{ title | handle }}"] { background-image: url({{ background_image_large }}); }}</style>
+
+    {% if text != blank or cta_url != blank %}
+        <div class="c-hero-banner__wrapper o-wrapper u-1/1 u-pl u-pl+@tablet">
+            <div class="c-hero-banner__content">
+                {% if title != blank %}
+                    <h1 class="u-heading u-h3 u-mb">{{ title }}</h1>
+                {% endif %}
+
+                {% if text != blank %}
+                    <p class="u-weight-bold u-mb">{{ text }}</p>
+                {% endif %}
+
+                <div class="u-flex">
+                    {% if primary_cta_url != blank %}
+                        <a href="{{ primary_cta_url }}" class="c-button c-button--black u-border-black-1">
+                            {{ primary_cta_label }}
+                        </a>
+                    {% endif %}
+                    {% if secondary_cta_url != blank %}
+                        <a href="{{ secondary_cta_url }}" class="c-button c-button--white u-border-black-1 u-ml-">
+                            {{ secondary_cta_label }}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="u-sticky-placeholder js-sticky-placeholder"></div>
+</section>

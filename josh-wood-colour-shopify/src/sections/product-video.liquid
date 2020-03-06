@@ -1,0 +1,83 @@
+{% include 'product-collection-url' %}
+{%- assign product_matched = false -%}
+
+{%- for block in section.blocks -%}
+    {%- if block.settings.product_url contains product.url and product_collection_url contains block.settings.collection_url -%}
+        {%- assign product_matched = block.settings -%}
+        {% break %}
+    {%- endif -%}
+{%- endfor -%}
+
+<div class="o-layout u-stack-layout@mobile u-flex@mobile js-product-video {% if product_matched == false %}u-hide{% endif %}">
+    <div class="o-layout__item u-5/12@mobile u-flex u-direction-column u-justify-center">
+        <h3 class="u-heading u-mb js-product-video-title">{{ product_matched.title }}</h3>
+
+        <p class="js-product-video-text">{{ product_matched.text }}</p>
+    </div><div class="o-layout__item u-1/12@mobile">
+    </div><div class="o-layout__item u-6/12@mobile">
+        <div class="c-responsive-video js-product-video-code">
+            {{ product_matched.video_code }}
+        </div>
+    </div>
+</div>
+
+<script>
+window.globalData.productVideos = [
+    {%- for block in section.blocks -%}
+        {%- if product_collection_url contains block.settings.collection_url -%}
+            {
+                collectionURL: "{{ block.settings.collection_url }}",
+                productURL: "{{ block.settings.product_url }}",
+                text: "{{ block.settings.text | escape | newline_to_br | strip_newlines }}",
+                title: "{{ block.settings.title }}",
+                videoCode: '{{ block.settings.video_code }}',
+                videoThumbnail: '{{ block.settings.video_thumbnail | img_url: '800x' }}'
+            },
+        {%- endif -%}
+    {%- endfor -%}
+];
+</script>
+
+{% schema %}
+{
+    "name": "Product video",
+    "blocks": [
+        {
+            "name": "Content",
+            "type": "object",
+            "settings": [
+                {
+                    "type": "url",
+                    "id": "product_url",
+                    "label": "Product"
+                },
+                {
+                    "type": "url",
+                    "id": "collection_url",
+                    "label": "Collection"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "textarea",
+                    "id": "text",
+                    "label": "Text"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "video_thumbnail",
+                    "label": "Video thumbnail"
+                },
+                {
+                    "type": "textarea",
+                    "id": "video_code",
+                    "label": "Video code"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

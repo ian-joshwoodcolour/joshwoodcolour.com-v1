@@ -1,0 +1,27 @@
+@include mq ($from: mobile) {
+    /**
+     * Add huge wrapper margins when they're used in sections
+     */
+    .o-wrapper.o-section {
+        padding-left: $global-spacing-large;
+        padding-right: $global-spacing-large;
+    }
+
+
+    .o-wrapper--article {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: $global-editorial-wrapper-max-width;
+    }
+}
+
+
+@include mq ($from: tablet) {
+    /**
+     * Add huge wrapper margins when they're used in sections
+     */
+    .o-wrapper.o-section {
+        padding-left: $global-spacing-huge;
+        padding-right: $global-spacing-huge;
+    }
+}

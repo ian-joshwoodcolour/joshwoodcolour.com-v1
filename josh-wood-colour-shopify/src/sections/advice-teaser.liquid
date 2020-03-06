@@ -1,0 +1,99 @@
+{%- assign product_recommendation = all_products[section.blocks[0].settings.product] -%}
+
+<div class="t-grey-lightest">
+    <section class="o-wrapper o-section u-relative">
+        <h2 class="u-heading u-h3 u-ph u-ph0@mobile u-mb u-mb+@mobile u-text-center">{{ section.settings.title }}</h2>
+
+        <div class="u-shadow t-white u-pt+@mobile">
+            <div class="u-relative">
+                {%- if section.blocks.size > 1 -%}
+                    <button class="c-advice-teaser__nav-button c-advice-teaser__nav-button--prev is-disabled js-advice-carousel-nav js-advice-carousel-nav-prev" aria-label="Previous advice post">
+                        {%- assign classes = 'c-svg c-svg--w14' -%}
+                        {% include 'right-arrow-icon' %}
+                    </button>
+                    <button class="c-advice-teaser__nav-button js-advice-carousel-nav js-advice-carousel-nav-next u-ml-" aria-label="Next advice post">
+                        {%- assign classes = 'c-svg c-svg--w14' -%}
+                        {% include 'right-arrow-icon' %}
+                    </button>
+                {%- endif -%}
+
+                <ul class="c-advice-teaser__carousel c-advice-teaser__carousel--loading js-advice-carousel u-lazyload u-fade-intersected js-monitor">
+                    {%- for block in section.blocks -%}
+                        <li class="c-advice-teaser__item o-wrapper o-section u-m0 u-p0 js-advice-carousel-item {% unless forloop.first %}u-ml- u-ml@mobile{% endunless %}">
+                            {%- if block.settings.video -%}
+                                <div class="c-advice-teaser__video t-grey c-responsive-video">
+                                    {{ block.settings.video | replace: ' src="', ' data-src="' }}
+                                </div>
+                            {%- endif -%}
+                        </li>
+                    {%- endfor -%}
+                </ul>
+            </div>
+
+            <footer class="u-p u-p+@mobile u-pt u-relative u-flex@mobile">
+                <div class="u-flex-grow">
+                    <a href="{{ articles[section.blocks[0].settings.article].url }}" class="u-block u-lead js-advice-title js-advice-cta">{{ articles[section.blocks[0].settings.article].title }}</a>
+
+                    {%- if product_recommendation != blank -%}
+                        <a href="{{ product_recommendation.url }}" class="u-block u-mt- js-advice-product">
+                            <span class="u-label">Featured product</span> &nbsp;
+                            <div class="u-hide@mobile"></div>
+                            <span class="js-advice-product-title">{{ product_recommendation.type }}</span> &mdash; 
+                            <span class="js-advice-product-price">{{ product_recommendation.price | money_without_trailing_zeros }}</span>
+                        </a>
+                    {%- endif -%}
+                </div>
+
+                <a href="/blogs/tips-tricks" class="c-button c-button--black u-mt u-mt0@mobile">
+                    {{ section.settings.cta_label }}
+                </a>
+            </footer>
+        </div>
+    </section>
+</div>
+
+<script>
+window.globalData.adviceContent = [{%- for block in section.blocks -%}{title:'{{ articles[block.settings.article].title }}',url:'{{ articles[block.settings.article].url }}',product:{url:'{{ all_products[block.settings.product].url }}',title:'{{ all_products[block.settings.product].title }}',price:'{{ all_products[block.settings.product].price | money_without_trailing_zeros }}',image:'{{ all_products[block.settings.product].featured_image | img_url: '300x400' }}'}},{%- endfor -%}];
+</script>
+
+{% schema %}
+{
+    "name": "Advice teaser",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+        },
+        {
+            "type": "text",
+            "id": "cta_label",
+            "label": "CTA Label"
+        }
+    ],
+    "blocks": [
+        {
+            "name": "Teaser content",
+            "type": "object",
+            "limit": 5,
+            "settings": [
+                {
+                    "type": "product",
+                    "id": "product",
+                    "label": "Product"
+                },
+                {
+                    "type": "article",
+                    "id": "article",
+                    "label": "Article"
+                },
+                {
+                    "type": "textarea",
+                    "id": "video",
+                    "label": "Video"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

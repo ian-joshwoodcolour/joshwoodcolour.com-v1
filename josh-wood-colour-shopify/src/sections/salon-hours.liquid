@@ -1,0 +1,186 @@
+<ul class="o-list-inline@mobile c-salon-hours">
+    <li class="o-list-inline__item c-salon-hours__item">
+        <div class="u-heading u-h5 u-mb">Monday</div>
+
+        <div class="o-layout o-layout--large">
+            <div class="o-layout__item u-6/12 u-1/1@mobile">
+                <div class="c-salon-hours__day">Open</div>
+                <strong class="c-salon-hours__time">{{ section.blocks[0].settings.monday_opens }}</strong>
+            </div><div class="o-layout__item u-6/12 u-1/1@mobile">
+                <div class="c-salon-hours__day">Close</div>
+                <strong class="c-salon-hours__time">{{ section.blocks[0].settings.monday_closes }}</strong>
+            </div>
+        </div>
+    </li>
+    <li class="o-list-inline__item c-salon-hours__item">
+        <div class="u-heading u-h5 u-mb">Tuesday</div>
+
+        <div class="o-layout o-layout--large">
+            <div class="o-layout__item u-6/12 u-1/1@mobile">
+                <div class="c-salon-hours__day">Open</div>
+                <strong class="c-salon-hours__time">{{ section.blocks[0].settings.tuesday_opens }}</strong>
+            </div><div class="o-layout__item u-6/12 u-1/1@mobile">
+                <div class="c-salon-hours__day">Close</div>
+                <strong class="c-salon-hours__time">{{ section.blocks[0].settings.tuesday_closes }}</strong>
+            </div>
+        </div>
+    </li>
+    <li class="o-list-inline__item c-salon-hours__item">
+        <div class="u-heading u-h5 u-mb">Wednesday</div>
+
+        <div class="o-layout o-layout--large">
+            <div class="o-layout__item u-6/12 u-1/1@mobile">
+                <div class="c-salon-hours__day">Open</div>
+                <strong class="c-salon-hours__time">{{ section.blocks[0].settings.wednesday_opens }}</strong>
+            </div><div class="o-layout__item u-6/12 u-1/1@mobile">
+                <div class="c-salon-hours__day">Close</div>
+                <strong class="c-salon-hours__time">{{ section.blocks[0].settings.wednesday_closes }}</strong>
+            </div>
+        </div>
+    </li>
+    <li class="o-list-inline__item c-salon-hours__item">
+        <div class="u-heading u-h5 u-mb">Thursday</div>
+
+        <div class="o-layout o-layout--large">
+            <div class="o-layout__item u-6/12 u-1/1@mobile">
+                <div class="c-salon-hours__day">Open</div>
+                <strong class="c-salon-hours__time">{{ section.blocks[0].settings.thursday_opens }}</strong>
+            </div><div class="o-layout__item u-6/12 u-1/1@mobile">
+                <div class="c-salon-hours__day">Close</div>
+                <strong class="c-salon-hours__time">{{ section.blocks[0].settings.thursday_closes }}</strong>
+            </div>
+        </div>
+    </li>
+    <li class="o-list-inline__item c-salon-hours__item">
+        <div class="u-heading u-h5 u-mb">Friday</div>
+
+        <div class="o-layout o-layout--large">
+            <div class="o-layout__item u-6/12 u-1/1@mobile">
+                <div class="c-salon-hours__day">Open</div>
+                <strong class="c-salon-hours__time">{{ section.blocks[0].settings.friday_opens }}</strong>
+            </div><div class="o-layout__item u-6/12 u-1/1@mobile">
+                <div class="c-salon-hours__day">Close</div>
+                <strong class="c-salon-hours__time">{{ section.blocks[0].settings.friday_closes }}</strong>
+            </div>
+        </div>
+    </li>
+    <li class="o-list-inline__item c-salon-hours__item">
+        <div class="u-heading u-h5 u-mb">Saturday</div>
+
+        <div class="o-layout o-layout--large">
+            <div class="o-layout__item u-6/12 u-1/1@mobile">
+                <div class="c-salon-hours__day">Open</div>
+                <strong class="c-salon-hours__time">{{ section.blocks[0].settings.saturday_opens }}</strong>
+            </div><div class="o-layout__item u-6/12 u-1/1@mobile">
+                <div class="c-salon-hours__day">Close</div>
+                <strong class="c-salon-hours__time">{{ section.blocks[0].settings.saturday_closes }}</strong>
+            </div>
+        </div>
+    </li>
+    <li class="o-list-inline__item c-salon-hours__item">
+        <div class="u-heading u-h5 u-mb">Sunday</div>
+
+        <div class="o-layout o-layout--large">
+            <div class="o-layout__item u-6/12 u-1/1@mobile">
+                <div class="c-salon-hours__day">Open</div>
+                <strong class="c-salon-hours__time">{{ section.blocks[0].settings.sunday_opens }}</strong>
+            </div><div class="o-layout__item u-6/12 u-1/1@mobile">
+                <div class="c-salon-hours__day">Close</div>
+                <strong class="c-salon-hours__time">{{ section.blocks[0].settings.sunday_closes }}</strong>
+            </div>
+        </div>
+    </li>
+</ul>
+
+{% javascript %}
+    var day = new Date().getDay();
+    if (typeof day === 'number') {
+        var $day = document.querySelector('.c-salon-hours__item:nth-child(' + ((day === 0) ? 7 : day) + ')');
+        if ($day) $day.classList.add('c-salon-hours__item--framed');
+    }
+{% endjavascript %}
+
+{% schema %}
+{
+    "name": "Salon Hours",
+    "blocks": [
+        {
+            "name": "Salon Hours content",
+            "type": "object",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "monday_opens",
+                    "label": "Monday opens at"
+                },
+                {
+                    "type": "text",
+                    "id": "monday_closes",
+                    "label": "Monday closes at"
+                },
+                {
+                    "type": "text",
+                    "id": "tuesday_opens",
+                    "label": "Tuesday opens at"
+                },
+                {
+                    "type": "text",
+                    "id": "tuesday_closes",
+                    "label": "Tuesday closes at"
+                },
+                {
+                    "type": "text",
+                    "id": "wednesday_opens",
+                    "label": "Wednesday opens at"
+                },
+                {
+                    "type": "text",
+                    "id": "wednesday_closes",
+                    "label": "Wednesday closes at"
+                },
+                {
+                    "type": "text",
+                    "id": "thursday_opens",
+                    "label": "Thursday opens at"
+                },
+                {
+                    "type": "text",
+                    "id": "thursday_closes",
+                    "label": "Thursday closes at"
+                },
+                {
+                    "type": "text",
+                    "id": "friday_opens",
+                    "label": "Friday opens at"
+                },
+                {
+                    "type": "text",
+                    "id": "friday_closes",
+                    "label": "Friday closes at"
+                },
+                {
+                    "type": "text",
+                    "id": "saturday_opens",
+                    "label": "Saturday opens at"
+                },
+                {
+                    "type": "text",
+                    "id": "saturday_closes",
+                    "label": "Saturday closes at"
+                },
+                {
+                    "type": "text",
+                    "id": "sunday_opens",
+                    "label": "Sunday opens at"
+                },
+                {
+                    "type": "text",
+                    "id": "sunday_closes",
+                    "label": "Sunday closes at"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

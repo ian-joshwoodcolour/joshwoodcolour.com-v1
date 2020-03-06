@@ -1,0 +1,192 @@
+$form-field-height: 50px;
+$form-field-horizontal-padding: $global-spacing-small;
+$form-field-vertical-padding: $global-spacing-small;
+$form-field-border-color: $color-grey-light;
+$form-field-border-color--active: darken($form-field-border-color, 15%);
+$form-field-font-size: $inuit-global-font-size;
+$form-field-multiline-rows: 5;
+$form-checkbox-size: 14px;
+
+
+.c-form {
+    overflow: hidden;
+}
+
+.c-form__label {
+    @include rem(margin-bottom, $global-spacing-tiny);
+    @include rem(margin-top, $global-spacing-tiny);
+    cursor: pointer;
+    display: block;
+    font-family: $global-font-family-bold;
+}
+    .c-form__label a {
+        margin-left: 2px;
+        margin-right: 2px;
+    }
+
+.c-form__input {
+    @include rem(padding-bottom, $form-field-vertical-padding);
+    @include rem(padding-left, $form-field-horizontal-padding);
+    @include rem(padding-right, $form-field-horizontal-padding);
+    @include rem(padding-top, $form-field-vertical-padding);
+    border: 1px solid $form-field-border-color;
+    border-radius: 0;
+    font-family: $global-font-family-bold;
+    font-size: $form-field-font-size;
+    min-height: $form-field-height;
+    -webkit-appearance: none;
+}
+    .c-form__input:active {
+        border-color: $form-field-border-color--active;
+    }
+
+    .c-form__input:not(.c-form__input--multiline):not(:empty):invalid {
+        border-color: $color-coral;
+        color: $color-coral;
+    }
+
+    .c-form__input--multiline {
+        height: ($global-spacing * $form-field-multiline-rows);
+    }
+
+
+.c-form__field > input[type="checkbox"] {
+    -webkit-appearance: checkbox;
+
+    + .c-form__label {
+        display: inline-block;
+        margin-left: $global-spacing-tiny;
+    }    
+}
+
+
+.c-form__checkbox {
+    -webkit-appearance: checkbox;
+    left: 1px;
+    margin: 0;
+    outline: none;
+    position: absolute;
+    top: 1px;
+    z-index: 0;
+}
+
+.c-form__checkbox + .c-form__label {
+    background-color: $color-white;
+    font-family: $global-font-family-body;
+    padding-left: calc(#{$form-checkbox-size} + #{$global-spacing-small});
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    z-index: 1;
+}
+
+.c-form__checkbox + .c-form__label::before {
+    border: 1px solid $global-font-color;
+    content: '';
+    display: block;
+    height: $form-checkbox-size;
+    left: 0;
+    opacity: 0.4;
+    position: absolute;
+    top: 0;
+    transition: all .12s, border-color .08s;
+    width: $form-checkbox-size;
+}
+.c-form__checkbox:checked + .c-form__label:before {
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-radius: 0;
+    left: $form-checkbox-size / 3;
+    opacity: 1;
+    top: (($form-checkbox-size / 3) - 2) * -1;
+    transform: rotate(45deg);
+    width: $form-checkbox-size / 2;
+}
+
+.c-form__field + .c-form__field {
+    display: block;
+    margin-top: $global-spacing-small;
+}
+
+@include mq ($until: mobile) {
+    .c-form__checkbox + .c-form__label::before {
+        top: 2px;
+    }
+    .c-form__checkbox:checked + .c-form__label:before {
+        top: (($form-checkbox-size / 3) - 2) * -1;
+    }
+}
+
+
+/* Variants
+   ====================================== */
+
+$form-row-button-width: 40px;
+
+.c-form--row {
+    display: flex;
+    position: relative;
+
+    .c-form__input {
+        padding-right: ($form-row-button-width + $global-spacing-tiny);
+        position: relative;
+        z-index: 1;
+    }
+
+    .c-form__button {
+        color: $color-black;
+        cursor: pointer;
+        height: 100%;
+        position: absolute;
+        right: 0;
+        text-align: left;
+        width: $form-row-button-width;
+        z-index: 2;
+    }
+}
+
+
+/**
+ * This a WIP - needs more work!
+ */
+.c-form--flex {
+    &,
+    * {
+        display: flex;
+    }
+}
+
+@include mq ($from: mobile) {
+    .c-form--flex,
+    .c-form--flex * {
+        height: auto;
+    }
+}
+
+@include mq ($until: mobile) {
+    .c-form--flex,
+    .c-form--flex * {
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+    }
+        .c-form--flex * + * {
+            margin-top: $global-spacing-tiny;
+        }
+}
+
+
+
+.c-form__inline-link {
+    position: relative;   
+}
+    .c-form__link {
+        background-color: $color-white;
+        font-size: $form-field-font-size;
+        padding-left: $global-spacing-tiny;
+        position: absolute;        
+        right: $form-field-horizontal-padding;
+        top: calc(50% - #{$global-spacing-small});
+    }

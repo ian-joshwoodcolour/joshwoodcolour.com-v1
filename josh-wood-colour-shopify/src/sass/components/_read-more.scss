@@ -1,0 +1,15 @@
+.c-read-more {
+    overflow: hidden;
+}
+
+.c-read-more__cta {
+    background-color: $color-white;
+    cursor: pointer;
+    display: inline-block;
+    font-family: $global-font-family-bold;
+    margin: 0;
+    outline: none;
+    padding: 0;
+    transition: $global-transition;
+    will-change: opacity;
+}

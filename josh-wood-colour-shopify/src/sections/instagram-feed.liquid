@@ -1,0 +1,30 @@
+<section class="c-image-feed u-mb">
+    <ul class="o-list-inline o-list-inline--tiny c-image-feed__list">
+        {%- for block in section.blocks limit:12 -%}
+            <li class="o-list-inline__item c-image-feed__item u-pt0 u-ml0 t-secondary">
+                <a href="{{ block.settings.photo_url }}" target="noopener" aria-label="View the photo on Instagram"  style="background-image: url('{{ block.settings.photo_url }}media/?size=m');" class="u-lazyload u-fade-intersected js-monitor"></a>
+            </li>
+        {%- endfor -%}
+    </ul>
+</section>
+
+
+{% schema %}
+{
+    "name": "Instagram Feed",
+    "blocks": [
+        {
+            "name": "Instagram photo",
+            "type": "object",
+            "settings": [
+                {
+                    "type": "url",
+                    "id": "photo_url",
+                    "label": "Photo URL",
+                    "info": "The URL should look like this 'https://www.instagram.com/p/BYrAkL7DHkb/', make sure there is nothing else at the end of the URL after the last '/'"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

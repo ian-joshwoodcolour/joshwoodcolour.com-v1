@@ -1,0 +1,30 @@
+{%- comment - %}
+This is pretty much the same layout used to list blogs for the index page – would be good to figure out how to just use one template
+{%- endcomment -%}
+
+{%- assign counter = 0 -%}
+
+<h2 class="u-heading u-h3 u-mb u-fade-intersected js-monitor js-related-product-header">Featured products</h2>
+
+<div class="o-layout o-layout--huge o-layout--matrix o-layout--offset-tops o-layout--left-right-cols">
+    {%- for product_slug in related_product_slugs -%}<!--
+    -->{%- if counter < 3 -%}<!--
+        -->{%- assign counter = counter | plus: 1 -%}<!--
+        --><div class="o-layout__item u-6/12@mobile u-4/12@tabletSmall u-fade-in js-related-product">
+            {%- assign product = all_products[product_slug] -%}
+            {%- assign collection_photo = product.featured_image -%}
+            {%- assign collection_title = product.title -%}
+            {%- if product.metafields.product.description != blank -%}
+                {%- assign collection_description = product.metafields.product.description -%}
+            {%- else -%}
+                {%- assign collection_description = '' -%}
+            {%- endif -%}
+            {%- assign collection_tags = product.tags | join: ', ' -%}
+            {%- assign collection_url = product.url -%}
+            {%- assign collection_price = product.price | money_without_trailing_zeros -%}
+            {%- assign photo_lazyload = true -%}
+            {%- include 'collection-card' -%}
+        </div><!--
+    -->{%- endif -%}<!--
+-->{%- endfor -%}
+</div>

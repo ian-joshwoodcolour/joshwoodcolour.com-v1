@@ -1,0 +1,165 @@
+{% include 'product-collection-url' %}
+
+{%- for block in section.blocks -%}
+    {%- if block.settings.product_url contains product.url and product_collection_url contains block.settings.collection_url -%}
+        <section class="t-grey-lightest">
+            <div class="o-section o-wrapper u-pb@tablet">
+                <div class="o-layout o-layout--huge c-recommended-products-grid">
+                    <div class="o-layout__item u-6/12@tablet">
+                        <div style="background-image: url('{{ block.settings.photo | img_url: '1000x' }}');" class="u-show@tablet c-recommended-products__hero-image"></div>
+
+                        <div class="u-mt- u-mb+ u-show@tablet">
+                            {% include 'josh-signature' %}
+                        </div>
+                    </div><div class="o-layout__item u-6/12@tablet u-pv+@tablet">
+                        {%- if block.settings.tip -%}
+                            <div class="u-h4 u-mb">"{{ block.settings.tip }}"</div>
+
+                            <div class="u-mt u-mb+ u-hide@tablet">
+                                {% include 'josh-signature' %}
+                            </div>
+                        {%- endif -%}
+
+                        {%- if block.settings.text -%}
+                            <p>{{ block.settings.text }}</p>
+                        {%- endif -%}
+
+                        <div class="c-recommended-products-container u-mt u-mt+@mobile">
+                            <div class="c-recommended-products u-text-center">
+                                {%- if block.settings.recommended_product_1 != blank -%}
+                                    {%- assign recommendation = all_products[block.settings.recommended_product_1] -%}
+                                    {%- assign recommendation_featured_image = recommendation.featured_image -%}
+                                    {%- for image in recommendation.images -%}
+                                        {%- if image.alt == 'recommended' %}
+                                            {%- assign recommendation_featured_image = image -%}
+                                            {%- break -%}
+                                        {%- endif -%}
+                                    {%- endfor -%}
+                                    {%- assign card_size = 'default' -%}
+                                    {%- assign container_classes = 'u-block c-recommended-products__item js-recommendation-1' %}
+                                    {%- assign collection_url = recommendation.url -%}
+                                    {%- assign collection_photo = recommendation_featured_image -%}
+                                    {%- assign collection_title = recommendation.title -%}
+                                    {%- assign collection_price = recommendation.price | money_without_trailing_zeros -%}
+                                    {% include 'collection-card' %}
+                                {%- endif -%}
+                                {%- if block.settings.recommended_product_2 != blank -%}
+                                    {%- assign recommendation = all_products[block.settings.recommended_product_2] -%}
+                                    {%- assign recommendation_featured_image = recommendation.featured_image -%}
+                                    {%- for image in recommendation.images -%}
+                                        {%- if image.alt == 'recommended' %}
+                                            {%- assign recommendation_featured_image = image -%}
+                                            {%- break -%}
+                                        {%- endif -%}
+                                    {%- endfor -%}
+                                    {%- assign card_size = 'default' -%}
+                                    {%- assign container_classes = 'u-block c-recommended-products__item js-recommendation-2' %}
+                                    {%- assign collection_url = recommendation.url -%}
+                                    {%- assign collection_photo = recommendation_featured_image -%}
+                                    {%- assign collection_title = recommendation.title -%}
+                                    {%- assign collection_price = recommendation.price | money_without_trailing_zeros -%}
+                                    {% include 'collection-card' %}
+                                {%- endif -%}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {%- endif -%}
+{%- endfor -%}
+
+<script>
+window.globalData.productRecommendations = [
+    {%- for block in section.blocks -%}
+        {%- if product_collection_url contains block.settings.collection_url -%}
+            {
+                productURL: '{{ block.settings.product_url }}',
+                recommendations: [
+                    {%- if block.settings.recommended_product_1 != blank -%}
+                        {%- assign featured_image = all_products[block.settings.recommended_product_1].featured_image -%}
+                        {%- for image in all_products[block.settings.recommended_product_1].images -%}
+                            {%- if image.alt == 'recommended' %}
+                                {%- assign featured_image = image -%}
+                                {%- break -%}
+                            {%- endif -%}
+                        {%- endfor -%}
+                        {
+                            price: {{ all_products[block.settings.recommended_product_1].price }},
+                            title: '{{ all_products[block.settings.recommended_product_1].title }}',
+                            handle: '{{ all_products[block.settings.recommended_product_1].handle }}',
+                            featured_image: '{{ featured_image | img_url: '800x1000' }}'
+                        },
+                    {%- endif -%}
+                    {%- if block.settings.recommended_product_2 != blank -%}
+                        {%- assign featured_image = all_products[block.settings.recommended_product_2].featured_image -%}
+                        {%- for image in all_products[block.settings.recommended_product_2].images -%}
+                            {%- if image.alt == 'recommended' %}
+                                {%- assign featured_image = image -%}
+                                {%- break -%}
+                            {%- endif -%}
+                        {%- endfor -%}
+                        {
+                            price: {{ all_products[block.settings.recommended_product_2].price }},
+                            title: '{{ all_products[block.settings.recommended_product_2].title }}',
+                            handle: '{{ all_products[block.settings.recommended_product_2].handle }}',
+                            featured_image: '{{ featured_image | img_url: '800x1000' }}'
+                        },
+                    {%- endif -%}                 
+                ]
+            },
+        {%- endif -%}
+    {%- endfor -%}
+];
+</script>
+ 
+{% schema %}
+{
+    "name": "Product recommendations",
+    "blocks": [
+        {
+            "name": "Recommendation content",
+            "type": "object",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "photo",
+                    "label": "Photo"
+                },
+                {
+                    "type": "url",
+                    "id": "product_url",
+                    "label": "Product"
+                },
+                {
+                    "type": "url",
+                    "id": "collection_url",
+                    "label": "Collection"
+                },
+                {
+                    "type": "textarea",
+                    "id": "tip",
+                    "label": "Tip",
+                    "default": "Once you have applied your permanent colour take care of your hair every day. That's the secret."
+                },
+                {
+                    "type": "text",
+                    "id": "text",
+                    "label": "Text",
+                    "default": "Pair with these products for long lasting colour and condition."
+                },
+                {
+                    "type": "product",
+                    "id": "recommended_product_1",
+                    "label": "Recommended product #1"
+                },
+                {
+                    "type": "product",
+                    "id": "recommended_product_2",
+                    "label": "Recommended product #2"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

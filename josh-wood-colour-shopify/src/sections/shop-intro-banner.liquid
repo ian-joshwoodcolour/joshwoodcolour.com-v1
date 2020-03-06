@@ -1,0 +1,60 @@
+<section class="c-hero-banner c-hero-banner--small">
+    <div class="c-hero-banner__image"></div>
+    <style>.c-hero-banner__image { background-image: url({{ section.blocks[0].settings.photo | img_url: '1200x800' }}) } @media only screen and (min-width: 46.0525em) { .c-hero-banner__image { background-image: url({{ section.blocks[0].settings.photo | img_url: '2000x800' }}); }}</style>
+
+    {% if section.blocks[0].settings.title != blank or section.blocks[0].settings.text != blank %}
+        <div class="c-hero-banner__wrapper o-wrapper u-1/1 u-pl u-pl+@tablet">
+            <div class="c-hero-banner__content u-1/1">
+                {% if section.blocks[0].settings.title != blank %}
+                    <h1 class="u-heading u-h3 u-mb">{{ section.blocks[0].settings.title }}</h1>
+                {% endif %}
+
+                {% if section.blocks[0].settings.text != blank %}
+                    <p class="u-weight-bold u-mb">{{ section.blocks[0].settings.text }}</p>
+                {% endif %}
+
+                <nav class="u-flex@mobile u-align-items-center">
+                    <a href="#permanent-colour-products" class="c-button c-button--small c-button--white u-border-black-1 u-block">Permanent Colour</a>
+                    <a href="#root-concealers-products" class="c-button c-button--small c-button--white u-border-black-1 u-ml-@mobile u-mt- u-mt0@mobile u-block">Root Concealers</a>
+                    <a href="#care-range-products" class="c-button c-button--small c-button--white u-border-black-1 u-ml-@mobile u-mt- u-mt0@mobile u-block">Care Range</a>
+                </nav>
+            </div>
+        </div>
+    {% endif %}
+</section>
+<style>html{scroll-behavior:smooth}</style>
+
+{% schema %}
+{
+    "name": "Shop Intro Banner",
+    "blocks": [
+        {
+            "name": "Content",
+            "type": "object",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "photo",
+                    "label": "Photo"
+                },
+                {
+                    "type": "color",
+                    "id": "photo_background_colour",
+                    "label": "Main background Colour"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "textarea",
+                    "id": "text",
+                    "label": "Text"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

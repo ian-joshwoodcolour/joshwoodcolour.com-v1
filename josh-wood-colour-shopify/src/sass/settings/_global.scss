@@ -1,0 +1,37 @@
+$global-radius: 0 !default;
+$global-transition-speed: .25s;
+$global-transition-easing: ease-in-out;
+$global-transition-easing-cubic: cubic-bezier(1.000, 0.000, 0.000, 1.000);
+$global-transition: all $global-transition-speed $global-transition-easing !default;
+
+
+$global-shadow: 0 0 20px rgba($color-black, .05);
+$global-shadow-active: 0 20px 60px rgba($color-black, .25);
+
+
+$global-highest-z-index: 100;
+
+
+$global-font-size: $inuit-global-font-size;
+$global-line-height: $inuit-global-line-height;
+
+
+$global-font-family-body: 'Brown-Light', Arial;
+$global-font-family-bold: 'Brown-Regular', Arial;
+$global-font-family-light: 'Brown-Light', Arial;
+$global-font-family-headings: 'Brown-Bold', Arial;
+$global-font-family-headings-alternate: 'Brown-Regular', Arial;
+
+$global-font-color: $color-black;
+
+$global-site-header-spacing: $global-spacing-large;
+$global-page-header-breakpoint: tablet;
+$global-page-header-height: 85px;
+$global-page-header-height--small: 60px;
+
+
+$global-image-placeholder-color: darken($color-white, 2%);
+
+
+$global-editorial-wrapper-max-width: 900px;
+

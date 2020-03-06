@@ -1,0 +1,101 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- for collection in product.collections -%}
+    {%- if collection.handle == 'permanent-colour' -%}
+        {%- assign IS_PERMANENT_COLLECTION = true -%}
+    {%- elsif collection.handle == 'permanent-colour-and-shade-shot-plus' -%}
+        {%- assign IS_SHADE_SHOT_PLUS_COLLECTION = true -%}
+    {%- elsif collection.handle == 'care-range' -%}
+        {%- assign IS_CARE_COLLECTION = true -%}
+    {%- endif -%}
+{%- endfor -%}
+{%- assign product_collection_slug = product.type | handle -%}
+{%- assign associated_products = collections[product_collection_slug].products -%}
+{%- if product.tags contains 'blonde' -%}
+    {%- assign default_care_colour = 'blonde' -%}
+{%- else -%}
+    {%- assign default_care_colour = 'brown' -%}
+{%- endif -%}
+{%- if IS_SHADE_SHOT_PLUS_COLLECTION -%}
+    {% comment %}
+        For Shade Shot Plus products, we also have to associate Permanent Colour products to show in the main
+        product dropdown.
+    {% endcomment %}
+    {%- assign secondary_associated_products = associated_products -%}
+    {%- assign associated_products = collections['permanent-colour-for-shade-shot-plus'].products -%}
+{%- endif -%}
+            
+<div class="u-mb">
+    <div class="u-show@mobile u-mb">
+        {% include 'product-title' %}
+        {% include 'product-price' %}
+    </div>
+    {% include 'product-description' %}
+</div>
+
+{%- if IS_PERMANENT_COLLECTION -%}
+    <a href="#" class="c-icon-link u-heading u-spacing-0 u-mv js-modal-open" data-modal="shade-comparison">
+        <svg xmlns="http://www.w3.org/2000/svg" class="c-svg c-svg--currentcolor c-svg--w18 u-mr-" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm2.5-4h-2v2H9v-2H7V9h2V7h1v2h2v1z"/>
+        </svg>
+
+        Match your shade
+    </a>
+{%- endif -%}
+
+{%- if IS_SHADE_SHOT_PLUS_COLLECTION -%}
+    {%- assign toggle_container_classes = 'u-mv' -%}
+    {% include 'shade-shot-plus-options-toggles' %}
+{%- elsif IS_CARE_COLLECTION and product.type != 'Everything Mask' -%}
+    {%- assign toggle_container_classes = 'u-mb' -%}
+    {% include 'care-product-options-toggles' %}
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+{%- elsif associated_products.size > 1 -%}
+    {% include 'associated-products-dropdown' %}
+{%- else -%}
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+{%- endif -%}
+
+{%- if IS_CARE_COLLECTION -%}
+    {%- assign button_classes = 'c-button--wide u-mt-' -%}
+{%- else -%}
+    {%- assign button_classes = 'u-1/1 u-mt-' -%}
+{%- endif -%}
+{%- assign button_has_price = false -%}
+{%- assign button_source = 'Product hero' -%}
+{% include 'add-to-cart-button' %}
+
+<div class="u-mt">
+    <button class="u-weight-bold u-font-size-12 u-underline u-color-grey u-mr- u-p0 u-inline-block js-modal-open" type="button" data-modal="product-ingredients">Ingredients</button>
+    <button class="u-weight-bold u-font-size-12 u-underline u-p0 u-color-grey u-mr- u-inline-block js-modal-open" type="button" data-modal="product-warnings">Warnings</button>
+    <a href="/pages/faqs" class="u-font-size-12 u-underline u-color-grey u-mr-">Need some help?</a>
+    <a href="/pages/delivery-returns" class="u-font-size-12 u-underline u-color-grey">Delivery and returns</a>
+</div>
+
+<script>
+window.globalData.collectionTypes ={
+    isPermanent: {%- if IS_PERMANENT_COLLECTION -%}true{%- else -%}false{%- endif -%},
+    isShadeShotPlus: {%- if IS_SHADE_SHOT_PLUS_COLLECTION -%}true{%- else -%}false{%- endif -%},
+    isCare: {%- if IS_CARE_COLLECTION -%}true{%- else -%}false{%- endif -%},
+};
+window.globalData.associatedProducts = [
+    {%- for associated_product in associated_products -%}{
+        available: {{ associated_product.available }},
+        box_image: '{%- if IS_PERMANENT_COLLECTION -%}{%- for image in associated_product.images -%}{%- if image.alt == 'box' %}{{ image | img_url: '1000x900' | crop: 'center' }}{%- endif -%}{%- endfor -%}{%- endif -%}',
+        description: '{{ associated_product.description | strip_html | newlines_to_br | strip_newlines }}',
+        featured_image: '{{ associated_product.featured_image | img_url: '1000x' }}',
+        hair_image: '{%- if IS_PERMANENT_COLLECTION -%}{%- for image in associated_product.images -%}{%- if image.alt == 'hair' %}{{ image | img_url: '1320x' }}{%- endif -%}{%- endfor -%}{%- endif -%}',
+        handle: '{{ associated_product.handle }}',
+        id: {{ associated_product.id }},
+        is_permanent_collection: {%- if IS_PERMANENT_COLLECTION -%}true{%- else -%}false{%- endif -%},
+        price: {{ associated_product.price }},
+        swatchImage: '{%- for image in associated_product.images -%}{%- if image.alt == 'swatch' -%}{{ image | img_url: '100x100' }}{%- endif -%}{%- endfor -%}',
+        title: '{{ associated_product.title }}',
+        tags: {{ associated_product.tags | json }},
+        variants: {{ associated_product.variants | json }},
+        url: '{{ associated_product.url }}'
+    },{%- endfor -%}
+];
+{%- if IS_SHADE_SHOT_PLUS_COLLECTION -%}
+    window.globalData.shadeShotPlusProducts = {{ secondary_associated_products | json }};
+{%- endif -%}
+</script>

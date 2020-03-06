@@ -1,0 +1,43 @@
+{%- for collection in product.collections -%}
+    {%- if collection.handle == 'permanent-colour' -%}
+        {%- assign IS_PERMANENT_COLLECTION = true -%}
+    {%- endif -%}
+    {%- if collection.handle == 'care-range' -%}
+        {%- assign IS_CARE_COLLECTION = true -%}
+    {%- endif -%}
+{%- endfor -%}
+{%- assign product_collection_slug = product.type | handle -%}
+{%- assign associated_products = collections[product_collection_slug].products -%}
+{%- if product.tags contains 'blonde' -%}
+    {%- assign default_care_colour = 'blonde' -%}
+{%- else -%}
+    {%- assign default_care_colour = 'brown' -%}
+{%- endif -%}
+
+<div class="o-layout o-layout--large u-10/12@mobile u-9/12@desktop u-m-auto@mobile u-flex@mobile u-align-items-center u-stack-layout@mobile">
+    <div class="o-layout__item u-6/12@mobile u-7/12@desktop u-text-center">
+        {%- if product.featured_image != blank -%}
+            <div class="c-product__image-container c-product__image-container--repeated">
+                <div style="background-image: url('{{ product.featured_image | img_url: '1000x' }}');" class="c-product__image {% if IS_PERMANENT_COLLECTION %}c-product__image--permanent{% endif %} js-product-image-repeated"></div>
+            </div>
+        {%- endif -%}
+    </div><div class="o-layout__item u-6/12@mobile u-5/12@desktop">
+        {% include 'product-title' %}
+        {% include 'product-price' %}
+        
+        {%- if IS_CARE_COLLECTION and product.type != 'Everything Mask'  -%}
+            {% include 'care-product-options-toggles' %}
+        {%- elsif associated_products.size > 1 -%}
+            {% include 'associated-products-dropdown' %}
+        {%- endif -%}
+
+        {%- assign button_classes = 'u-1/1 u-mt' -%}
+        {%- assign button_has_price = false -%}
+        {%- assign button_source = 'Product mini' -%}
+        {% include 'add-to-cart-button' %}
+
+        <div class="u-mt-">
+            {% include 'faq-and-returns-cta' %}
+        </div>
+    </div>
+</div>

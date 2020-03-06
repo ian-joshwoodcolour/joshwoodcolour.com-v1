@@ -1,0 +1,111 @@
+$product-image-container-max-size: 600px;
+$product-image-container-min-size: 550px;
+$product-image-container-min-size--small: 310px;
+
+.c-product__image-container {
+    height: 100%;
+    max-height: $product-image-container-max-size;
+    min-height: $product-image-container-min-size--small;
+    position: relative;
+    width: 100%;
+}
+    .c-product__image-container--repeated {
+        height: 400px;
+        max-height: 400px;
+        min-height: 0 !important;
+
+        .c-product__image {
+            background-position: center 0 !important;
+            background-size: contain;
+        }
+    }
+
+    .c-product__image {
+        background-position: 0 center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 100%;
+        will-change: opacity;
+        transition: all ($global-transition-speed * 2) $global-transition-easing;
+    }
+        .c-product__image--changing {
+            filter: blur(2px);
+        }
+
+        .c-product__image--small {
+            max-height: $product-image-container-max-size;
+        }
+
+        .c-product__image--cart {
+            max-height: 134px;
+            margin-right: $global-spacing-small;
+            width: 134px;
+        }
+
+.c-product__shade-comparison-cta {
+    height: 50px;
+    left: 35%;
+    padding: 0;
+    position: absolute;
+    top: 25%;
+    width: 50px;
+}
+
+@include mq ($until: mobile) {
+    .c-product__image-container {
+        max-height: 300px;
+    }
+
+    .c-product__image {
+        background-size: 100% auto;
+    }
+
+    .c-product__permanent-recommendation {
+        .c-consultation__permanent-shade {
+            font-size: 30vmin;
+            margin-top: $global-spacing-huge;
+        }
+
+        .c-consultation__permanent-box {
+            margin-bottom: $global-spacing;
+            margin-left: ($global-spacing * -1);
+            width: 100%;
+        }
+    }
+}
+
+@include mq ($from: mobile, $until: tabletSmall) {
+    /**
+     * 1. Reduce font size for product option buttons when we're tight on screen space..
+     */
+    .c-product .c-button--selectable,
+    .c-product .c-button--selected {
+        font-size: 13px; /* [1] */
+    }
+
+    /**
+     * 1. Increase the width of the product image container as we don't enough space for a bigger gutter
+     */
+    .c-product__image-container {
+        max-height: 450px; 
+        width: 110%; /* [1] */
+    }
+}
+
+@include mq ($from: mobile) {
+     /**
+      * 1. Display columns next to each other
+      * 2. Prevent toggles overlapping other content
+      */
+    .c-product-toggle--columns {
+        display: flex; /* [1] */
+        max-width: 75%; /* [1] */
+
+        /**
+         * 1. Prevent columns from filling the full width if they don't need to
+         */
+        .o-layout__item {
+            width: auto; /* [1] */
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{% unless template == 'index' or template == 'cart' or template == 'list-collections' %}
+<nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+  <a href="/" title="Home">Home</a>
+  {% if template contains 'product' %}
+     <span aria-hidden="true">&rsaquo;</span>
+      <a href="/collections/all" title="Shop">Shop</a>
+    {% if product.collections %}
+      <span aria-hidden="true">&rsaquo;</span>
+      {{ product.collections[1].title | link_to: product.collections[1].url }}
+    {% endif %}
+    <span aria-hidden="true">&rsaquo;</span>
+    <span>{{ product.title }}</span>
+  {% else %}
+   <span aria-hidden="true">&rsaquo;</span>
+   <span>{{ page_title }}</span>
+  {% endif %}
+</nav>
+{% endunless %}

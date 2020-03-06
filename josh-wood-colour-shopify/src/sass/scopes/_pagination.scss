@@ -1,0 +1,61 @@
+/**
+ * Override built-in Shopify pagination
+ */
+.s-pagination {
+    $pagination-button-colour: $color-grey;
+    $pagination-button-colour--active: $color-black;
+    $pagination-button-text-colour: $color-white;
+    $pagination-button-size:  44px;
+
+    text-align: center;
+
+    /**
+     * All pagination buttons
+     */
+    .page a,
+    .current {
+        background-color: $pagination-button-colour;
+        border-radius: 100%;
+        color: $pagination-button-text-colour;
+        display: inline-block;
+        height: $pagination-button-size;
+        line-height: $pagination-button-size;
+        overflow: hidden;
+        text-align: center;
+        transition: $global-transition;
+        vertical-align: middle;
+        width: $pagination-button-size;    
+    }
+        .page a:hover,
+        .page a:active {
+            background-color: lighten(nth($pagination-button-colour, 1), 25%);
+        }
+
+        .page + .page {
+            margin-left: $global-spacing-tiny;
+        }
+
+    /**
+     * Additional class used on the button that is the current active page
+     */
+    .current {
+        background-color: $pagination-button-colour--active;
+        pointer-events: none;
+    }
+
+    /**
+     * 'Prev' and 'next' label links
+     */
+    .prev,
+    .next {
+        display: none;
+    }
+
+    /**
+     * The ellipsis used between sets of buttons
+     */
+    .deco {
+        margin-left: $global-spacing-tiny;
+        margin-right: $global-spacing-tiny;
+    }
+}

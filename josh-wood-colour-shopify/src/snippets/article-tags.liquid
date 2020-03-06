@@ -1,0 +1,7 @@
+{%- for article_tag in article_tags -%}
+    {%- unless article_tag == 'Featured' -%}
+        <a href="/blogs/{{ blog.handle }}/tagged/{{ article_tag | handle }}" class="u-color-grey u-inline-block">
+            {{ article_tag }}
+        </a> {%- unless forloop.last -%}<strong>,</strong>&nbsp;&nbsp;{%- endunless -%}
+    {%- endunless -%}
+{%- endfor -%}

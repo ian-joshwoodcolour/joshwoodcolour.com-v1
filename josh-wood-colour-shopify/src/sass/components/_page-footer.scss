@@ -1,0 +1,10 @@
+.c-page-footer {
+    border-top: 1px solid $color-grey-light;
+}
+
+
+@include mq ($until: mobile) {
+    .c-page-footer {
+        line-height: ($inuit-global-line-height * 1.2);
+    }
+}

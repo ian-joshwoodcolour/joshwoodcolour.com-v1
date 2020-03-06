@@ -1,0 +1,92 @@
+<div class="o-layout o-layout--large u-stack-layout@mobile">
+    <div class="o-layout__item u-6/12@mobile u-4/12@desktop">
+        <a href="{{ section.blocks[0].settings.map_cta_url }}" target="noopener">
+            <img src="{{ section.blocks[0].settings.photo | img_url: '600x500' }}" alt="" class="u-1/1">
+        </a>
+    </div><div class="o-layout__item u-6/12@mobile u-8/12@desktop" id="salon">
+        <div itemscope itemtype="http://schema.org/HairSalon">
+            <h3 class="u-heading u-mb">{{ section.blocks[0].settings.title }}</h3>
+
+            <h5 class="u-mb-" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                <span itemprop="streetAddress">{{ settings.address_street_name }}</span>, <br>
+                <span itemprop="addressRegion">{{ settings.address_region }}</span> 
+                <span itemprop="postalCode">{{ settings.address_postcode }}</span>
+            </h5>
+
+            <a href="{{ section.blocks[0].settings.map_cta_url }}" class="c-icon-link u-mb" target="noopener">
+                {{ section.blocks[0].settings.map_cta_label }}
+
+                {%- assign classes = 'c-svg c-svg--currentcolor c-svg--w18 u-ml-' -%}
+                {% include 'right-arrow-icon' %}
+            </a>
+
+            <p class="u-mb0">{{ section.blocks[0].settings.contact_text }}</p>
+            <ul class="o-list-inline@tablet u-mt-">
+                <li class="o-list-inline__item">
+                    <a href="mailto:{{ settings.contact_email }}" class="c-icon-link u-weight-light">
+                        {%- assign classes = 'c-svg c-svg--currentcolor c-svg--w16 u-mr-' -%}
+                        {% include 'mail-icon' %}
+
+                        <span itemprop="email">{{ settings.contact_email }}</span>
+                    </a>
+                </li>
+                <li class="o-list-inline__item">
+                    <a href="tel:{{ settings.contact_phone }}" class="c-icon-link u-weight-light">
+                        {%- assign classes = 'c-svg c-svg--currentcolor c-svg--w16 u-mr-' -%}
+                        {% include 'phone-icon' %}
+
+                        <span itemprop="telephone">{{ settings.contact_phone }}</span>
+                    </a>
+                </li>
+            </ul>
+
+            <span class="u-hide" itemprop="name">Josh Wood Colour - Atelier Salon</span>
+            <span class="u-hide" itemprop="logo">https:{{ 'josh-wood-colour-logo.jpg' | asset_url }}</span>
+            <span class="u-hide" itemprop="image">https:{{ 'josh-wood-profile.jpg' | asset_url }}</span>
+            <span class="u-hide" itemprop="photo" itemscope itemtype="http://schema.org/Photograph">
+                <span itemprop="url">https:{{ 'josh-wood-colour-atelier.jpg' | asset_url }}</span>
+                <span itemprop="description">A photo of Josh Wood Colour Atelier salon</span>
+            </span>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Salon Map Section",
+    "blocks": [
+        {
+            "name": "Salon Map content",
+            "type": "object",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "photo",
+                    "label": "Map photo"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "url",
+                    "id": "map_cta_url",
+                    "label": "Map CTA URL"
+                },
+                {
+                    "type": "text",
+                    "id": "map_cta_label",
+                    "label": "Map CTA Label"
+                },
+                {
+                    "type": "textarea",
+                    "id": "contact_text",
+                    "label": "Contact text"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

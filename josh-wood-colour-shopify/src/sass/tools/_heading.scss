@@ -1,0 +1,10 @@
+@mixin heading ($size: null) {
+    @if ($size) {
+        @include inuit-font-size($size);
+    }
+
+    @include rem(letter-spacing, -1px);
+    font-family: $global-font-family-headings;
+    line-height: 1.1;
+    word-break: keep-all;
+}   

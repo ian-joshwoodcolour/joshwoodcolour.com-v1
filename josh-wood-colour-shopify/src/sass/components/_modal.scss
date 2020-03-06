@@ -1,0 +1,383 @@
+$modal-close-button-size: 34px;
+$modal-close-button-icon-size: 20px;
+$modal-wrapper-max-width: 740px;
+$modal-wrapper-max-width--wide: 1100px;
+$modal-container-min-height: 500px;
+$modal-container-min-height--small: 230px;
+
+.c-modal {
+    /**
+     * 1. Don't let the modal appear on top of the page header
+     */
+    align-items: center;
+    background-color: rgba($color-black, 0.5);
+    bottom: 0;
+    display: flex;
+    height: 100%;
+    left: 0;
+    height: 100%;
+    justify-content: center;
+    opacity: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: ($global-highest-z-index + 3); /* [1] */
+}
+    .c-modal__close {
+        display: flex;
+        height: $modal-close-button-size;
+        justify-content: center;
+        padding: 0 !important;
+        position: absolute;
+        right: $global-spacing-small;
+        top: $global-spacing-small;
+        width: $modal-close-button-size;
+        z-index: 2;
+
+        .c-button__icon {
+            height: $modal-close-button-icon-size;
+            left: 50%;
+            margin-left: ($modal-close-button-icon-size / 2) * -1;
+            margin-top: ($modal-close-button-icon-size / 2) * -1;
+            position: absolute;
+            top: 50%;
+            width: $modal-close-button-icon-size;
+        }
+    }
+        .c-modal__close:hover,
+        .c-modal__close:active {
+            transform: translateY(-4px) !important;
+        }
+
+    .c-modal__wrapper {
+        min-height: 70%;
+        max-width: $modal-wrapper-max-width;
+        -webkit-overflow-scrolling: touch;
+        touch-action: manipulation;
+        width: 70%;
+        will-change: transform;
+        z-index: 1;
+        &.wide {
+            max-width: 940px;
+            width: 80%;
+            min-height: 600px;
+            #consultation-modal {
+                min-height: 60vh;
+            }
+        }
+    }
+        .c-modal__wrapper--framed {
+            @include gold-frame();
+            background-color: $color-white;
+        }
+
+        .c-modal__wrapper--grow {
+            height: auto;
+            position: relative;
+            top: auto;
+        }
+
+    .c-modal__image-container {
+        position: relative;
+    }
+        .c-modal__image {
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: calc(100% + #{$global-spacing-tiny * 3});
+            left: $global-spacing-tiny;
+            position: absolute;
+            top: $global-spacing-tiny * -3;
+            width: calc(100% + #{$global-spacing-tiny * 2});
+        }
+
+
+.c-modal,
+.c-modal__wrapper {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+
+.c-modal--flush {
+    .c-modal__wrapper {
+        height: 100%;
+        margin: 0;
+        max-height: none;
+        max-width: none;
+        min-height: 100vh;
+        width: 100%;
+    }
+}
+
+
+@include mq ($from: mobile) {
+    .c-modal::before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+    }
+
+    .c-modal__wrapper {
+        min-height: 350px;
+    }
+
+
+    .c-modal--no-flex {
+        display: block;
+
+        &::before {
+            display: none;
+        }
+
+        .c-modal__wrapper {
+            margin: $global-spacing auto;
+        }
+    }
+
+    .c-modal__layout {
+        width: 100%;
+    }
+
+    .c-modal__image {
+        height: 100%;
+        left: $global-spacing;
+        top: 0;
+        width: calc(100% - #{$global-spacing});
+    }
+}
+
+@include mq ($from: mobile, $until: tablet) {
+    .c-modal__wrapper {
+        max-width: none;
+        width: 80%;
+        &.wide {
+            max-width: 940px;
+            width: 80%;
+            min-height: none;
+        }
+    }
+}
+
+@include mq ($until: mobile) {
+    .c-modal__wrapper {
+        height: auto;
+        left: 0;
+        margin-left: $global-spacing-small;
+        margin-top: $global-spacing-small;
+        max-width: none;
+        min-height: 0;
+        position: absolute;
+        top: 0;
+        width: calc(100% - #{$global-spacing-small * 2});
+    }
+
+    .c-modal__close {
+        right: $global-spacing-small;
+        top: $global-spacing-small;
+    }
+
+    .c-modal--flush\@mobile {
+        .c-modal__wrapper {
+            height: 100%;
+            margin: 0;
+            width: 100%;
+        }
+    }
+}
+
+
+/* Modal for cart summary
+   ====================================== */
+
+.c-modal--cart-summary {
+    &::before {
+        display: none;
+    }
+
+    .c-modal__wrapper {
+        display: flex;
+        flex-direction: column;
+        height: calc(100vh - 100px);
+        margin-right: $global-spacing-small;
+        overflow: auto;
+        position: absolute;
+        right: $global-spacing-small;
+        top: $global-spacing-small;
+        width: calc(100% - #{$global-spacing});
+
+
+        .u-flex\@tablet {
+            align-items: center !important;
+            display: flex !important;
+        }
+    }
+
+    .c-modal__close {
+        right: $global-spacing + $global-spacing-small;
+        top: $global-spacing + $global-spacing-small;
+    }
+
+    .c-modal__scroller {
+        @include styled-scrollbar($color-white, $color-grey-light);
+        flex-grow: 1;
+        overflow: hidden;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        padding-right: $global-spacing-small;
+        position: relative;
+        right: 0;
+        top: 0;
+        width: calc(100% + #{$global-spacing-small});
+        z-index: 1;
+    }
+
+    .c-modal__header {
+        flex: 0 0 $global-spacing;
+    }
+
+    .c-modal__footer {
+        flex: 0 0 255px;
+        position: relative;
+        z-index: 2;
+    }
+}
+
+@include mq ($from: mobile) {
+    .c-modal--cart-summary {
+        .c-modal__wrapper {
+            height: auto;
+            margin-top: $global-spacing-small;
+            max-height: calc(84vh - #{$global-spacing * 2});
+            max-width: 500px;
+        }
+    }
+}
+
+@include mq ($until: mobile) {
+    .c-modal--cart-summary {
+        .c-modal__close {
+            right: $global-spacing;
+            top: $global-spacing;
+        }
+    }
+}
+
+@media (max-height: 450px) and (max-width: 850px) and (orientation: landscape), (max-width: 46.3125em) {
+    .c-modal--cart-summary {
+        height: auto;
+        overflow: auto;
+
+        .c-modal__wrapper {
+            height: auto !important;
+            margin-left: $global-spacing-small;
+            margin-top: 0;
+            max-height: none !important;
+            max-width: none !important;
+        }
+    }
+}
+
+
+/* Modal for auto-growing content
+   ====================================== */
+
+.c-modal--auto-grow {
+    display: flex;
+
+    .c-modal__wrapper {
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    @include mq ($from: mobile) {
+        .c-modal__wrapper {
+            max-height: calc(100vh - #{$global-spacing-large});
+            height: auto;
+        }
+    }
+
+    @include mq ($until: mobile) {
+        & {
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .c-modal__wrapper {
+            background-color: $color-white;
+            min-height: 100%;
+            height: auto;
+        }
+    }
+}
+
+
+
+/* Modal for promo content
+   ====================================== */
+
+.c-modal--promo {
+    .c-modal__wrapper {
+        max-width: $modal-wrapper-max-width--wide;
+        width: calc(100% - #{$global-spacing-small * 2});
+    }
+        .c-modal__image-container,
+        .c-modal__content-container {
+            min-height: $modal-container-min-height--small;
+        }
+
+    @include mq ($from: mobile) {
+        .c-modal__image-container,
+        .c-modal__content-container {
+            min-height: $modal-container-min-height;
+        }
+    }
+}
+
+
+
+/* Modal for wide content
+   ====================================== */
+
+.c-modal--wide {
+    .c-modal__wrapper {
+        max-width: $modal-wrapper-max-width--wide;
+        width: calc(100% - #{$global-spacing-small * 2});
+    }
+}
+
+
+/* Modal for Consultation chat
+   ====================================== */
+
+@include mq ($from: mobile) {
+    .c-modal--chat {
+        .c-modal__wrapper {
+            height: 70%;
+        }
+    }
+}
+
+
+/* Modal for embedded videos
+   ====================================== */
+
+.c-modal--video {
+    .c-modal__wrapper {
+        height: 80%;
+        max-height: 680px;
+        max-width: $inuit-wrapper-width;
+        min-height: none;
+        position: relative;
+        width: 100%;
+    }
+
+    iframe {
+        bottom: 0;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        width: 100%;
+    }
+}

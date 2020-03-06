@@ -1,0 +1,79 @@
+$shade-comparison-max-height: 800px;
+$shade-comparison-min-height: 430px;
+$shade-comparison-max-width: 1600px;
+
+.c-shade-comparison-container,
+.c-shade-comparison {
+    max-height: $shade-comparison-max-height;
+    // max-width: $shade-comparison-max-width;
+    min-height: $shade-comparison-min-height;
+    overflow: hidden;
+}
+
+.c-shade-comparison__comparison {
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.c-shade-comparison__shade {
+    background-color: $color-grey-light;
+    background-position: 0 0;
+    background-size: cover;
+    height: 50%;
+    max-height: ($shade-comparison-max-height / 2.2);
+    position: relative;
+    width: 100%;
+}
+    .c-shade-comparison__shade::after {
+        @include inuit-font-size(14px);
+        background-color: rgba($color-black, 0.5);
+        border-radius: 3px;
+        content: 'After';
+        color: $color-white;
+        font-family: $global-font-family-headings;
+        left: $global-spacing-small;
+        letter-spacing: 0;
+        padding: 0 $global-spacing-tiny;
+        position: absolute;
+        top: $global-spacing-small;
+    }
+
+    .c-shade-comparison__shade--before {
+        height: calc(50% - #{$global-spacing-small});
+        margin-bottom: $global-spacing-small;
+    }
+        .c-shade-comparison__shade--before::after {
+            content: 'Before';
+        }
+
+
+@include mq ($until: mobile) {
+    .c-shade-comparison-container {
+        margin-left: ($global-spacing * -1);
+        margin-right: ($global-spacing * -1);
+        overflow-x: scroll;
+        -webkit-overflow-scrolling: touch;
+        touch-action: manipulation;
+        white-space: nowrap;
+    }
+        .c-shade-comparison {
+            padding-left: $global-spacing !important;
+            width: 70vw !important;
+        }
+
+        .c-shade-comparison__shade--before {
+            height: calc(50% - #{$global-spacing-tiny});
+            margin-bottom: $global-spacing-tiny;
+        }
+}
+
+@media (max-height: 1000px) {
+    .c-shade-comparison-container,
+    .c-shade-comparison {
+        height: 60vh;
+        max-height: none;
+        min-height: 60vh;
+    }
+}

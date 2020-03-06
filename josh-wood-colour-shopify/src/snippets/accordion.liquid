@@ -1,0 +1,11 @@
+<div class="c-accordion">
+    <button class="c-accordion__toggle js-visibility-toggle" id="{{ accordion_id }}-toggle" aria-controls="{{ accordion_id }}" aria-expanded="false" role="tab">
+        {{ accordion_title }}
+
+        {%- assign classes = 'c-svg c-accordion__toggle-icon' -%}
+        {% include 'plus-icon' %}
+    </button>
+    <div class="c-accordion__content" id="{{ accordion_id }}" aria-labelledby="{{ accordion_id }}-toggle" aria-hidden="true" role="tabpanel">
+        <br>{{ accordion_content }}
+    </div>
+</div>

@@ -1,0 +1,13 @@
+.c-icon-link {
+    align-items: center;
+    display: flex;
+}
+    .c-icon-link svg {
+        transition: transform $global-transition-speed $global-transition-easing;
+        will-change: transform;
+    }
+
+    .c-icon-link:hover svg,
+    .c-icon-link:active svg {
+        transform: translateX(#{$global-spacing-tiny});
+    }

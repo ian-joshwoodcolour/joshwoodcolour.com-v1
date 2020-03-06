@@ -1,0 +1,47 @@
+
+{%- assign back_button_label = 'cart.general.back' | t -%}
+{%- assign back_button_url = 'javascript:history.go(-1)' -%}
+{% include 'back-button' %}
+
+<section class="o-section o-wrapper">
+    <h1 class="u-heading u-h3 u-text-center u-mb+ u-mb++@tablet">Your {{ 'cart.general.title' | t }}</h1>
+    {% if cart.item_count > 0 %}
+        <form action="#" method="post" novalidate class="js-cart-form">
+            <div class="o-layout u-stack-layout@mobile">
+                <div class="o-layout__item u-7/12@mobile">
+                    {% include 'cart-items' %}
+                </div><div class="o-layout__item u-1/12@mobile">
+                </div><div class="o-layout__item u-4/12@mobile">
+                    {% include 'cart-total' %}
+                </div>
+            </div>
+        </form>
+
+        <div class="c-modal c-modal js-modal u-hide" data-modal="ssp-bundle-warning">
+            <div class="c-modal__wrapper t-white u-p u-p+@mobile u-p++@desktop js-modal-wrapper">
+                {%- assign modal_name = 'ssp-bundle-warning' -%}
+                {% include 'modal-close-button' %}
+                
+                <h5 class="u-heading u-mb">You are removing Permanent Colour and Shade Shot Plus from your cart</h5>
+
+                <p>The Shade Shot Plus can only be purchased with our Josh Wood Permanent Colour. Removing your Permanent Colour will also remove the Shade Shot Plus from your cart</p>
+
+                <div class="u-flex@mobile">
+                    <button class="c-button c-button--black u-1/1 js-modal-close" data-modal="ssp-bundle-warning" type="button">Keep both products</button>
+                    <button class="c-button c-button--black c-button--ghost u-1/1 u-mt- u-mt0@mobile u-ml-@mobile js-ssp-removal-remove" type="button">Remove both products</button>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="u-text-center u-mt u-mt+@mobile u-fade-in js-cart-empty-message" {% if cart.item_count > 0 %}style="display: none;"{% endif %}>
+        <p>{{ 'cart.general.empty' | t }}</p>
+        <a href="/collections/all" class="c-button c-button--black u-mt">{{ 'cart.general.continue_browsing_html' | t }}</a>
+    </div>
+
+    {% include 'cart-convert' %} 
+</section>
+
+<script>
+window.globalData.cart = {{ cart | json }};
+</script>

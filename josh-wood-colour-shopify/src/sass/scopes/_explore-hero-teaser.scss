@@ -1,0 +1,28 @@
+/**
+ * We're re-using the 'explore' teaser module, but when it's on the explore page we need to change it a little
+ */
+.s-explore-hero-teaser {
+    /**
+     * 1. Increase the font size of the title
+     */
+    .u-heading {
+        font-size: $inuit-font-size-h2; /* [1] */
+    }
+
+    /**
+     * 1. Mimic the 'wide' button variant
+     * 2. Prevent full-width buttons
+     */
+    .c-button {
+        @include rem(padding-left, $global-spacing-large); /* [1] */
+        @include rem(padding-right, $global-spacing-large); /* [1] */
+        width: auto !important; /* [2] */
+    }
+
+    /**
+     * 1. Remove the second CTA as it links to the explore page
+     */
+    .c-button:nth-child(2) {
+        display: none; /* [1] */
+    }
+}

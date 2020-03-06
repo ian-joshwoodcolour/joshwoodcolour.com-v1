@@ -1,0 +1,60 @@
+{% for block in section.blocks %}
+    <div class="o-layout u-stack-layout@mobile">
+        <div class="o-layout__item u-6/12@mobile">
+            <h1 class="u-h2 u-heading u-mb">{{ block.settings.title }}</h1>
+
+            <a class="c-icon-link u-weight-light u-mb- u-pb--" href="mailto:{{ settings.contact_email }}">
+                {%- assign classes = 'c-svg c-svg--currentcolor c-svg--w16 u-mr-' -%}
+                {% include 'mail-icon' %}
+
+                {{ settings.contact_email }}
+            </a>
+            <a class="c-icon-link u-weight-light u-mb- u-pb--" href="tel:{{ settings.contact_phone }}">
+                {%- assign classes = 'c-svg c-svg--currentcolor c-svg--w16 u-mr-' -%}
+                {% include 'phone-icon' %}
+
+                {{ settings.contact_phone }}
+            </a>
+            <a class="c-icon-link js-scroll-to---" data-scroll-to="#salon-info" href="#salon-info">
+                {%- assign classes = 'c-svg c-svg--currentcolor c-svg--w16 u-mr-' -%}
+                {% include 'right-arrow-icon' %}
+
+                {{ block.settings.cta_label }}
+            </a>
+        </div>
+        <div class="o-layout__item u-1/12"></div>
+        <div class="o-layout__item u-5/12@mobile">
+            <p>{{ block.settings.text }}</p>
+        </div>
+    </div>
+{% endfor %}
+
+{% schema %}
+
+{
+    "name": "Salon Intro",
+    "blocks": [
+        {
+            "name": "Salon Intro content",
+            "type": "object",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                }, {
+                    "type": "textarea",
+                    "id": "text",
+                    "label": "Text"
+                }, {
+                    "type": "text",
+                    "id": "cta_label",
+                    "label": "CTA Label"
+                }
+            ]
+        }
+    ]
+}
+
+{% endschema %}

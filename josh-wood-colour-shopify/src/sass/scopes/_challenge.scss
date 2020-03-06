@@ -1,0 +1,31 @@
+/**
+ * Override styles applied to Shopify's captcha/challenge page for account creation
+ */
+.shopify-challenge__container {
+    margin-bottom: $global-spacing-large !important;
+    margin-top: $global-spacing-large !important;
+
+
+    form {
+        text-align: center;
+    }
+        /**
+         * Mimic our main button style
+         */
+        input[type="submit"] {
+            @include rem(padding, $global-spacing-small $global-spacing);
+            background-color: $color-black;
+            border: 1px solid;
+            border-radius: $global-radius;
+            color: $color-white;
+            cursor: pointer;
+            display: inline-block;
+            font: inherit;
+            font-family: $global-font-family-bold;
+            margin: $global-spacing auto 0;
+            outline: none;
+            text-align: center;
+            transition: $global-transition;
+            vertical-align: middle;
+        }
+}

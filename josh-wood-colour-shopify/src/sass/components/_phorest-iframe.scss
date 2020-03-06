@@ -1,0 +1,12 @@
+.c-phorest-iframe {
+    height: 800px;
+    overflow: hidden;
+    position: relative;
+}
+    .c-phorest-iframe > iframe {
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }

@@ -1,0 +1,488 @@
+$cookiebot-spacing: $global-spacing-small;
+$cookiebot-box-shadow-color: rgba(0, 0, 0, 0.4);
+$cookiebot-border-color: $color-grey-light;
+$cookiebot-border-width: 2px;
+$cookiebot-button-border-radius: 0;
+$cookiebot-button-color: $color-primary;
+$cookiebot-button-padding: 8px 10px;
+$cookiebot-category-title-size: $inuit-font-size-h6;
+$cookiebot-cell-border-color: $color-grey-lightest;
+$cookiebot-column-headings: Name, Provider, Purpose, Expiry, Type;
+$cookiebot-column-headings-mobile-width: 75px;
+$cookiebot-details-height: 200px;
+$cookiebot-declaration-background-color: $color-grey-lightest;
+$cookiebot-declaration-border-color: $color-grey-light;
+$cookiebot-footer-font-size: 10px;
+$cookiebot-main-font-color: $color-grey-dark;
+$cookiebot-main-font-family: inherit;
+$cookiebot-main-font-size: 14px;
+$cookiebot-main-font-weight: 300;
+$cookiebot-main-line-height: 1.4;
+$cookiebot-mobile-breakpoint: 800px;
+$cookiebot-title-font-color: $color-primary;
+$cookiebot-title-font-family: $global-font-family-bold;
+$cookiebot-title-font-size: $inuit-font-size-h6;
+$cookiebot-title-font-weight: 400;
+$cookiebot-max-width: 1000px;
+$cookiebot-mobile-breakpoint: 840px;
+$cookiebot-width: 90%;
+
+/**
+ * 1. Force inheritance of site fonts
+ */
+#CybotCookiebotDialog,
+#CybotCookiebotDialog * {
+    border-width: $cookiebot-border-width !important;
+    font-family: $cookiebot-main-font-family !important; /* [1] */
+    font-size: $cookiebot-main-font-size !important;
+    font-weight: $cookiebot-main-font-weight !important;
+    line-height: $cookiebot-main-line-height !important;
+}
+
+/**
+ * The main cookie banner element
+ * 
+ * 1. Reduce harshness of the default box shadow.
+ * 2. Add a slight border for improved box shadow definition
+ */
+#CybotCookiebotDialog {
+    box-shadow: 0 20px 80px $cookiebot-box-shadow-color !important; /* [1] */
+    border-top: none;
+    padding-bottom: 0 !important;
+}
+
+/**
+ * The 'Powered by'/logo element
+ *
+ * 1. Remove the logo
+ */
+#CybotCookiebotDialogPoweredbyLink {
+    display: none !important;
+}
+
+/**
+ * The 'container' element
+ *
+ * 1. Extend the max-width so it's not so tight
+ */
+#CybotCookiebotDialogBody {
+    max-width: $cookiebot-max-width !important; /* [1] */
+    padding-bottom: ($cookiebot-spacing * 2) !important;
+    padding-right: 0 !important;
+    padding-top: ($cookiebot-spacing * 2) !important;
+    width: $cookiebot-width !important;
+}
+/**
+ * The 'content' container element
+ *
+ * 1. Remove all padding (there is lots of left padding applied for some reason...)
+ */
+#CybotCookiebotDialogBodyContent {
+    color: $cookiebot-main-font-color !important;
+    margin-bottom: $cookiebot-spacing !important;
+    padding: 0 !important;
+}
+#CybotCookiebotDialogBodyContentText {
+    color: $cookiebot-main-font-color !important;
+}
+
+/**
+ * The title shown above the cookie introduction
+ *
+ * 1. Increase padding above the title element
+ */
+#CybotCookiebotDialogBodyContentTitle {
+    color: $cookiebot-title-font-color !important;
+    font-family: $cookiebot-title-font-family !important;
+    font-size: $cookiebot-title-font-size !important;
+    font-weight: $cookiebot-title-font-weight !important;
+    margin-bottom: $cookiebot-spacing !important;
+    margin-top: 0;
+}
+
+/**
+ * The container for the accept/deny buttons
+ */
+#CybotCookiebotDialogBodyButtons {
+    margin: 0 !important;
+    padding-left: 0 !important;
+}
+
+/**
+ * The 'OK' button used to accept cookies
+ * 
+ * 1. Change the 'OK' button background
+ * 2. Remove button border
+ */
+#CybotCookiebotDialogBodyButtonAccept {
+    background-color: $cookiebot-button-color !important; /* [1] */
+    border: 0 !important; /* [2] */
+    border-radius: $cookiebot-button-border-radius !important;
+    margin: 0 !important;
+    padding: $cookiebot-button-padding !important;
+}
+
+/**
+ * The 'details' toggle button
+ */
+#CybotCookiebotDialogBodyButtonDetails {
+    float: none !important;
+    margin-left: $cookiebot-spacing * 2 !important;
+}
+
+/**
+ * The 'container' element for showing the cookie explanations
+ *
+ * 1. Extend the max-width so it's not so tight
+ */
+#CybotCookiebotDialogDetailBody {
+    max-width: $cookiebot-max-width !important; /* [1] */
+    width: $cookiebot-width !important;
+}
+/**
+ * We have to use and ID and class selector here for higher specificity, the ID
+ * selectors above would otherwise override the class-based selectors below.
+ */
+#CybotCookiebotDialogDetailBodyContentTabs {
+    /**
+     * The horizontal tabs shown in the details section
+     */
+    .CybotCookiebotDialogDetailBodyContentTab {
+        border: $cookiebot-border-width solid $cookiebot-border-color !important;
+        border-radius: 0 !important;
+        margin-right: $cookiebot-spacing;
+        padding: ($cookiebot-spacing / 2) $cookiebot-spacing !important;
+        top: $cookiebot-border-width !important;
+    }
+
+    /**
+     * The selected tab state
+     */
+    .CybotCookiebotDialogDetailBodyContentTabsItemSelected {
+        border-bottom-color: transparent !important;
+        color: $cookiebot-title-font-color !important;
+        font-family: $cookiebot-title-font-family !important;
+        font-weight: $cookiebot-title-font-weight !important;
+        top: $cookiebot-border-width !important;
+    }
+}
+
+#CybotCookiebotDialogDetailBodyContent {
+    border-color: $cookiebot-border-color !important;
+    border-width: $cookiebot-border-width !important;
+
+    .CybotCookiebotDialogDetailBodyContentCookieContainerTypes,
+    .CybotCookiebotDialogDetailBodyContentCookieContainerTypesSelected {
+        padding: ($cookiebot-spacing / 2) $cookiebot-spacing * 2 ($cookiebot-spacing / 2)
+            $cookiebot-spacing !important;
+    }
+
+    /**
+     * The selected tab state
+     */
+    .CybotCookiebotDialogDetailBodyContentCookieContainerTypesSelected {
+        color: $cookiebot-title-font-color !important;
+        font-family: $cookiebot-title-font-family !important;
+        font-weight: $cookiebot-title-font-weight !important;
+    }
+}
+
+/**
+ * The vertical tabs and scrolling content area.
+ */
+#CybotCookiebotDialogDetailBodyContent {
+    height: $cookiebot-details-height !important;
+}
+
+/**
+ * The scrolling content area.
+ *
+ * 1. This is the height of the main scrolling area, minus the border at the bottom.
+ */
+#CybotCookiebotDialogDetailBodyContentCookieContainerTypeDetails,
+#CybotCookiebotDialogDetailBodyContentTextAbout {
+    color: $cookiebot-main-font-color !important;
+    height: ($cookiebot-details-height - ($cookiebot-spacing * 3)) !important; /* [1] */
+    max-height: ($cookiebot-details-height - ($cookiebot-spacing * 3)) !important; /* [1] */
+}
+
+#CybotCookiebotDialogDetailBodyContentCookieContainerTypeDetails {
+    margin-right: 0 !important;
+    margin-bottom: $cookiebot-spacing !important;
+    margin-top: $cookiebot-spacing !important;
+    padding-left: $cookiebot-spacing !important;
+    padding-right: $cookiebot-spacing !important;
+
+    &::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+        -webkit-appearance: none;
+        -webkit-border-radius: 100px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #fff;
+        -webkit-border-radius: 100px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $cookiebot-border-color;
+        border: none;
+        -webkit-border-radius: 100px;
+    }
+}
+
+/**
+ * 1. Increase the spacing between the vertical and horizontal tabs
+ */
+#CybotCookiebotDialogDetailBodyContentCookieContainerTypes {
+    margin-top: ($cookiebot-spacing / 2) !important; /* [1] */
+}
+
+/**
+ * The table for listing all cookies used
+ */
+#CybotCookiebotDialogDetailBodyContentCookieContainer
+    .CybotCookiebotDialogDetailBodyContentCookieTypeTable {
+    margin-top: $cookiebot-spacing !important;
+
+    thead td {
+        background-color: transparent !important;
+        color: $cookiebot-title-font-color !important;
+        font-family: $cookiebot-title-font-family !important;
+        font-weight: $cookiebot-title-font-weight !important;
+        padding: ($cookiebot-spacing / 2) !important;
+    }
+
+    tbody td:first-child {
+        font-weight: $cookiebot-title-font-weight !important;
+    }
+
+    td {
+        border-width: 1px !important;
+        color: $cookiebot-main-font-color !important;
+        font-size: ($cookiebot-main-font-size - 1) !important;
+        padding: $cookiebot-spacing / 2 !important;
+    }
+}
+
+#CybotCookiebotDialogDetailFooter {
+    margin-top: ($cookiebot-spacing / 2) !important;
+
+    &,
+    a {
+        font-size: $cookiebot-footer-font-size !important;
+    }
+}
+
+.CybotCookiebotDialogDetailBodyContentCookieTypeIntro {
+    color: $cookiebot-main-font-color;
+}
+
+@media (max-width: $cookiebot-mobile-breakpoint) {
+    #CybotCookiebotDialogDetailBody {
+        width: 100% !important;
+    }
+
+    #CybotCookiebotDialogDetailBodyContent {
+        .CybotCookiebotDialogDetailBodyContentCookieContainerTypes,
+        .CybotCookiebotDialogDetailBodyContentCookieContainerTypesSelected {
+            font-size: small !important;
+            padding: ($cookiebot-spacing / 2) !important;
+        }
+
+        .CybotCookiebotDialogDetailBodyContentCookieTypeIntro,
+        .CybotCookiebotDialogDetailBodyContentCookieTypeTableContainer {
+            font-size: small !important;
+        }
+    }
+
+    #CybotCookiebotDialogDetailBodyContentCookieContainerTypeDetails {
+        overflow-x: scroll;
+        -webkit-overflow-scrolling: touch;
+        padding-right: $cookiebot-spacing / 2 !important;
+    }
+
+    #CybotCookiebotDialogDetailBodyContentCookieContainerTypeDetails,
+    #CybotCookiebotDialogDetailBodyContentTextAbout {
+        height: ($cookiebot-details-height - ($cookiebot-spacing * 3)) !important;
+        max-height: ($cookiebot-details-height - ($cookiebot-spacing * 3)) !important;
+    }
+
+    #CybotCookiebotDialogDetailFooter {
+        display: none !important;
+    }
+}
+
+// Declaration page
+
+.CookieDeclarationDialogText,
+.CookieDeclarationIntro,
+.CookieDeclarationLastUpdated {
+    margin: 0 0 $cookiebot-spacing 0;
+}
+
+.CookieDeclarationDialogText,
+.CookieDeclarationIntro,
+.CookieDeclarationIntro + p,
+#CookieDeclarationUserStatusPanel,
+.CookieDeclarationLastUpdated {
+    color: $cookiebot-main-font-color;
+}
+
+.CookieDeclarationUserStatusPanel + br,
+.CookieDeclarationUserStatusLabelOff {
+    display: none;
+}
+.CookieDeclarationLastUpdated {
+    margin-bottom: $cookiebot-spacing * 4;
+}
+
+#CookieDeclarationUserStatusPanel a {
+    border: 1px solid;
+    border-color: $cookiebot-button-color;
+    color: $cookiebot-button-color;
+    border-radius: $cookiebot-button-border-radius;
+    cursor: pointer;
+    display: inline-block;
+    font: inherit;
+    font-family: $cookiebot-title-font-family;
+    line-height: 1;
+    margin-top: $cookiebot-spacing;
+    padding: $cookiebot-button-padding;
+    text-align: center;
+    transition: all 0.15s ease-in;
+    vertical-align: middle;
+}
+#CookieDeclarationUserStatusPanel a:hover,
+#CookieDeclarationUserStatusPanel a:active {
+    background-color: $cookiebot-button-color;
+    color: #fff;
+}
+
+.CookieDeclarationType {
+    background-color: $cookiebot-declaration-background-color !important;
+    border: 0 !important;
+    display: block !important;
+    padding: $cookiebot-spacing * 3 !important;
+    vertical-align: top !important;
+}
+.CookieDeclarationType + .CookieDeclarationType {
+    margin-top: $cookiebot-spacing * 2;
+}
+
+#CookieDeclarationUserStatusPanel {
+    display: block !important;
+    margin: 0 !important;
+}
+
+
+
+.CookieDeclarationTypeHeader {
+    @include inuit-font-size($cookiebot-category-title-size, false, true);
+    color: $cookiebot-title-font-color !important;
+    font-family: $cookiebot-title-font-family;
+    font-weight: inherit !important;
+    line-height: 1.1 !important;
+    margin-bottom: $cookiebot-spacing * 2 !important;
+}
+.CookieDeclarationTypeDescription {
+    margin-bottom: $cookiebot-spacing * 2;
+    opacity: 0.6;
+}
+.CookieDeclarationTable {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 0 0 18px 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+.CookieDeclarationTableHeader {
+    border-bottom: $cookiebot-border-width solid $cookiebot-cell-border-color !important;
+    font-weight: $cookiebot-title-font-weight;
+    padding-bottom: $cookiebot-spacing;
+    text-align: left;
+}
+.CookieDeclarationTableHeader[dir='rtl'] {
+    text-align: right;
+}
+.CookieDeclarationTableCell {
+    border-color: $cookiebot-declaration-border-color !important;
+    color: $cookiebot-main-font-color !important;
+    font-size: small;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    border-top: $cookiebot-border-width solid $cookiebot-border-color;
+    vertical-align: top;
+    padding: $cookiebot-spacing ($cookiebot-spacing / 2);
+}
+
+#CookieDeclarationUserStatusLabelWithdraw {
+    display: none !important;
+}
+
+@media (max-width: $cookiebot-mobile-breakpoint) {
+    .CookieDeclarationType {
+        margin-left: ($cookiebot-spacing * 2) * -1 !important;
+        padding: $cookiebot-spacing * 2 !important;
+        width: calc(100% + #{($cookiebot-spacing * 2) * 2}) !important;
+    }
+
+    .CybotCookiebotDialogDetailBodyContentCookieTypeTable,
+    .CookieDeclarationTable {
+        position: relative;
+
+        *,
+        tr,
+        td {
+            display: block !important;
+        }
+
+        > tbody > tr:nth-child(n + 2) {
+            margin-top: ($cookiebot-spacing * 3);
+        }
+
+        thead {
+            display: none !important;
+        }
+    }
+
+    #CybotCookiebotDialogDetailBodyContentCookieContainer
+        .CybotCookiebotDialogDetailBodyContentCookieTypeTable
+        td,
+    .CookieDeclarationTableCell {
+        padding: 0 !important;
+        padding-left: $cookiebot-column-headings-mobile-width !important;
+        position: relative !important;
+        max-width: none !important;
+    }
+    .CybotCookiebotDialogDetailBodyContentCookieTypeTable td:first-of-type,
+    .CybotCookiebotDialogDetailBodyContentCookieTypeTable td:last-of-type,
+    .CookieDeclarationTableCell:first-of-type,
+    .CookieDeclarationTableCell:last-of-type {
+        border: 0 !important;
+    }
+
+    .CybotCookiebotDialogDetailBodyContentCookieTypeTable td::before,
+    .CookieDeclarationTableCell::before {
+        color: $cookiebot-title-font-color !important;
+        left: 0;
+        font-family: $cookiebot-title-font-family;
+        margin-right: $cookiebot-spacing;
+        position: absolute;
+    }
+
+    @each $heading in $cookiebot-column-headings {
+        $i: index($cookiebot-column-headings, $heading);
+
+        .CybotCookiebotDialogDetailBodyContentCookieTypeTable td:nth-child(#{$i})::before,
+        .CookieDeclarationTableCell:nth-child(#{$i})::before {
+            content: '#{$heading}';
+        }
+    }
+}

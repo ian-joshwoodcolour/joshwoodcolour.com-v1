@@ -1,0 +1,169 @@
+<div id="experts-content">
+    {%- for block in section.blocks -%}
+        {%- assign profile_title = block.settings.name | append: ' - ' | append: block.settings.role -%}
+        {%- if page.title == profile_title -%}
+            {%- assign back_button_label = 'All ' | append: block.settings.role_group -%}
+            {%- assign group_handle = block.settings.role_group | handle -%}
+            {%- assign back_button_url = '/pages/the-experts#' | append: group_handle -%}
+            {% include 'back-button' %}
+
+            {%- if block.settings.active == true -%}
+                <section class="o-wrapper o-section" itemscope itemprop="Person" itemtype="http://schema.org/Person">
+                    <div class="o-layout o-layout--large u-stack-layout@mobile">
+                        <div class="o-layout__item u-5/12@mobile">
+                            <div class="c-card c-card--default u-ml u-ml0@mobile">
+                                <div class="c-card__image-wrapper">
+                                    <div class="c-card__title c-card__title--right u-parallax" data-rellax-speed="-1">
+                                        <h2 class="u-heading" itemprop="name">{{ block.settings.name }}</h2>
+                                        <span itemprop="jobTitle">{{ block.settings.role }}</span>
+                                    </div>
+
+                                    <div style="background-image: url({{ block.settings.photo | img_url: '660x860' }}); background-position: top center;" class="c-card__image u-ml u-ml0@mobile"></div>
+
+                                    <div class="u-hide">
+                                        <span itemprop="worksFor" itemtype="http://schema.org/Organization">
+                                            Josh Wood Colour
+                                        </span>
+                                        <span itemprop="image">https://{{ block.settings.photo | img_url: '660x860' }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><div class="o-layout__item u-1/12@mobile">
+                        </div><div class="o-layout__item u-6/12@mobile">
+                            <div class="u-10/12@mobile u-mt+@mobile">
+                                <p>{{ block.settings.biography }}</p>
+                            </div>
+
+                            {% if block.settings.signature_style != blank %}
+                                <div class="u-mt+ u-mt++@tablet">
+                                    <h3 class="u-heading u-h4 u-mb">
+                                        Signature: {{ block.settings.signature_style }}
+                                    </h3>
+
+                                    {% if block.settings.signature_style_photo_1 != blank %}
+                                        <div class="u-7/12 js-overlapped-images">
+                                            <div class="c-card c-card--default">
+                                                <div class="c-card__image-wrapper u-parallax" data-rellax-percentage="0.5" data-rellax-speed="0.5">
+                                                    <div style="background-image: url({{ block.settings.signature_style_photo_1 | img_url: '660x860' }})" class="c-card__image"></div>
+                                                </div>
+                                            </div>
+
+                                            {% if block.settings.signature_style_photo_2 != blank %}
+                                                <div class="c-card c-card--default c-card--overlap-2">
+                                                    <div class="c-card__image-wrapper u-parallax" data-rellax-percentage="0.5" data-rellax-speed="1">
+                                                        <div style="background-image: url({{ block.settings.signature_style_photo_2 | img_url: '660x860' }})" class="c-card__image"></div>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </section>
+            {%- else -%}
+                <section class="o-section o-wrapper u-pt0">
+                    <p class="u-text-center">Sorry, this profile is currently unavailable.</p>
+                </section>
+            {%- endif -%}
+            {%- break -%}
+        {%- endif -%}
+    {%- endfor -%}
+</div>
+
+
+<script>
+window.globalData = {
+    view: '{{ template.suffix }}',
+    content: {
+        experts: [{%- for block in section.blocks -%}{active: {{ block.settings.active }}, name: '{{ block.settings.name }}', slug: '{{ block.settings.name | handle }}', role: '{{ block.settings.role }}', category: '{{ block.settings.role_group }}', categorySlug: '{{ block.settings.role_group | handle }}', photo: '{{ block.settings.photo | img_url: '660x860' }}', profileLink: '{{ block.settings.profile_link }}'},{%- endfor -%}],
+        filters: [{%- for block in section.blocks -%}{name: '{{ block.settings.role_group }}',slug: '{{ block.settings.role_group | handle }}'},{%- endfor -%}]
+    }
+};
+</script>
+
+
+{% schema %}
+{
+    "name": "Experts list",
+    "blocks": [
+        {
+            "name": "Expert",
+            "type": "object",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "photo",
+                    "label": "Photo"
+                },
+                {
+                    "type": "text",
+                    "id": "name",
+                    "label": "Name"
+                },
+                {
+                    "type": "text",
+                    "id": "role",
+                    "label": "Role"
+                },
+                {
+                    "type": "text",
+                    "id": "role_group",
+                    "label": "Role Group"
+                },
+                {
+                    "type": "textarea",
+                    "id": "biography",
+                    "label": "Biography"
+                },
+                {
+                    "type": "url",
+                    "id": "instagram_handle",
+                    "label": "Instagram Handle"
+                },
+                {
+                    "type": "url",
+                    "id": "instagram_url",
+                    "label": "Instagram URL"
+                },
+                {
+                    "type": "text",
+                    "id": "signature_style",
+                    "label": "Signature Style"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "signature_style_photo_1",
+                    "label": "Signature Style Photo #1"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "signature_style_photo_2",
+                    "label": "Signature Style Photo #2"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "signature_style_photo_3",
+                    "label": "Signature Style Photo #3"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "signature_style_photo_4",
+                    "label": "Signature Style Photo #4"
+                },
+                {
+                    "type": "url",
+                    "id": "profile_link",
+                    "label": "Profile link"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "active",
+                    "label": "Active"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

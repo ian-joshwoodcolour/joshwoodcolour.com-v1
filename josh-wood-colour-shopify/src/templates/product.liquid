@@ -1,0 +1,99 @@
+{%- for collection in product.collections -%}
+  {%- if collection.handle == 'permanent-colour' -%}
+    {%- assign IS_PERMANENT_COLLECTION = true -%}
+  {%- elsif collection.handle == 'permanent-colour-and-shade-shot-plus' -%}
+    {%- assign IS_SHADE_SHOT_PLUS_COLLECTION = true -%}
+  {%- elsif collection.handle == 'gloss' -%}
+    {%- assign IS_GLOSS_COLLECTION = true -%}
+  {%- elsif collection.handle == 'care-range' -%}
+    {%- assign IS_CARE_COLLECTION = true -%}
+  {%- endif -%}
+
+{%- endfor -%}
+
+{% section 'product-promo-banner' %}
+
+<section class="o-section o-wrapper u-pv">
+  {% include 'breadcrumbs' %}
+</section>
+
+<section class="o-section o-wrapper u-pv+">
+  <form action="/cart/add" class="c-product c-product--{{ product.type | handle }} u-m0" enctype="multipart/form-data" itemscope itemtype="http://schema.org/Product" method="post">
+    <div class="o-layout u-stack-layout@mobile u-flex@mobile u-relative c-product-hero-section">
+      <div class="o-layout__item u-6/12@mobile u-7/12@desktop u-relative">
+        <div class="u-mb u-hide@mobile">
+          {% include 'product-title' %}
+          {% include 'product-price' %}
+        </div>
+        <div class="c-product__image">
+          {% section 'product-gallery' %}
+        </div>
+        <meta content="https:{{ product_image | img_url: '1000x' }}" itemprop="image">
+      </div>
+      <div class="o-layout__item u-6/12@mobile u-5/12@desktop">
+        <div class="u-pl@mobile u-pl+@mobile">
+          {% section 'product' %}
+          {%- if IS_PERMANENT_COLLECTION -%}
+            {% section 'permanent-shade-comparison' %}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
+
+{% section 'product-information' %}
+
+<section class="o-section o-wrapper u-pt">
+  {% section 'product-video' %}
+</section>
+
+{%- if product.type == 'Shade Shot' -%}
+  <section class="o-section o-wrapper">
+    <div class="o-section o-wrapper">
+      <div class="o-layout u-stack-layout@mobile u-flex@mobile js-product-video">
+        <div class="o-layout__item u-6/12@mobile">
+          <div class="c-responsive-video js-product-video-code">
+            <iframe allowfullscreen="" frameborder="0" height="480" mozallowfullscreen="" src="https://player.vimeo.com/video/343410755" webkitallowfullscreen="" width="640"></iframe>
+          </div>
+        </div>
+        <div class="o-layout__item u-1/12@mobile"></div>
+        <div class="o-layout__item u-5/12@mobile u-flex u-direction-column u-justify-center">
+          <h3 class="u-heading u-mb js-product-video-title">What’s the goss on gloss?</h3>
+          <p class="js-product-video-text">Shade Shot Gloss is a semi permanent colour AND a treatment, in one tube.  It colours as it conditions, everyone can use it, and it’s super simple to apply! Watch Josh cover the basics on our brand new treatment colour.</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+  <section class="o-section o-wrapper">
+    {% section 'everything-mask-recommendation' %}
+  </section>
+{%- endif -%}
+
+<section class="o-section o-wrapper u-pt+ u-pb">
+  {% section 'product-featured-quotes' %}
+</section>
+
+<section class="o-section o-wrapper">
+  {% section 'product-instructions' %}
+</section>
+
+{% section 'consultation-tool-teaser' %}
+
+{% section 'product-recommendations' %}
+
+<div class="c-modal c-modal--promo c-modal--video js-modal u-hide" data-modal="product-gallery-video">
+  {%- assign modal_name = 'product-gallery-video' -%}
+  {% include 'modal-close-button' %}
+
+  <div class="c-modal__wrapper js-modal-wrapper"></div>
+</div>
+
+<script>
+window.globalData.product = {{ product | json }};
+window.globalData.product.description = "{{ product.description | strip_html | newlines_to_br | strip_newlines }}";
+window.globalData.productTrackView = true;
+</script>

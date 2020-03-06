@@ -1,0 +1,36 @@
+$font-families: (
+    'Brown-Light': '../fonts/lineto-brown-light',
+    'Brown-Regular': '../fonts/lineto-brown-regular',
+    'Brown-Bold': '../fonts/lineto-brown-bold'
+);
+
+@each $font-family-name, $font-family-filename in $font-families {
+    @font-face {
+        font-family: $font-family-name;
+        src: url('../fonts/#{$font-family-filename}.woff2') format('woff2'),
+             url('../fonts/#{$font-family-filename}.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+}
+
+@font-face {
+    font-family: Brown;
+    src: url('../fonts/lineto-brown-light.woff');
+    src: url('../fonts/lineto-brown-light.woff2') format('woff2');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Brown;
+    src: url('../fonts/lineto-brown-regular.woff');
+    src: url('../fonts/lineto-brown-regular.woff2') format('woff2');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Brown;
+    src: url('../fonts/lineto-brown-bold.woff');
+    src: url('../fonts/lineto-brown-bold.woff2') format('woff2');
+    font-weight: 700;
+}

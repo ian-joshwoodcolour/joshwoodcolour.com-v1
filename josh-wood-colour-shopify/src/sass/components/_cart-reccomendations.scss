@@ -1,0 +1,46 @@
+.esc-cc__modern-container__sub-heading {
+    margin-top: 12px
+}
+
+
+
+.esc-cc__modern-container__products-container {
+    justify-content: end;
+    margin-top: 12px;
+
+    .esc-cc__modern-container__product {
+        flex-basis: 25% !important; // Needed to override any setting modifiers triggered by changing the size option in the app
+        @include mq ($until: mobile) {
+            flex-basis: 100% !important;
+        }
+
+        > a {
+                display: flex;
+                flex-direction: column;
+        }
+
+        .esc-cc__modern-container__product-title {
+            margin: 1rem 0 .5rem;
+            line-height: 1rem;
+            height: inherit;
+        }
+    
+        .esc-cc__modern-container__product-price {
+            position: relative;
+            order: 1;
+            background: transparent;
+            padding: inherit;
+            text-align: center;
+            color: inherit;
+            margin-bottom: 5px;
+        }
+
+        .esc-cc__modern-container__add-to-cart{
+        @extend .c-button;
+        @extend .c-button--black; 
+            padding: 4px;
+        }
+}
+    
+    
+} 

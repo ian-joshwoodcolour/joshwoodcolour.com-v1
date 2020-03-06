@@ -1,0 +1,11 @@
+{%- if IS_SHADE_SHOT_PLUS_COLLECTION -%}
+    {%- assign price = product.price | plus: associated_products[0].price | money_without_trailing_zeros | replace: '£', '' -%}
+{%- else -%}
+    {%- assign price = product.price | money_without_trailing_zeros | replace: '£', '' -%}
+{%- endif -%}
+<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+    <div class="u-h5 u-weight-bold u-mt-- js-price">
+        <span itemprop="priceCurrency" content="GBP">£</span><span itemprop="price" content="{{ product.price | divided_by: 100.00 }}">{{ price }}</span>
+        <link itemprop="availability" href="http://schema.org/InStock">
+    </div>
+</div>

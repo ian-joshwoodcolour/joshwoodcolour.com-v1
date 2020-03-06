@@ -1,0 +1,187 @@
+/**
+ * 1. Never allow buttons to be full-width in a flex layout
+ * 2. Force all button-styled elements to appear clickable.
+ * 3. Allow us to style box model properties.
+ * 4. Make buttons inherit font styles (often necessary when styling `input`s as
+ *    buttons).
+ * 5. Reset/normalize some styles.
+ * 6. Line different sized buttons up a little nicer.
+ * 7. Regardless of height align text in the center
+ */
+.c-button {
+    @include rem(padding, $global-spacing-small $global-spacing);
+    align-self: flex-start;
+    border: 1px solid;
+    border-radius: $global-radius;
+    cursor: pointer; /* [2] */
+    display: inline-block; /* [3] */
+    font: inherit; /* [4] */
+    font-family: $global-font-family-bold;
+    outline: none;
+    text-align: center; /* [6] */
+    transition: $global-transition;
+    vertical-align: middle; /* [7] */
+}
+
+@include mq ($until: mobile) {
+    .c-button:not(.c-button--no-block) {
+        display: block;
+        width: 100%;
+    }
+}
+
+/* Themes
+   ====================================== */
+
+/**
+ * Theme is defined by background colour, text colour, and optional ghost themes
+ */
+$button-themes: (
+    'black': ($color-black, $color-white, true),
+    'white': ($color-white, $color-black, true),
+    'grey-light': ($color-grey-light, $color-black, true)
+);
+
+@each $button-theme-name, $button-theme-colors in $button-themes {
+    .c-button--#{$button-theme-name} {
+        background-color: nth($button-theme-colors, 1);
+        border: none;
+        color: nth($button-theme-colors, 2);
+        position: relative;
+        &.c-button--ghost-hover{
+             border: 1px solid nth($button-theme-colors, 1);
+         }
+    }
+    .c-button--#{$button-theme-name}:hover,
+    .c-button--#{$button-theme-name}:focus {
+        background-color: lighten(nth($button-theme-colors, 1), 25%);
+    }
+      .c-button--#{$button-theme-name}:hover,
+    .c-button--#{$button-theme-name}:focus {
+        &.c-button--ghost-hover{
+             background-color: transparent;
+             color: nth($button-theme-colors, 1);
+         }
+    }
+
+    .c-button__text {
+        position: relative;
+        z-index: 1;
+    }
+
+    @if nth($button-theme-colors, 3) == true {
+        .c-button--#{$button-theme-name}.c-button--ghost {
+            background-color: transparent;
+            border: 1px solid nth($button-theme-colors, 1);
+            color: nth($button-theme-colors, 1);
+
+            &:hover,
+            &:focus {
+                background-color: nth($button-theme-colors, 1);
+                color: nth($button-theme-colors, 2);
+            }
+        }
+    }
+}
+
+/* Variants
+   ====================================== */
+
+.c-button--round {
+    @include rem(border-radius, 100px);
+}
+
+.c-button--round-top {
+    @include rem(border-radius, 10px);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.c-button--small {
+    padding: 10px $global-spacing;
+}
+
+.c-button--big {
+    min-width: 247px;
+}
+
+.c-button--smaller {
+    font-size: 12px;
+    min-width: 120px;
+    padding: 10px $global-spacing;
+}
+
+.c-button--thin {
+    @include rem(padding, 2px 14px);
+}
+
+.c-button--thick {
+    @include rem(padding, 7px 10px);
+}
+
+.c-button--block {
+    display: block;
+}
+
+.c-button--wide {
+    @include rem(padding-left, $global-spacing-large);
+    @include rem(padding-right, $global-spacing-large);
+}
+
+.c-button__icon {
+    margin-left: $global-spacing-small;
+    transition: transform $global-transition-speed $global-transition-easing;
+    will-change: transform;
+    vertical-align: middle;
+}
+.c-button:hover .c-button__icon,
+.c-button:focus .c-button__icon {
+    // transform: translateX(#{$global-spacing-tiny});
+}
+
+/**
+ * Selectable/selected are used for active/toggle states
+ */
+.c-button--selectable {
+    border-color: lighten($color-black, 70%);
+}
+.c-button--selectable:hover,
+.c-button--selectable:active {
+    border-color: $color-black;
+}
+
+.c-button--selected {
+    background-color: darken($color-white, 3%);
+    pointer-events: none;
+}
+
+.c-button--cart-item {
+    @include inuit-font-size(12px);
+    line-height: 1.8;
+    min-height: 24px;
+    padding-bottom: $global-spacing-tiny;
+    padding-left: $global-spacing-small;
+    padding-right: $global-spacing-small;
+    padding-top: $global-spacing-tiny;
+    width: 100%;
+}
+
+@include mq ($from: tabletSmall) {
+    .c-button--cart-item {
+        padding-left: $global-spacing;
+        padding-right: $global-spacing;
+        width: auto;
+    }
+}
+
+.c-button--danger:hover,
+.c-button--danger:active {
+    background-color: $color-coral !important;
+    border-color: $color-coral !important;
+    color: $color-white !important;
+}
+
+.c-button--add {
+    min-width: 130px;
+}
+

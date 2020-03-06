@@ -1,0 +1,34 @@
+<ul class="o-ui-list u-mt u-mt+@mobile">
+    {%- for block in section.blocks -%}
+        <li class="o-ui-list__item u-ph- u-ph@mobile">
+            {%- assign accordion_id = 'd-and-r-' | append: forloop.index0 -%}
+            {%- assign accordion_title = block.settings.title -%}
+            {%- assign accordion_content = block.settings.content -%}
+            {% include 'accordion' %}
+        </li>
+    {%- endfor -%}
+</ul>
+
+{% schema %}
+{
+    "name": "Delivery & Returns",
+    "blocks": [
+        {
+            "name": "Delivery & Rtrns content",
+            "type": "object",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "textarea",
+                    "id": "content",
+                    "label": "Content"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

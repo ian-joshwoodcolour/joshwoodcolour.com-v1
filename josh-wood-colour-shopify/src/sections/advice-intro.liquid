@@ -1,0 +1,34 @@
+<div class="o-layout u-stack-layout@mobile">
+    <div class="o-layout__item u-6/12@mobile">
+            <h1 class="u-h2 u-heading">{{ section.blocks[0].settings.title }}</h1>
+        </div><div class="o-layout__item u-1/12@mobile">
+        </div><div class="o-layout__item u-5/12@mobile">
+            {{ section.blocks[0].settings.text }}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Advice Intro",
+    "blocks": [
+        {
+            "name": "Intro content",
+            "type": "object",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "textarea",
+                    "id": "text",
+                    "label": "Text"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

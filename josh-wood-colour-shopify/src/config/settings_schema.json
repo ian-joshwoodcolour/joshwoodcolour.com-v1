@@ -1,0 +1,367 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Josh Wood Colour",
+    "theme_version": "3.0.0",
+    "theme_author": "Maido",
+    "theme_documentation_url": "https://www.maido.com",
+    "theme_support_url": "https://www.maido.com"
+  },
+  {
+    "name": "Third party configuration",
+    "settings": [
+      {
+        "type": "header",
+        "content": "IDs and keys required for third party scripts and libraries."
+      },
+      {
+        "type": "text",
+        "id": "cookiebot_id",
+        "label": "ID used for enabling Cookiebot consent tracking"
+      },
+      {
+        "type": "text",
+        "id": "outbrain_id",
+        "label": "ID used for enabling Outbrain tracking"
+      },
+      {
+        "type": "text",
+        "id": "hotjar_id",
+        "label": "ID used for enabling Hotjar tracking and recording"
+      }
+    ]
+  },
+  {
+    "name": "Contact information",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General contact info"
+      },
+      {
+        "type": "text",
+        "id": "contact_email",
+        "label": "Email",
+        "info": "Used when adding email contact information on the site."
+      },
+      {
+        "type": "text",
+        "id": "contact_phone",
+        "label": "Phone",
+        "info": "Used when adding phone contact information on the site."
+      },
+      {
+        "type": "text",
+        "id": "address_street_name",
+        "label": "Address Street Name",
+        "info": "Used when displaying the office location"
+      },
+      {
+        "type": "text",
+        "id": "address_region",
+        "label": "Address Region",
+        "info": "Used when displaying the office location"
+      },
+      {
+        "type": "text",
+        "id": "address_postcode",
+        "label": "Address Postcode",
+        "info": "Used when displaying the office location"
+      }
+    ]
+  },
+  {
+    "name": "Contact form",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Content used for the contact form"
+      },
+      {
+        "type": "text",
+        "id": "contact_form_title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "contact_form_text",
+        "label": "Intro text"
+      },
+      {
+        "type": "text",
+        "id": "contact_form_reason_label",
+        "label": "Reason label",
+        "info": "The label displayed before the 'reason for contact' field"
+      },
+      {
+        "type": "textarea",
+        "id": "contact_form_reasons",
+        "label": "Reasons",
+        "info": "These need to be the options of the 'What do you need help with?' custom field in Zendesk. Use the format of 'tag - title', e.g. 'order - I’ve got a question about my order'. The tag is used by Zendesk, the title is used for the dropdown field. Each tag/title should go on a new line."
+      },
+      {
+        "type": "text",
+        "id": "contact_form_message_placeholder",
+        "label": "Message placeholder",
+        "info": "The placeholder message shown in the message field"
+      },
+      {
+        "type": "text",
+        "id": "contact_form_success_message",
+        "label": "Success message",
+        "info": "The message shown after the form has been submitted"
+      }
+    ]
+  },
+  {
+    "name": "Form consent",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Content used for user consent on forms"
+      },
+      {
+        "type": "text",
+        "id": "form_consent_checkbox_label",
+        "label": "Consent text",
+        "info": "The text shown on T&Cs checkboxes, shown on all forms on the site",
+        "default": "I consent to Josh Wood Colour storing and using my data for the requirements set out on the <a href=\"/pages/privacy-policy\">privacy policy</a>"
+      }
+    ]
+  },
+  {
+    "name": "Shop settings",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Shop listing page"
+      },
+      {
+        "type": "url",
+        "id": "default_permanent_product",
+        "label": "Default Permanent Product",
+        "info": "Used to define the default Permanent product shown when a user clicks through from the shop listing page."
+      },
+      {
+        "type": "url",
+        "id": "default_permanent_and_ssp_product",
+        "label": "Default Permanent and Shade Shot Plus Product",
+        "info": "Used to define the default Permanent and Shade Shot Plus product shown when a user clicks through from the shop listing page."
+      },
+      {
+        "type": "text",
+        "id": "order_fulfilled_custom_label",
+        "label": "Custom value for `fulfilled` orders",
+        "info": "A new value used for displayed the status of an order, the default is `Fulfilled`"
+      },
+      {
+        "type": "text",
+        "id": "order_unfulfilled_custom_label",
+        "label": "Custom value for `unfulfilled` orders",
+        "info": "A new value used for displayed the status of an order, the default is `Unfulfilled`"
+      }
+    ]
+  },
+  {
+    "name": "MailChimp Newsletter",
+    "settings": [
+      {
+        "type": "header",
+        "content": "The site-wide settings used for MailChimp newsletter signup forms"
+      },
+      {
+        "type": "url",
+        "id": "mailchimp_newsletter_post_url",
+        "label": "POST URL"
+      },
+      {
+        "type": "text",
+        "id": "mailchimp_newsletter_key",
+        "label": "Form key"
+      },
+      {
+        "type": "text",
+        "id": "mailchimp_newsletter_email_field_name",
+        "label": "Email form field name"
+      },
+      {
+        "type": "text",
+        "id": "mailchimp_newsletter_consent_field_name",
+        "label": "Consent checkbox field name"
+      }
+    ]
+  },
+  {
+    "name": "Promo banner",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Visible on shop, product and cart pages"
+      },
+      {
+        "type": "text",
+        "id": "promo_banner_text",
+        "label": "Text"
+      },
+      {
+        "type": "url",
+        "id": "promo_banner_url",
+        "label": "URL"
+      }
+    ]
+  },
+  {
+    "name": "Promo popup",
+    "settings": [
+      {
+        "type": "header",
+        "content": "A popup window that shows the user information for a promotion."
+      },
+      {
+        "type": "text",
+        "id": "promo_popup_title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "promo_popup_text",
+        "label": "Text"
+      },
+      {
+        "type": "text",
+        "id": "promo_popup_footnote",
+        "label": "Footnote",
+        "info": "Can be used for terms and conditions or other smallprint"
+      },
+      {
+        "type": "image_picker",
+        "id": "promo_popup_image",
+        "label": "Image"
+      },
+      {
+        "type": "url",
+        "id": "promo_popup_primary_cta_url",
+        "label": "Primary CTA URL"
+      },
+      {
+        "type": "text",
+        "id": "promo_popup_primary_cta_label",
+        "label": "Primary CTA Label"
+      },
+      {
+        "type": "url",
+        "id": "promo_popup_secondary_cta_url",
+        "label": "Secondary CTA URL"
+      },
+      {
+        "type": "text",
+        "id": "promo_popup_secondary_cta_label",
+        "label": "Secondary CTA Label"
+      },
+      {
+        "type": "checkbox",
+        "id": "promo_popup_email_capture_active",
+        "label": "Email Capture Form?",
+        "default": false,
+        "info": "If enabled, this will show a form instead of the CTA links"
+      },
+      {
+        "type": "text",
+        "id": "promo_popup_email_capture_submit_label",
+        "label": "Email Capture Submit CTA Label",
+        "default": "Submit"
+      },
+      {
+        "type": "text",
+        "id": "promo_popup_email_capture_terms_label",
+        "label": "Email Capture Terms & Conditions label"
+      },
+      {
+        "type": "text",
+        "id": "promo_popup_email_capture_success_text",
+        "label": "Email Capture Success Message"
+      },
+      {
+        "type": "text",
+        "id": "promo_popup_email_capture_success_discount",
+        "label": "Email Capture Discount Code",
+        "info": "Optional"
+      },
+      {
+        "type": "text",
+        "id": "promo_popup_modal_timeout",
+        "label": "Popup delay (seconds)",
+        "default": "5"
+      },
+      {
+        "type": "select",
+        "id": "promo_popup_cookie_duration",
+        "label": "Cookie duration",
+        "info": "When the user closes the popup, how long until they see it again?",
+        "default": "3650",
+        "options": [
+          {
+            "value": "1",
+            "label": "1 day"
+          },
+          {
+            "value": "7",
+            "label": "1 week"
+          },
+          {
+            "value": "31",
+            "label": "1 month"
+          },
+          {
+            "value": "365",
+            "label": "1 year"
+          },
+          {
+            "value": "3650",
+            "label": "Indefinite"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "promo_popup_active",
+        "label": "Active",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "User accounts",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Content for user accounts"
+      },
+      {
+        "type": "text",
+        "id": "user_account_help_title",
+        "label": "Help title",
+        "default": "Help"
+      },
+      {
+        "type": "text",
+        "id": "user_account_help_text",
+        "label": "Help text",
+        "info": "Help text for the user if they need to contact a shop admin"
+      },
+      {
+        "type": "text",
+        "id": "user_account_help_text_cta_label",
+        "label": "Help text CTA Label",
+        "default": "Contact us"
+      },
+      {
+        "type": "text",
+        "id": "user_account_no_orders_message",
+        "label": "No orders message",
+        "info": "The message shown to users in the 'Order History' section if they have no yet made an order",
+        "default": "You haven't made any orders yet."
+      }
+    ]
+  }
+]

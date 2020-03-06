@@ -1,0 +1,198 @@
+{% include 'product-collection-url' %}
+
+{%- for block in section.blocks -%}
+    {%- if product.url contains block.settings.product_url and product_collection_url contains block.settings.collection_url -%}
+        <div class="o-layout u-stack-layout@mobile u-flex@mobile js-instructions-1" style="{% unless block.settings.photo_1 != blank or block.settings.title_1 != blank or block.settings.text_1 != blank %}display: none !important;{% endunless %}">
+            <div class="o-layout__item u-6/12@mobile">
+                {%- assign card_size = 'square' -%}
+                {%- assign card_row = false -%}
+                {%- assign has_frame = false -%}
+                {%- assign title = '' -%}
+                {%- assign classes = 'js-instructions-1-photo' -%}
+                {%- assign photo = block.settings.photo_1 | img_url: '800x800' -%}
+                {%- assign photo_lazyload = true %}
+                {% include 'card' %}
+            </div><div class="o-layout__item u-1/12 u-mb">
+            </div><div class="o-layout__item u-5/12@mobile u-flex u-direction-column u-justify-center">
+                <h2 class="u-heading u-h3 u-mb js-instructions-1-title">{{ block.settings.title_1 }}</h2>
+
+                <p class="js-instructions-1-text">{{ block.settings.text_1 }}</p>
+
+                <a href="{{ block.settings.cta_url_1 }}" class="c-button c-button--black u-mt js-instructions-1-cta-link" style="display: {% if block.settings.cta_url_1 and block.settings.cta_label_1 %}block{% else %}none{% endif %};">
+                    <span class="js-instructions-1-cta-label">{{ block.settings.cta_label_1 }}</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="o-layout u-stack-layout@mobile u-flex@mobile u-mt+ u-mt++@mobile js-instructions-2" style="{% unless block.settings.photo_2 != blank or block.settings.title_2 != blank or block.settings.text_2 != blank %}display: none !important;{% endunless %}">
+            <div class="o-layout__item u-5/12@mobile u-flex u-direction-column u-justify-center">
+                <h2 class="u-heading u-h3 u-mb js-instructions-2-title">{{ block.settings.title_2 }}</h2>
+
+                <p class="js-instructions-2-text">{{ block.settings.text_2 }}</p>
+
+                <a href="{{ block.settings.cta_url_2 }}" class="c-button c-button--black u-mt js-instructions-2-cta-link" style="display: {% if block.settings.cta_url_2 and block.settings.cta_label_2 %}block{% else %}none{% endif %};">
+                    <span class="js-instructions-2-cta-label">{{ block.settings.cta_label_2 }}</span>
+                </a>
+            </div><div class="o-layout__item u-1/12 u-mb">
+            </div><div class="o-layout__item u-6/12@mobile">
+                {%- assign card_size = 'square' -%}
+                {%- assign card_row = false -%}
+                {%- assign frame_classes = 'left-tall' -%}
+                {%- assign has_frame = true -%}
+                {%- assign title = '' -%}
+                {%- assign classes = 'js-instructions-2-photo' -%}
+                {%- assign photo = block.settings.photo_2 | img_url: '800x800' -%}
+                {%- assign photo_lazyload = true %}
+                {% include 'card' %}
+            </div>
+        </div>
+
+        <div class="o-layout u-stack-layout@mobile u-flex@mobile u-mt+ u-mt++@mobile js-instructions-3" style="{% unless block.settings.photo_3 != blank or block.settings.title_3 != blank or block.settings.text_3 != blank %}display: none !important;{% endunless %}">
+            <div class="o-layout__item u-6/12@mobile">
+                {%- assign card_size = 'square' -%}
+                {%- assign has_frame = false -%}
+                {%- assign has_frame = false -%}
+                {%- assign title = '' -%}
+                {%- assign classes = 'js-instructions-3-photo' -%}
+                {%- assign photo = block.settings.photo_3 | img_url: '800x800' -%}
+                {%- assign photo_lazyload = true %}
+                {% include 'card' %}
+            </div><div class="o-layout__item u-1/12 u-mb">
+            </div><div class="o-layout__item u-5/12@mobile u-flex u-direction-column u-justify-center">
+                <h2 class="u-heading u-h3 u-mb js-instructions-3-title">{{ block.settings.title_3 }}</h2>
+
+                <p class="js-instructions-3-text">{{ block.settings.text_3 }}</p>
+
+                <a href="{{ block.settings.cta_url_3 }}" class="c-button c-button--black u-mt js-instructions-3-cta-link" style="display: {% if block.settings.cta_url_3 and block.settings.cta_label_3 %}block{% else %}none{% endif %};">
+                    <span class="js-instructions-3-cta-label">{{ block.settings.cta_label_3 }}</span>
+                </a>
+            </div>
+        </div>
+    {%- endif -%}
+{%- endfor -%}
+
+<script>
+window.globalData.productInstructions = [
+    {%- for block in section.blocks -%}
+        {%- if product_collection_url contains block.settings.collection_url -%}
+            {
+                productURL: "{{ all_products[block.settings.product_url].url }}",
+                ctaLabel1: "{{ block.settings.cta_label_1 }}",
+                ctaURL1: "{{ block.settings.cta_url_1 }}",
+                photo1: "{%- if block.settings.photo_1 != blank -%}{{ block.settings.photo_1 | img_url: '800x800' }}{%- endif -%}",
+                text1: "{{ block.settings.text_1 | newlines_to_br | strip_newlines }}",
+                title1: "{{ block.settings.title_1 }}",
+                ctaLabel2: "{{ block.settings.cta_label_2 }}",
+                ctaURL2: "{{ block.settings.cta_url_2 }}",
+                photo2: "{%- if block.settings.photo_2 != blank -%}{{ block.settings.photo_2 | img_url: '800x800' }}{%- endif -%}",
+                text2: "{{ block.settings.text_2 | newlines_to_br | strip_newlines }}",
+                title2: "{{ block.settings.title_2 }}",
+                ctaLabel3: "{{ block.settings.cta_label_3 }}",
+                ctaURL3: "{{ block.settings.cta_url_3 }}",
+                photo3: "{%- if block.settings.photo_3 != blank -%}{{ block.settings.photo_3 | img_url: '800x800' }}{%- endif -%}",
+                text3: "{{ block.settings.text_3 | newlines_to_br | strip_newlines }}",
+                title3: "{{ block.settings.title_3 }}"
+            },
+        {%- endif -%}
+    {%- endfor -%}
+];
+</script>
+
+{% schema %}
+{
+    "name": "Product instructions",
+    "blocks": [
+        {
+            "name": "Instructions content",
+            "type": "object",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "photo_1",
+                    "label": "Photo #1"
+                },
+                {
+                    "type": "text",
+                    "id": "title_1",
+                    "label": "Title #1"
+                },
+                {
+                    "type": "textarea",
+                    "id": "text_1",
+                    "label": "Text #1"
+                },
+                {
+                    "type": "url",
+                    "id": "cta_url_1",
+                    "label": "CTA URL #1"
+                },
+                {
+                    "type": "text",
+                    "id": "cta_label_1",
+                    "label": "CTA Label #1"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "photo_2",
+                    "label": "Photo #2"
+                },
+                {
+                    "type": "text",
+                    "id": "title_2",
+                    "label": "Title #2"
+                },
+                {
+                    "type": "textarea",
+                    "id": "text_2",
+                    "label": "Text #2"
+                },
+                {
+                    "type": "url",
+                    "id": "cta_url_2",
+                    "label": "CTA URL #2"
+                },
+                {
+                    "type": "text",
+                    "id": "cta_label_2",
+                    "label": "CTA Label #2"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "photo_3",
+                    "label": "Photo #3"
+                },
+                {
+                    "type": "text",
+                    "id": "title_3",
+                    "label": "Title #3"
+                },
+                {
+                    "type": "textarea",
+                    "id": "text_3",
+                    "label": "Text #3"
+                },
+                {
+                    "type": "url",
+                    "id": "cta_url_3",
+                    "label": "CTA URL #3"
+                },
+                {
+                    "type": "text",
+                    "id": "cta_label_3",
+                    "label": "CTA Label #3"
+                },
+                {
+                    "type": "product",
+                    "id": "product_url",
+                    "label": "Product"
+                },
+                {
+                    "type": "collection",
+                    "id": "collection_url",
+                    "label": "Collection"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

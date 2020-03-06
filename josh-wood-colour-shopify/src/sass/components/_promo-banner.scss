@@ -1,0 +1,38 @@
+$promo-banner-background-color: #f6f6f6;
+$promo-banner-background-color-salmon: #FDDBCF;
+$promo-banner-height: 40px;
+
+.c-promo-banner {
+    @include inuit-font-size(14px);
+    align-items: center;
+    background-color: $promo-banner-background-color;
+    display: flex;
+    height: $promo-banner-height;
+    margin-bottom: ($promo-banner-height * -1);
+    margin-top: $global-page-header-height--small;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    z-index: $global-highest-z-index;
+    &.salmon {
+        background-color: $promo-banner-background-color-salmon;
+    }
+}
+
+@include mq ($from: $global-page-header-breakpoint) {
+    .c-promo-banner {
+        margin-top: $global-page-header-height;
+        &.salmon {
+            margin-top: 0;
+        }
+    }
+}
+
+@include mq ($from: tablet) {
+    .c-promo-banner {
+        position: absolute;
+        &.salmon {
+            top: 0;
+        }
+    }
+}

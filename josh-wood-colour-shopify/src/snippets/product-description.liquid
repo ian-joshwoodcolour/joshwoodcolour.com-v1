@@ -1,0 +1,17 @@
+{%- assign description = product.description | strip_html -%}
+
+<div class="c-read-more" data-read-more="product-description">
+    <div class="js-read-more-teaser">
+        <p>
+            {{ description | truncate: 110, '...' }}
+            <button type="button" class="c-read-more__cta js-read-more-cta" data-action="more" data-target="product-description">Read more</button>
+        </p>
+    </div>
+    <div class="js-read-more u-mt0" style="height: 0; overflow: hidden;">
+        <p class="js-product-description">{{ description }}</p>
+
+        <ul class="o-base-list u-mt js-product-details"></ul>
+
+        <button type="button" class="c-read-more__cta js-read-more-cta u-m0 u-mt" data-action="less" data-target="product-description">Read less</button>
+    </div>
+</div>

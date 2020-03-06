@@ -1,0 +1,12 @@
+<blockquote class="c-quote u-10/12@mobile u-8/12@tablet u-m-auto js-quote {% unless disable_lazyload %}u-fade-intersected js-monitor{% endunless %}" style="display: {%- if text == '' -%}none{%- endif-%}">
+    {%- assign classes = 'c-svg--w12 u-mb' -%}
+    {% include 'quote-icon' %}
+
+    <p class="c-quote__body js-quote-text">{{ text }}</p>
+    
+    <footer class="c-quote__footer">
+        <strong class="js-quote-quotee">{{ quotee }}</strong>
+
+        <div class="c-quote__role js-quote-quotee-title" style="display: {%- if quotee_title == blank -%}none{%- endif-%}">{{ quotee_title }}</div>
+    </footer>
+</blockquote>

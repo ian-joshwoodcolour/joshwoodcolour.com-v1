@@ -1,0 +1,101 @@
+$featured-logos-max-number: 6;
+$featured-logos-max-number--tiny: 4;
+$featured-logos-max-width: 500px;
+$featured-logo-height: 60px;
+$featured-logo-width: 130px;
+$featured-logo-height--small: 40px;
+$featured-logo-width--small: 90px;
+$featured-logo-height--tiny: 25px;
+$featured-logo-width--tiny: 60px;
+
+/**
+ * 1. Align logos vertically center
+ * 2. Alibygn logos horizontally by using all available space
+ */
+.c-featured-logos__logos {
+    align-items: center; /* [1] */
+    display: flex;  
+    justify-content: space-between; /* [1] */
+}
+    .c-featured-logos__logo {
+        animation: logoFadeIn 1s;
+        animation-fill-mode: forwards;
+        max-height: $featured-logo-height--tiny;
+        max-width: $featured-logo-width--tiny;
+        opacity: 0;
+        overflow: hidden;
+        transform: translateY($global-spacing-tiny);
+        will-change: transform;
+    }
+    .c-featured-logos__logo + .c-featured-logos__logo {
+        margin-left: $global-spacing;
+    }
+
+
+@for $i from 1 through $featured-logos-max-number {
+    .c-featured-logos__logo:nth-child(#{$i}) {
+        animation-delay: #{($i * 0.125)}s;
+    }
+}
+
+@keyframes logoFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY($global-spacing-tiny);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@include mq ($until: mobileSmall) {
+    .c-featured-logos__logo:nth-child(n+#{($featured-logos-max-number--tiny + 1)}) {
+        display: none;
+    }
+}
+
+@include mq ($from: mobile) {
+    .c-featured-logos {
+        text-align: center;
+    }
+        .c-featured-logos__logos {
+            justify-content: center;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: none;
+        }
+        .c-featured-logos__logo {
+            max-height: $featured-logo-height--small;
+            max-width: $featured-logo-width--small;
+        }
+        .c-featured-logos__logo + .c-featured-logos__logo {
+            margin-left: $global-spacing-large;
+        }
+}
+
+@include mq ($from: tablet) {
+    .c-featured-logos__logo {
+        max-height: $featured-logo-height;
+        max-width: $featured-logo-width;
+    }
+}
+
+
+/**
+ * Style the logos when used as a banner that spans the full width of the page
+ */
+.c-featured-logos--banner {
+    @include rem(margin-bottom, $global-spacing);
+    @include rem(padding-bottom, $global-spacing-small);
+    @include rem(padding-top, $global-spacing-small);
+    border-bottom: 2px solid $color-grey-light;
+    border-top: 2px solid $color-grey-light;
+}
+
+@include mq ($from: mobile) {
+    .c-featured-logos--banner {
+        border-top: 0;
+    }
+}

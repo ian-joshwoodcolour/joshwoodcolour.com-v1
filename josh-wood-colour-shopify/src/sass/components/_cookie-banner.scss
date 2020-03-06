@@ -1,0 +1,52 @@
+$cookie-banner-close-button-size: $global-spacing;
+
+.c-cookie-banner {
+    @include inuit-font-size(14px, false);
+    @include rem('padding-bottom', $global-spacing-small);
+    @include rem('padding-top', $global-spacing-small);
+    background-color: $color-white;
+    bottom: 0;
+    box-shadow: 0 0 20px 1px rgba($color-black, .05);
+    left: 0;
+    line-height: 1.4;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    will-change: transform;
+    transform: translateY(80px);
+    z-index: $global-highest-z-index;
+}
+    .c-cookie-banner__close {
+        height: $cookie-banner-close-button-size;
+        padding: 0;
+        width: $cookie-banner-close-button-size;
+    }
+        /**
+         * 😱
+         */
+        .c-cookie-banner__close > .c-svg {
+            margin: -3px auto 0 !important;
+        }
+
+
+@include mq ($until: 320px) {
+    .c-cookie-banner {
+        text-align: left;
+    }
+        .c-cookie-banner {
+            > .o-wrapper {
+                padding-left: $global-spacing !important;
+                padding-right: $global-spacing !important;
+            }
+
+            a {
+                float: left;
+                width: calc(100% - 40px);
+            }
+
+            .c-button {
+                float: right;
+                margin-top: $global-spacing-tiny;
+            }
+        }
+}

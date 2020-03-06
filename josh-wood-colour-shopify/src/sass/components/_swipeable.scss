@@ -1,0 +1,61 @@
+$swipeable-depth-size: 60px;
+
+
+/**
+ * 1. Remove the spacing added by section wrapper, so when we swipe the items go past the edge
+ * 2. Accomodate for removing the wrapper spacing...
+ * 3. Swipe-scroll horizontally only
+ * 4. Don't wrap items onto multiple lines
+ * 5. Increase the width to accommodate the left margin and padding...
+ */
+.c-swipeable {
+    // animation: swipeEnter 2s;
+    margin-left: ($global-spacing-small * -1); /* [1] */
+    overflow-x: scroll; /* [3] */
+    -webkit-overflow-scrolling: touch;
+    padding-left: $global-spacing-small; /* [2] */
+    position: relative;
+    touch-action: manipulation;
+    white-space: nowrap; /* [4] */
+    width: calc(100% + #{($global-spacing-small * 2)}); /* [5] */
+    will-change: transform;
+}
+    .c-swipeable__depth {
+        background-image: none;
+        content: '';
+        height: 100%;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        transition: all ($global-transition-speed * 2) $global-transition-easing;
+        will-change: opacity;
+        width: $swipeable-depth-size;
+        visibility: hidden;
+    }
+    .c-swipeable__depth--left {
+        background-image: linear-gradient(to right, $color-white 5%, rgba($color-white, 0));
+        left: 0;
+        opacity: 1;
+        visibility: visible;
+    }
+    .c-swipeable__depth--right {
+        background-image: linear-gradient(to left, $color-white 5%, rgba($color-white, 0));
+        right: 0;
+        opacity: 1;
+        visibility: visible;
+    }
+
+
+@include mq ($from: mobile) {
+    .c-swipeable {
+        margin-left: ($global-spacing * -1);
+        padding-left: $global-spacing;
+        width: calc(100% + #{($global-spacing * 2)});
+    }
+}
+
+
+@keyframes swipeEnter {
+    0% {transform: translateX($global-spacing-huge);}
+    100% {transform: translateX(0);}
+}

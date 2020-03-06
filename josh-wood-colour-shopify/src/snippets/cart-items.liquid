@@ -1,0 +1,8 @@
+{%- assign collections = 'Permanent colour|Root concealers|Care range' | split: '|' -%}
+{%- assign permanent_collections = 'Permanent Colour|Permanent Colour and Shade Shot Plus' | split: '|' -%}
+{%- assign root_concealers_collections = 'Root Marker|Root Smudger|Blending Brush|Tinted Dry Shampoo' | split: '|' -%}
+{%- assign care_collections = 'Shampoo|Conditioner|Shade Shot|Everything Mask' | split: '|' -%}
+{%- for collection in collections -%}
+    {%- assign is_first_group = forloop.first -%}
+    {% include 'cart-collection-group' %}
+{%- endfor -%}

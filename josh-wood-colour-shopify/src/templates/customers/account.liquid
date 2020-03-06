@@ -1,0 +1,36 @@
+<section class="o-section o-wrapper">
+    <h1 class="u-heading u-h3 u-text-center u-mb+ u-mb++@tablet">Hello, <span class="u-case-capitalize">{{ customer.first_name }}</span></h1>
+
+    <div class="o-layout u-stack-layout@mobile">
+        <div class="o-layout__item u-7/12@mobile">
+            <h2 class="u-heading u-h4 u-mb">{{ 'customer.orders.title' | t }}</h2>
+
+            {%- if customer.orders.size > 0 -%}
+                <ul class="o-ui-list">
+                    {%- for order in customer.orders -%}
+                        <li class="o-ui-list__item">
+                            {% include 'order-teaser' %}
+                        </li>
+                    {%- endfor -%}
+                </ul>
+            {%- else -%}
+                <p>{{ settings.user_account_no_orders_message }}</p>
+            {%- endif -%}
+    
+            <h2 class="u-heading u-h4 u-mb u-mt+ u-mt++@mobile">{{ 'customer.addresses.title' | t }}</h2>
+            
+            {%- if customer.default_address -%}
+                <div class="u-label u-mt-">Default</div>
+
+                {%- assign address = customer.default_address -%}
+                {% include 'order-address' %}
+                <br>
+            {%- endif -%}
+
+            <a href="/account/addresses" class="c-button c-button--black u-mt">Manage addresses</a>
+        </div><div class="o-layout__item u-1/12@mobile">
+        </div><div class="o-layout__item u-4/12@mobile">
+            {% include 'user-account-help' %}
+        </div>
+    </div>
+</section>

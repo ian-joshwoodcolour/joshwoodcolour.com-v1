@@ -1,0 +1,14 @@
+/**
+ * Need to come back to this later...
+ */
+.c-modal--cart-summary {
+    .c-product__image--cart,
+    .c-product__image--cart img {
+        height: auto;
+        max-height: 110px;
+        width: 90px;
+    }
+        .c-product__image--cart img {
+            object-fit: contain;
+        }
+}

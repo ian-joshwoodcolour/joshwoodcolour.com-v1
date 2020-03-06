@@ -1,0 +1,58 @@
+{%- assign back_button_label = 'customer.account.title' | t -%}
+{%- assign back_button_url = '/account' -%}
+{% include 'back-button' %}
+
+<section class="o-section o-wrapper">
+    <h1 class="u-heading u-h3 u-text-center u-mb+ u-mb++@tablet">{{ 'customer.addresses.title' | t }}</h1>
+
+    <div class="o-layout u-stack-layout@mobile">
+        <div class="o-layout__item u-7/12@mobile">
+            <h2 class="u-heading u-h4 u-mb">All addresses</h2>
+
+            <ul class="o-ui-list u-pb u-border-bottom-grey-2">
+                {%- for address in customer.addresses -%}
+                    <li class="o-ui-list__item js-address-container" data-address-id="{{ address.id }}">
+                        {%- if address == customer.default_address -%}
+                          <strong class="u-label">{{ 'customer.addresses.default' | t }}</strong> <br>
+                        {%- endif -%}
+
+                        {% include 'order-address' %}
+
+                        <div class="u-mt">
+                            <button type="button" class="c-button c-button--grey-light c-button--ghost  c-button--cart-item u-color-black js-visibility-toggle" id="address-{{ address.id }}-toggle" aria-controls="address-{{ address.id }}" aria-expanded="false" role="tab">
+                                {{ 'customer.addresses.edit' | t }}
+                            </button>
+
+                            <button type="button" class="c-button c-button--grey-light c-button--ghost c-button--danger c-button--cart-item u-color-black u-mt- u-mt0@mobile u-ml-@mobile js-delete-address" data-address-id="{{ address.id }}" data-confirm-message="{{ 'customer.addresses.delete_confirm' | t }}">
+                                {{ 'customer.addresses.delete' | t }}
+                            </button>
+                        </div>
+
+                        <div class="u-mt u-p u-p+@mobile t-grey-lightest" id="address-{{ address.id }}" aria-labelledby="address-{{ address.id }}-toggle" aria-hidden="true" role="tabpanel" style="display: none;">
+                            {%- form 'customer_address', address -%}
+                                <h4 class="u-h5 u-spacing-0 u-mb u-heading">{{ 'customer.addresses.edit_address' | t }}</h4>
+
+                                {% include 'edit-address-form' %}
+                            {%- endform -%}
+                        </div>
+                    </li>
+                {%- endfor -%}
+            </ul>
+
+            <div class="u-mt">
+                <button class="c-button c-button--black js-visibility-toggle" id="address-{{ address.id }}-toggle" aria-controls="address-{{ address.id }}" aria-expanded="false" role="tab">Add address</button>
+                
+                <div class="u-mt u-p u-p+@mobile t-grey-lightest" id="address-{{ address.id }}" aria-labelledby="address-{{ address.id }}-toggle" aria-hidden="true" role="tabpanel" style="display: none;">
+                    {%- form 'customer_address', customer.new_address -%}
+                        <h4 class="u-h5 u-spacing-0 u-mb u-heading">{{ 'customer.addresses.add' | t }}</h4>
+
+                        {% include 'edit-address-form' %}
+                    {%- endform -%}
+                </div>
+            </div>
+        </div><div class="o-layout__item u-1/12@mobile">
+        </div><div class="o-layout__item u-4/12@mobile">
+            {% include 'user-account-help' %}
+        </div>
+    </div>
+</section>

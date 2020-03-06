@@ -1,0 +1,77 @@
+$hamburger-color: currentColor;
+$hamburger-width: 30px;
+$hamburger-line-width: 2px;
+$hamburger-height: 19px;
+
+/**
+ * ----- .c-hamburger__icon
+ * ----- .c-hamburger__icon::before
+ * ----- .c-hamburger__icon::after
+ *
+ * 1. Contain the icon elements
+ * 2. Hide the 'Menu' text
+ */
+.c-hamburger {
+    color: $hamburger-color;
+    cursor: pointer;
+    display: inline-block;
+    height: $hamburger-height; 
+    position: relative; /* [1] */
+    text-indent: -9999px; /* [2] */
+    width: $hamburger-width;
+}
+    .c-hamburger__icon,
+    .c-hamburger__icon::before,
+    .c-hamburger__icon::after {
+        background-color: $hamburger-color;
+        height: $hamburger-line-width;
+        left: 0;
+        position: absolute;
+        top: (($hamburger-height / 2) - ($hamburger-line-width / 2)) + 2px;
+        transition: all $global-transition-speed $global-transition-easing,
+                    color 0s;
+        will-change: transform;
+        width: $hamburger-width;
+    }
+    .c-hamburger__icon::before,
+    .c-hamburger__icon::after {
+        content: '';
+    }
+    .c-hamburger__icon::before {
+        top: ((($hamburger-height / 2) - ($hamburger-line-width / 2)) * -1);
+        transform-origin: 33% 100%;
+    }
+    .c-hamburger__icon::after {
+        top: (($hamburger-height / 2) - ($hamburger-line-width / 2));
+        transform-origin: 33% 0;
+    }
+
+
+/**
+ * Transition from a 3-level to a 2-level X
+ */
+.c-hamburger--active {
+    /**
+     * 1. Hide the first line
+     */
+    .c-hamburger__icon {
+        background-color: transparent; /* [1] */
+    }
+    /**
+     * 1. Give the other 2 lines colour again
+     */
+    .c-hamburger__icon::before,
+    .c-hamburger__icon::after {
+        background-color: $hamburger-color; /* [1] */
+    }
+    .c-hamburger__icon::before {
+        transform: translateY(#{((($hamburger-height / 2) - ($hamburger-line-width / 2)) / 2)})
+                   translateX(1px)
+                   rotate(45deg);
+    }
+    .c-hamburger__icon::after {
+        transform: translateY(#{(((($hamburger-height / 2) - ($hamburger-line-width / 2)) / 2) * -1)})
+                   translateX(1px)
+                   rotate(-45deg);
+    }
+}

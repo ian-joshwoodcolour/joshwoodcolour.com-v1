@@ -1,0 +1,59 @@
+{%- if current_tags -%}
+    {%- assign back_button_label = 'All articles' -%}
+    {%- assign back_button_url = '/blogs/tips-tricks' -%}
+    {% include 'back-button' %}
+{%- endif -%}
+
+{%- paginate blog.articles by 9 -%}
+    <section class="o-section o-wrapper">
+        {% section 'advice-intro' %}
+    </section>
+
+    {%- comment -%}
+    <section class="o-section o-wrapper u-pt+ u-pt++@desktop">
+        {% include 'blogs-filter' -%}
+    </section>
+    {%- endcomment -%}
+
+    {%- if blog.articles.size > 0 -%}
+        {%- if paginate.current_page == 1 -%}
+            {%- for article in blog.articles -%}
+                {%- if article.tags contains 'Featured' -%}
+                    {%- assign featured_blog = article -%}
+                    {%- break -%}
+                {%- endif -%}
+            {%- endfor -%}
+            {%- unless featured_blog -%}
+                {%- assign featured_blog = blog.articles[0] -%}
+            {%- endunless -%}
+
+            <section class="o-section o-wrapper u-pt">
+                {%- assign featured_title = featured_blog.title -%}
+                {%- assign featured_tags = featured_blog.tags -%}
+                {%- assign featured_photo = featured_blog.image -%}
+                {%- assign featured_cta_url = featured_blog.url -%}
+                {%- assign featured_cta_label = 'Read more' -%}
+                {%- assign featured_text = featured_blog.excerpt -%}
+                {% include 'featured-content' %}
+            </section>
+        {%- endif -%}
+
+        <section class="o-section o-wrapper u-pt">
+            {%- assign articles = blog.articles -%}
+            {% include 'blogs-list' %}
+        </section>
+
+        {%- if paginate.pages > 1 -%}
+            <section class="o-section o-wrapper u-pt0">
+                {% include 'pagination' %}
+            </section>
+        {%- endif -%}
+    {%- else -%}
+        <section class="o-section o-wrapper u-pt0 u-text-center">
+            <p><strong>Sorry, there's no articles to show here.</strong></p>
+            <a href="/blogs/tips-tricks" class="c-button c-button--black u-mt">All articles</a>
+        </section>
+    {%- endif -%}
+{%- endpaginate -%}
+
+{% section 'instagram-feed' %}

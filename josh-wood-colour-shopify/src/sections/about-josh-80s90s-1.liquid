@@ -1,0 +1,42 @@
+{%- for block in section.blocks -%}
+    {%- assign card_size = 'shorter' -%}
+    {%- assign card_row = true -%}
+    {%- assign has_frame = true -%}
+    {%- assign frame_position = 'left' -%}
+    {%- assign photo = block.settings.photo | img_url: '500x700' -%}
+    {%- assign photo_position = 'top left' -%}
+    {%- assign title = block.settings.title -%}
+    {%- assign title_position = 'left' -%}
+    {%- assign text = block.settings.text -%}
+    {% include 'card' %}
+{%- endfor -%}
+
+{% schema %}
+{
+    "name": "About Josh 80s90s 1",
+    "blocks": [
+        {
+            "name": "About Josh 80s90s 1",
+            "type": "object",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "photo",
+                    "label": "Photo"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "textarea",
+                    "id": "text",
+                    "label": "Text"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

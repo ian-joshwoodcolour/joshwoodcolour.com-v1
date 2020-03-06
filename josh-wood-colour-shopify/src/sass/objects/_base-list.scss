@@ -1,0 +1,4 @@
+.o-base-list {
+    @include rem(margin-left, $inuit-global-font-size);
+    list-style-position: outside;
+}

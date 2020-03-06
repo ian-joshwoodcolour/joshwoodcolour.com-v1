@@ -1,0 +1,45 @@
+.c-back-button-container {
+    padding-top: $global-spacing-small;
+    position: relative;
+    z-index: $global-highest-z-index;
+}
+    /**
+     * 1. Prevent the button from filling full available width
+     */
+    .c-back-button {
+        max-width: 260px; /* [1] */
+    }
+
+    .c-back-button svg {
+        transform: rotate(180deg)
+    }
+
+    .c-back-button:hover .c-svg,
+    .c-back-button:focus .c-svg {
+        transform: rotate(180deg) translateX(#{$global-spacing-small});
+    }
+
+
+@include mq ($from: $global-page-header-breakpoint) {
+    .c-back-button-container {
+        position: absolute;
+        margin-top: ($global-spacing * -1);
+        padding-top: 0;
+    }
+        .c-back-button {
+            padding-left: $global-spacing;
+        }
+            .c-back-button:hover .c-svg,
+            .c-back-button:focus .c-svg {
+                transform: rotate(180deg) translateX(#{$global-spacing-small});
+            }
+
+    .shopify-section + [data-component="back-button"] {
+        margin-top: $global-spacing-small;
+    }
+}
+
+
+.s-promo-banner .c-back-button-container{
+    margin-top: $global-spacing-small;
+}

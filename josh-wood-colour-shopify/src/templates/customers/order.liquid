@@ -1,0 +1,121 @@
+{%- assign back_button_label = 'customer.account.title' | t -%}
+{%- assign back_button_url = '/account' -%}
+{% include 'back-button' %}
+
+<section class="o-section o-wrapper">
+    <h1 class="u-heading u-h3 u-text-center u-mb+ u-mb++@tablet">{{ 'customer.order.title' | t: name: order.name }}</h1>
+
+    <div class="o-layout u-stack-layout@mobile">
+        <div class="o-layout__item u-7/12@mobile">
+            <h2 class="u-heading u-h4 u-mb-">
+                {% include 'order-fulfillment-label' %}
+            </h2>
+            <p><strong>Ordered:</strong> {{ 'customer.order.date' | t: date: order.created_at | date: "%B %d, %Y %I:%M%p" }}</p>
+            
+            <div class="u-pb u-pb+@desktop u-border-bottom-grey-2"> 
+                <table class="c-table u-mt">
+                    <thead>
+                        <tr class="c-table__row c-table__row--headings">
+                            <th class="c-table__heading u-label">{{ 'customer.order.product' | t }}</th>
+                            <th class="c-table__heading u-label">{{ 'customer.order.price' | t }}</th>
+                            <th class="c-table__heading u-label">{{ 'customer.order.quantity' | t }}</th>
+                            <th class="c-table__heading u-label">{{ 'customer.order.total' | t }}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="c-table__body">
+                        {%- assign money_saved = 0 -%}
+                        {%- for line_item in order.line_items -%}
+                            {%- assign money_saved = money_saved | plus: line_item.total_discount -%}
+                            <tr id="{{ line_item.key }}" class="c-table__row {% if forloop.last %}c-table__row--borderless{% endif %}">
+                                <td>
+                                    <div class="u-flex u-align-items-center">
+                                        <img src="{{ line_item.product.featured_image | img_url: '70x' }}" alt="">
+
+                                        <div class="u-ml">
+                                            {{ line_item.title | link_to: line_item.product.url }}
+                                            
+                                            {%- if line_item.fulfillment -%}
+                                                <div class="u-font-size-14 u-color-grey u-mt-">
+                                                    {%- assign created_at = line_item.fulfillment.created_at | date: format: 'month_day_year' -%}
+                                                    {{ 'customer.order.fulfilled_at' | t: date: created_at }}
+                                                   
+                                                    {%- if line_item.fulfillment.tracking_number -%}
+                                                        by <a href="{{ line_item.fulfillment.tracking_url }}">{{ line_item.fulfillment.tracking_company }} #{{ line_item.fulfillment.tracking_number}}</a>
+                                                    {%- endif -%}
+                                                </div>
+                                            {%- endif -%}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="u-text-center" data-label="{{ 'customer.order.price' | t }}">{{ line_item.price | money_without_trailing_zeros }}</td>
+                                <td class="u-text-center"  data-label="{{ 'customer.order.quantity' | t }}">{{ line_item.quantity }}</td>
+                                <td class="u-text-center"  data-label="{{ 'customer.order.total' | t }}">{{ line_item.quantity | times: line_item.price | money_without_trailing_zeros }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        {%- if money_saved != 0 -%}
+                            <tr class="c-table__row c-table__row--borderless">
+                                <td colspan="3" class="u-heading u-spacing-0">{{ 'customer.order.discount' | t }}</td>
+                                <td class="u-text-center" data-label="{{ 'customer.order.discount' | t }}">-{{ money_saved | money_without_trailing_zeros }}</td>
+                            </tr>
+                        {%- endif -%}
+                        
+                        {%- for discount in order.discounts -%}
+                            <tr class="c-table__row c-table__row--borderless">
+                                <td colspan="3" class="u-heading u-spacing-0">{{ discount.code }} {{ 'customer.order.discount' | t }}</td>
+                                <td class="u-text-center" data-label="{{ 'customer.order.discount' | t }}">{{ discount.savings | money_without_trailing_zeros }}</td>
+                            </tr>
+                        {%- endfor -%}
+
+                        {%- for shipping_method in order.shipping_methods -%}
+                            <tr class="c-table__row c-table__row--borderless">
+                                <td colspan="3" class="u-heading u-spacing-0">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</td>
+                                <td class="u-text-center" data-label="{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})">{{ shipping_method.price | money_without_trailing_zeros }}</td>
+                            </tr>
+                        {%- endfor -%}
+
+                        {%- for tax_line in order.tax_lines -%}
+                            <tr class="c-table__row c-table__row--borderless">
+                                <td colspan="3" class="u-heading u-spacing-0">{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)</td>
+                                <td class="u-text-center" data-label="{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)">{{ tax_line.price | money_without_trailing_zeros }}</td>
+                            </tr>
+                        {%- endfor -%}
+
+                        <tr class="c-table__row c-table__row--borderless">
+                            <td colspan="3" class="u-heading u-h6 u-mt- u-spacing-0">{{ 'customer.order.total' | t }}</td>
+                            <td class="u-h6 u-heading u-text-center" data-label="{{ 'customer.order.total' | t }}">{{ order.total_price | money_without_trailing_zeros }}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <div class="o-layout u-stack-layout@mobile u-mt u-mt+@desktop">
+                <div class="o-layout__item u-6/12@mobile">
+                    <h3 class="u-heading u-h5">Billing address</h3>
+                    <div class="u-label u-mt--">
+                        {{ order.financial_status_label }}
+                    </div>
+
+                    <div class="u-mt">
+                        {%- assign address = order.billing_address -%}
+                        {% include 'order-address' %}
+                    </div>
+                </div><div class="o-layout__item u-6/12@mobile">
+                    <h3 class="u-heading u-h5">Shipping address</h3>
+                    <div class="u-label u-mt--">
+                        {{ order.fulfillment_status_label }}
+                    </div>
+
+                    <div class="u-mt">
+                        {%- assign address = order.shipping_address -%}
+                        {% include 'order-address' %}
+                    </div>
+                </div>
+            </div>
+        </div><div class="o-layout__item u-1/12@mobile">
+        </div><div class="o-layout__item u-4/12@mobile">
+            {% include 'user-account-help' %}
+        </div>
+    </div>
+</section>

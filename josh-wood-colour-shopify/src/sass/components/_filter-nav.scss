@@ -1,0 +1,62 @@
+.c-filter-nav,
+.c-filter-nav__nav {
+    display: flex;
+    width: 100%;
+}
+    /**
+     * 1. Stretch the list items to fill empty space
+     */
+    .c-filter-nav__item {
+        animation: filterNavEntrance ($global-transition-speed * 2) $global-transition-easing;
+        animation-fill-mode: forwards;
+        flex-grow: 1; /* [1] */
+        opacity: 0;
+        transform: translateY($global-spacing);
+        will-change: transform;
+    }
+
+    @for $i from 1 through 8 {
+        .c-filter-nav__item:nth-child(#{$i}) {
+            animation-delay: #{($i * 0.075s)};
+        }
+    }
+
+    @keyframes filterNavEntrance {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
+@include mq ($until: mobile) {
+    /**
+     * 1. Remove the spacing added by section wrapper, so when we swipe the items go past the edge
+     * 2. Accomodate for removing the wrapper spacing...
+     * 3. Swipe-scroll horizontally only
+     * 4. Don't wrap items onto multiple lines
+     * 5. Increase the width to accommodate the left margin and padding...
+     */
+    .c-filter-nav {
+        margin-left: ($global-spacing * -1); /* [1] */
+        padding-left: $global-spacing; /* [2] */
+        overflow-x: scroll; /* [3] */
+        -webkit-overflow-scrolling: touch;
+        touch-action: manipulation;
+        white-space: nowrap; /* [4] */
+        width: calc(100% + #{($global-spacing * 2)}); /* [5] */
+    }
+        /**
+         * 1. Remove spacing added by inline list object
+         */
+        .c-filter-nav__item {
+            padding-top: 0 !important; /* [1] */
+        }
+
+        /**
+         * 1. Add spacing between individual items
+         */
+        .c-filter-nav__item + .c-filter-nav__item {
+            margin-left: $global-spacing-small; /* [1] */
+        }
+}

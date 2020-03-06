@@ -1,0 +1,17 @@
+<strong class="{% if order.fulfillment_status_label == 'Fulfilled' %} u-color-shamrock{% endif %}">
+    {%- if order.fulfillment_status_label == 'Fulfilled' -%}
+        {%- if settings.order_fulfilled_custom_label != blank -%}
+            {{ settings.order_fulfilled_custom_label }}
+        {%- else -%}
+            {{ order.fulfillment_status_label }}
+        {%- endif -%}
+    {%- elsif order.fulfillment_status_label == 'Unfulfilled' -%}
+        {%- if settings.order_unfulfilled_custom_label != blank -%}
+            {{ settings.order_unfulfilled_custom_label }}
+        {%- else -%}
+            {{ order.fulfillment_status_label }}
+        {%- endif -%}
+    {%- else -%}
+        {{ order.fulfillment_status_label }}
+    {%- endif -%}
+</strong>

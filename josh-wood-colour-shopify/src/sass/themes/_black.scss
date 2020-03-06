@@ -1,0 +1,3 @@
+.t-black {
+    @include theme($color-black, $color-white);
+}

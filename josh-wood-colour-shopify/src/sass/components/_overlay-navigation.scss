@@ -1,0 +1,114 @@
+.c-overlay-nav {
+    display: none;
+}
+
+
+@include mq ($until: tablet) {
+    .c-overlay-nav {
+        background-color: $color-white;
+        display: none;
+        flex-direction: column;
+        height: 100%;
+        left: 0;
+        justify-content: space-around;
+        opacity: 0;
+        position: fixed;
+        text-align: center;
+        top: 0;
+        width: 100%;
+        z-index: ($global-highest-z-index + 1);
+    }
+        .c-overlay-nav__inner {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-between;
+            padding-top: 30px;
+            opacity: 0;
+            will-change: opacity;
+        }
+
+        .c-overlay-nav__nav {
+            align-content: center;
+            line-height: 2;
+        }
+            .c-overlay-nav--main {
+                flex-grow: 1;
+            }
+
+            .c-overlay-nav__link {
+                @include inuit-font-size(22px);
+                display: block;
+                font-family: $global-font-family-body;
+                padding-bottom: $global-spacing-tiny;
+                padding-top: $global-spacing-tiny;
+                text-align: center;
+            }
+            .c-overlay-nav__link:last-child {
+                padding-bottom: 0;
+            }
+
+            .c-overlay-nav .c-button {
+                align-self: center;
+            }
+}
+
+@include mq ($from: mobile, $until: desktop) {
+    .c-overlay-nav__nav--main {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-between;
+        margin-top: $global-spacing-large;
+        max-height: 450px;
+    }
+}
+
+@include mq ($until: mobile) {
+    .c-overlay-nav__link {
+        @include inuit-font-size(20px);
+    }
+
+    .c-overlay-nav__cols {
+        columns: 2;
+        padding-left: $global-spacing;
+        padding-right: $global-spacing;
+        text-align: left;
+    }
+
+    .c-overlay-nav__footer {
+        align-items: center;
+        display: flex;
+        justify-content: flex-start;
+        padding-left: $global-spacing;
+        padding-right: $global-spacing;
+    }
+}
+
+@media only screen and (max-height: 850px) and (orientation: landscape) {
+    .c-overlay-nav__nav--main {
+        margin-top: 0;
+    }
+
+    .c-overlay-nav__nav {
+        display: block;
+    }
+        .c-overlay-nav__nav a {
+            display: inline-block;
+            margin-left: $global-spacing;
+        }
+        .c-overlay-nav__nav br {
+            display: none;
+        }
+}
+
+
+// @include mq ($from: mobileSmall, $until: mobile) {
+//     .c-overlay-nav__nav {
+//         display: flex;
+//         justify-content: space-evenly;
+//         margin-left: auto;
+//         margin-right: auto;
+//         max-width: 60%;
+//     }
+// }

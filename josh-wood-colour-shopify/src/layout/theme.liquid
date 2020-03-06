@@ -1,0 +1,131 @@
+{%- if settings.promo_banner_text != blank -%}
+    {%- if template == 'list-collections' or template == 'collection' or template == 'product' or template == 'cart' -%}
+        {%- assign HAS_PROMO_BANNER = true -%}
+    {%- endif -%}
+{%- endif -%}
+{% assign templates_with_hero = 'about-josh|salon|price-list|explore|list-collections' %}
+{% if templates_with_hero contains template.suffix or template.name == 'index' %}
+    {% assign has_hero = 's-hero' %}
+{% endif %}
+{%- assign SHOW_SITE_FURNITURE = true -%}
+{%- if template == 'password' or template == 'page.style-guide' -%}
+    {%- assign SHOW_SITE_FURNITURE = false -%}
+{%- endif -%}
+<!DOCTYPE html>
+<html lang="{{ shop.locale }}" class="no-js">
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-92319949-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-92319949-1', { 'optimize_id': 'GTM-PCL3SM2'});
+        </script>
+
+        <meta charset="utf-8">
+        <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+        <meta content="width=device-width, initial-scale=1" name="viewport">
+        <meta name="theme-color" content="{{ settings.color_primary }}">
+        <meta content="toPp7O_dNDxtlWUjxnw4tSHEozl5a2Ui2nLeOXEI6Sc" name="google-site-verification">
+        <link href="//cdn.shopify.com" rel="dns-prefetch preconnect">
+        <link
+        href="//fbcdn.net" rel="dns-prefetch preconnect">
+        <!-- <link rel="prerender" href="/collections/all"> -->
+
+        {%- capture seo_title -%}
+            {{ page_title }}
+
+            {%- if current_tags -%}
+                {%- assign meta_tags = current_tags | join: ', ' %}
+                &ndash;
+                {{ 'general.meta.tags' | t: tags: meta_tags -}}
+            {%- endif -%}
+            {%- if current_page != 1 -%}
+                &ndash;
+                {{ 'general.meta.page' | t: page: current_page }}
+            {%- endif -%}
+            {%- unless page_title contains shop.name -%}
+                &ndash;
+                {{ shop.name }}
+            {%- endunless -%}
+        {%- endcapture -%}
+        <title>{{ seo_title }}</title>
+
+        {%- if page_description -%}
+            <meta name="description" content="{{ page_description | escape }}">
+        {%- endif -%}
+
+        <link rel="icon" type="image/png" href="{{ 'favicon-16x16.png' | asset_url }}" sizes="16x16">
+        <link rel="icon" type="image/png" href="{{ 'favicon-32x32.png' | asset_url }}" sizes="32x32">
+        <link rel="canonical" href="{{ canonical_url }}">
+
+        {% include 'social-meta-tags' %}
+        {{ 'main.css' | asset_url | stylesheet_tag }}
+
+        <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,es5,Array.prototype.includes,String.prototype.includes,Object.values,Object.assign,fetch,Promise"></script>
+        <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="{{ settings.cookiebot_id }}" type="text/javascript"></script>
+        <script>
+        function CookiebotCallback_OnAccept(){
+            if (Cookiebot.consent.statistics){enableStatisticTracking();}
+            if (typeof window.handleConsentAccept !== 'undefined'){window.handleConsentAccept();}
+        }
+        function enableStatisticTracking() {
+            (function(h,o,t,j,a,r){h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};h._hjSettings={hjid:{{ settings.hotjar_id | default: 0 }},hjsv:5};a=o.getElementsByTagName('head')[0];r=o.createElement('script');r.async=1;r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r);})(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
+            !function(e,t){var a="{{ settings.outbrain_id }}";if(e.obApi){var r=function(e){return"[object Array]"===Object.prototype.toString.call(e)?e:[e]};e.obApi.marketerId=r(e.obApi.marketerId).concat(r(a))}else{var o=e.obApi=function(){o.dispatch?o.dispatch.apply(o,arguments):o.queue.push(arguments)};o.version="1.1",o.loaded=!0,o.marketerId=a,o.queue=[];var c=t.createElement("script");c.async=!0,c.src="//amplify.outbrain.com/cp/obtp.js",c.type="text/javascript";var i=t.getElementsByTagName("script")[0];i.parentNode.insertBefore(c,i)}}(window,document),obApi("track","PAGE_VIEW");
+        }
+        </script>
+        <script>window.globalData = {};window.isModernBrowser = ('querySelector' in document && 'localStorage' in window && 'addEventListener' in window);</script>
+        {{ content_for_header }}
+    </head>
+    <body id="{{ page_title | handle }}" class="s-{{ template.name | handle }} {{ has_hero | default:'s-no-hero' }} {% if HAS_PROMO_BANNER %}s-promo-banner{% endif %}">
+        {%- if SHOW_SITE_FURNITURE -%}
+            {% section 'header-home' %}
+        {%- endif -%}
+
+        {%- if HAS_PROMO_BANNER -%}
+            {% include 'promo-banner' %}
+        {%- endif -%}
+
+        {%- if template.suffix != 'consultation' -%}
+            <div class="c-header-spacer"></div>
+        {%- endif -%}
+
+        <main id="main" role="main">
+            {{ content_for_layout }}
+        </main>
+
+        {%- if SHOW_SITE_FURNITURE -%}
+            {% section 'footer' %}
+
+            {% include 'cookie-banner' %}
+            {% include 'cart-summary' %}
+            {% include 'contact-form' %}
+        {%- endif -%}
+
+        <script src="{{ 'main.js' | asset_url }}"></script>
+        <script src="{{ 'vendor.js' | asset_url }}"></script>
+        {%- capture routed_js -%}
+            {%- if template.suffix == 'experts-list' or template.suffix == 'expert-detail' -%}experts
+            {%- endif -%}
+            {%- if template.suffix == 'consultation' -%}consultation
+            {%- endif -%}
+            {%- if template == 'index' -%}home
+            {%- endif -%}
+            {%- if template == 'product' -%}product
+            {%- endif -%}
+            {%- if template == 'article' -%}editorial
+            {%- endif -%}
+            {%- if template == 'customers/addresses' -%}account
+            {%- endif -%}
+        {%- endcapture -%}
+        {%- if routed_js != blank -%}
+            <script src="{{ routed_js | append: '.js' | asset_url }}"></script>
+        {%- endif -%}
+
+        {%- if SHOW_SITE_FURNITURE -%}
+            {% include 'promo-popup' %}
+        {%- endif -%}
+    </body>
+</html>

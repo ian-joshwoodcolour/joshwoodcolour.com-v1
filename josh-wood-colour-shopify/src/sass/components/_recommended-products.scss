@@ -1,0 +1,67 @@
+$recommended-product-overlap-breakpoint: tablet;
+$recommended-product-overlap-size: 30%;
+$recommended-product-hero-image-height: 450px;
+
+
+.c-recommended-products {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: stretch;
+}
+    .c-recommended-products__item {
+        background-color: $color-grey-lightest;
+        flex-grow: 1;
+        flex: 0 0 250px;
+    }
+    .c-recommended-products__item:nth-child(n+2) {
+        @include rem(margin-left, $global-spacing);
+    }
+
+    .c-recommended-products__hero-image {
+        @include rem(height, $recommended-product-hero-image-height);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        width: 100%;
+    }
+
+@include mq ($from: $recommended-product-overlap-breakpoint) {
+    .c-recommended-products {
+        margin-left: ($recommended-product-overlap-size * -1);
+        width: (100% + $recommended-product-overlap-size);
+    }
+
+    /**
+     * 1. Contain the signature element which we'll absolutely position below
+     */
+    .c-recommended-products-grid {
+        position: relative; /* [1] */
+    }
+
+    .c-recommended-products__item {
+        flex: 0 0 320px;
+    }
+}
+
+@include mq ($until: mobile) {
+    /**
+     * At mobile we switch to a swipeable section
+     * 
+     * 2. Position the area flush against the edge of the page by removing the parent containers padding
+     * 3. Allow scrolling on the swipe area
+     * 4. Prevent the images from wrapping onto new lines
+     * 5. Extend the width of the container to accomodate the negative space added by changing the margins
+     */
+    .c-recommended-products-container {
+        margin-left: ($global-spacing * -1);
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        padding-left: $global-spacing;
+        white-space: nowrap;
+        width: calc(100% + #{($global-spacing * 2)});
+    }
+
+    .c-recommended-products {
+        width: (100% + $recommended-product-overlap-size);
+    }
+}

@@ -1,0 +1,20 @@
+$stack-layout-breakpoints: (mobile);
+
+
+@each $stack-layout-breakpoint in $stack-layout-breakpoints {
+    /**
+     * At a given layout, space layout items as they are stacked
+     */
+    @include mq ($until: $stack-layout-breakpoint) {
+        .u-stack-layout\@#{$stack-layout-breakpoint} > .o-layout__item:nth-child(n+2) {
+            margin-top: $global-spacing;
+        }
+
+        .o-layout--huge,
+        .o-layout--large {
+            &.u-stack-layout\@#{$stack-layout-breakpoint} > .o-layout__item:nth-child(n+2) {
+                margin-top: $global-spacing-large;
+            }
+        }
+    }
+}

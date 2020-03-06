@@ -1,0 +1,8 @@
+{
+ "extends": [
+    "@strv/stylelint-config-styled-components"
+  ],
+  "rules": {
+    "declaration-colon-newline-after": null,
+  }
+}

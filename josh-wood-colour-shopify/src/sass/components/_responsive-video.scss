@@ -1,0 +1,51 @@
+/**
+ * 1. Remove the height
+ * 2. Add responsive height at 16:9 aspect ratio
+ * 3. Contain the iframe inside
+ * 4. Add a transition for when the video resizes
+ * 5. Fill the width of the parent element
+ */
+.c-responsive-video {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 0; /* [1] */
+    padding-bottom: 56.25%; /* [2] */
+    position: relative; /* [3] */
+    transition: $global-transition; /* [4] */
+    width: 100%; /* [5] */
+}
+     /**
+      * Fill the space of the parent container
+      */
+    .c-responsive-video iframe {
+        height: 100%;   
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+.c-video-cta {
+    align-items: center;
+    background-color: $color-white;
+    border-radius: 100%;
+    display: flex;
+    height: 50px;
+    justify-content: center;
+    margin-top: calc(28.12% - 25px); 
+    padding-left: 2px;
+    transition: $global-transition;
+    will-change: transform;
+    width: 50px;
+
+    svg {
+        fill: $color-black;
+        height: auto !important;
+        margin: 0 auto !important;
+    }
+}
+.c-responsive-video:focus .c-video-cta,
+.c-responsive-video:hover .c-video-cta {
+    transform: scale(1.15);
+}

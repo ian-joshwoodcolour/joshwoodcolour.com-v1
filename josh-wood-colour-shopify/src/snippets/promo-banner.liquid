@@ -1,0 +1,13 @@
+{%- if settings.promo_banner_url != blank -%}
+    <a href="{{ settings.promo_banner_url }}" data-component="promo-banner">
+    {%- endif -%}
+
+    <div class="c-promo-banner" role="banner">
+        <div class="o-wrapper">
+            {{ settings.promo_banner_text }}
+        </div>
+    </div>
+
+    {%- if settings.promo_banner_url != blank -%}
+    </a>
+{%- endif -%}

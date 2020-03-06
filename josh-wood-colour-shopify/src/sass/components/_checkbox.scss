@@ -1,0 +1,25 @@
+$checkbox-size: 18px;
+$checkbox-icon-size: 16px;
+
+.c-checkbox {
+    align-items: center;
+    background-color: $color-white;
+    border: 1px solid $color-black;
+    cursor: pointer;
+    display: flex;
+    height: $checkbox-size;
+    justify-content: center;
+    transition: all ($global-transition-speed / 2) $global-transition-easing;
+    width: $checkbox-size;
+}
+    .c-checkbox--selected {
+        background-color: $color-black;
+    }
+
+
+.c-checkbox__icon {
+    width: $checkbox-icon-size;
+}
+    .c-checkbox__icon path {
+        fill: $color-white;
+    }

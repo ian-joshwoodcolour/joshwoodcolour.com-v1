@@ -1,0 +1,110 @@
+<div class="o-layout o-layout--large u-stack-layout@mobile u-pt@mobile u-pb++@mobile u-flex@mobile u-align-items-center u-ml0@mobile">
+    <div class="o-layout__item u-1/12@mobile"></div>
+    <div class="o-layout__item u-4/12@mobile">
+        <div class="u-1/1 u-mb+ u-mb0@mobile">
+            <div class="u-pb u-pb+@desktop u-border-bottom-grey-2">
+                <h3 class="u-heading u-mb u-text-center">{{ section.blocks[0].settings.title }}</h3>
+                <p class="u-text-center">{{ section.blocks[0].settings.text }}</p>
+                <span class="js-modal-open js-consultation-open" data-modal="consultation">
+                    <button class="c-button c-button--black u-mt u-1/1" type="button">
+                        {{ section.blocks[0].settings.cta_label }}
+                    </button>
+                </span>
+                <p class="u-text-center u-mt-- u-ml-- u-mr-- js-consultation-retrieve">
+                    <a href="{{ section.blocks[0].settings.retrieve_cta_url }}" class="js-consultation-retrieve">
+                        {{ section.blocks[0].settings.retrieve_text }}
+                    </a>
+                </p>
+                <form action="{{section.blocks[0].settings.retrieve_cta_url}}" class="c-form u-mt0 js-retrieve-form" style="height: 0; overflow: hidden;">
+                    <br/>
+                    <input class="c-form__input u-1/1 js-retrieve-input" placeholder="Your email" required type="email">
+                    <div class="js-retrieve-error u-mt- u-color-coral u-weight-bold u-fade-in"></div>
+                    <button class="c-button c-button--black c-form__button u-1/1 u-mt-">Retrieve my results</button>
+                </form>
+                <div class="js-consultation-error u-color-coral u-mt- u-weight-bold u-fade-in"></div>
+            </div>
+            <div class="u-mt u-mt+@desktop u-text-center js-retrieve-container">
+                <p class="u-mt-- u-ml-- u-mr--">{{ section.blocks[0].settings.contact_us_text }}</p>
+                <a class=" u-1/1 c-button c-button--ghost c-button--black" href="mailto:hello@joshwoodcolour.com">
+                    {{ section.blocks[0].settings.contact_cta_label}}
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="o-layout__item u-1/12@mobile u-show@mobile"></div>
+    <div class="o-layout__item u-5/12@mobile u-1/1 u-mt--">
+        <div id="colour-grid"></div>
+    </div>
+</div></div><script>
+window.globalData.consultationCTALabel = '{{ section.blocks[0].settings.cta_label }}';
+
+window.globalData.view = 'consultation-tool-intro'
+
+window.globalData.colourGridImages = {
+    '2-0': '{{ 'Level 2.jpg' | asset_img_url: '350x' }}',
+    '3-0': '{{ 'Level 3.jpg' | asset_img_url: '350x' }}',
+    '4-0': '{{ 'Level 4.jpg' | asset_img_url: '350x' }}',
+    '5-0': '{{ 'Level 5.jpg' | asset_img_url: '350x' }}',
+    '5-5': '{{ 'Level 5.5.jpg' | asset_img_url: '350x' }}',
+    '6-0': '{{ 'Level 6.jpg' | asset_img_url: '350x' }}',
+    '6-5': '{{ 'Level 6.5.jpg' | asset_img_url: '350x' }}',
+    '7-0': '{{ 'Level 7.jpg' | asset_img_url: '350x' }}',
+    '7-5': '{{ 'Level 7.5.jpg' | asset_img_url: '350x' }}',
+    '8-0': '{{ 'Level 8.jpg' | asset_img_url: '350x' }}',
+    '8-5': '{{ 'Level 8.5.jpg' | asset_img_url: '350x' }}',
+    '9-0': '{{ 'Level 9.jpg' | asset_img_url: '350x' }}'
+};
+
+</script>{% schema %}
+
+{
+    "name": "Consultation Intro",
+    "blocks": [
+        {
+            "name": "Intro content",
+            "type": "object",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                }, {
+                    "type": "textarea",
+                    "id": "text",
+                    "label": "Sub Heading Text"
+                }, {
+                    "type": "text",
+                    "id": "cta_label",
+                    "label": "CTA Label"
+                }, {
+                    "type": "text",
+                    "id": "retrieve_text",
+                    "label": "Retrieve Text"
+                }, {
+                    "type": "text",
+                    "id": "retrieve_cta_label",
+                    "label": "Retrieve CTA Label"
+                }, {
+                    "type": "url",
+                    "id": "retrieve_cta_url",
+                    "label": "Retrieve CTA URL"
+                }, {
+                    "type": "text",
+                    "id": "contact_us_text",
+                    "label": "Text copy for contacting us directly"
+                }, {
+                    "type": "text",
+                    "id": "contact_cta_label",
+                    "label": "Contact button CTA text"
+                }, {
+                    "type": "image_picker",
+                    "id": "cta_image",
+                    "label": "CTA Image"
+                }
+            ]
+        }
+    ]
+}
+
+{% endschema %}

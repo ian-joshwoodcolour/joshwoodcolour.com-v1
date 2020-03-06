@@ -1,0 +1,61 @@
+.c-hero-card-section__copy {
+    padding-top: $global-spacing;
+}
+
+
+@include mq ($from: mobile) {
+    /**
+     * 1. Reduce the max width allowed for the car/copy content
+     * 2. Contain the copy
+     */
+    .c-hero-card-section {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 1070px; /* [1] */
+        position: relative; /* [2] */
+    }
+        .c-hero-card-section__card {
+            max-width: 50%;
+        }
+
+        /**
+         * 1. Pull up to align with the bottom of the card's frame (bit fidgety and might break in future...)
+         */
+        .c-hero-card-section__copy {
+            bottom: 0; /* [1] */
+            position: absolute;
+            right: 0;
+            width: 35%;      
+        }
+}
+
+@include mq ($from: mobile, $until: desktop) {
+    .c-hero-card-section {
+        width: 90%;
+    }
+    .c-hero-card-section .c-card[class*="c-card--framed"] .c-card__title { 
+        left: 60%;
+        width: 100%;
+    }
+}
+
+
+@include mq ($until: mobile) {
+    $home-hero-card-mobile-spacing: 30px;
+    
+    .c-hero-card-section {
+        margin-top: ($home-hero-card-mobile-spacing * -1);
+        padding-left: $global-spacing;
+        padding-right: $global-spacing;
+
+        .c-card {
+            padding-top: $home-hero-card-mobile-spacing;
+        }
+    }
+        /**
+         * 1. Add extra spacing under the image and frame so the copy doesn't overlap
+         */
+         .c-hero-card-section__copy {
+            @include rem(margin-top, 120px);
+        }
+}

@@ -1,0 +1,46 @@
+.c-quote {
+    text-align: center;
+}
+    .c-quote__body {
+        @include inuit-font-size(26px);
+        line-height: 1.4;
+    }
+
+    .c-quote__footer {
+        @include rem(margin-top, $global-spacing-small);
+        font-family: $global-font-family-headings;
+    }
+        .c-quote__role {
+            @include inuit-font-size(12px);
+            color: $color-grey;
+            display: inline-block;
+            font-family: $global-font-family-bold;
+        }
+        .c-quote__role::before {
+            @include rem(margin-left, $global-spacing-tiny);
+            @include rem(margin-right, $global-spacing-tiny);
+            content: '|';
+        }
+
+
+@include mq ($until: mobile) {
+    .c-quote__body {
+        font-size: calc(#{$inuit-global-font-size} + 1vw);
+    }
+}
+
+
+/**
+ * Workaround hacks for not showing multiple quotes on a pagE
+ */
+.s-show-first-quote {
+    .c-quote:nth-child(n+2) {
+        display: none;
+    }
+}
+.s-show-second-quote {
+    .c-quote:nth-child(1),
+    .c-quote:nth-child(n+3) {
+        display: none;
+    }
+}

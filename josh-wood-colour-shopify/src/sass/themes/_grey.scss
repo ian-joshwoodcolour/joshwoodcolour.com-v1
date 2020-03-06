@@ -1,0 +1,3 @@
+.t-grey {
+    @include theme($color-grey, $color-white);
+}

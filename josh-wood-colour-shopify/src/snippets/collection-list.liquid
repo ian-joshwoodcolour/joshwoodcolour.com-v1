@@ -1,0 +1,36 @@
+{%- assign layout_classes = 'o-layout--products o-layout--left-right-cols' -%}
+{%- assign layout_item_classes = 'u-6/12@mobile u-4/12@tabletSmall' -%}
+{%- assign sub_collections_string = sub_collections | join: ',' -%}
+{%- if sub_collections_string contains 'permanent-colour' -%}
+    {%- assign layout_classes = '' -%}
+    {%- assign layout_item_classes = 'u-6/12@mobile' -%}
+{%- endif -%}
+
+<header class="u-8/12@mobile u-6/12@desktop u-mb u-mb+@mobile u-text-center u-m-auto">
+    <h2 class="u-heading u-h3 u-mb">{{ collection.title }}</h2>
+
+    {{ collection.description }}
+</header>
+
+<div class="o-layout o-layout--large u-stack-layout@mobile {{ layout_classes }} u-mt+">
+    {%- for sub_collection in sub_collections %}<!--
+        -->{%- if all_collections[sub_collection].products.size > 0 -%}<!--
+        --><div class="o-layout__item u-fade-in {{ layout_item_classes }}">
+                {%- assign collection_photo = all_collections[sub_collection].image -%}
+                {%- assign collection_title = all_collections[sub_collection].title -%}
+                {%- assign _collection_description = all_collections[sub_collection].description | remove: '<p>' | remove: '</p>' | newline_to_br | split: '<br />' -%}
+                {%- assign collection_price = _collection_description[0] -%}
+                {%- assign collection_description = _collection_description[1] -%}
+                {%- assign collection_label = _collection_description[2] -%}
+                {%- if collection.handle == 'permanent-colour' and sub_collection == 'permanent-colour-products' and settings.default_permanent_product != blank -%}
+                    {%- assign collection_url = settings.default_permanent_product -%}
+                {%- elsif collection.handle == 'permanent-colour' and sub_collection == 'permanent-colour-and-shade-shot-plus' and settings.default_permanent_and_ssp_product != blank -%}
+                    {%- assign collection_url = settings.default_permanent_and_ssp_product -%}
+                {%- else - %}
+                    {%- assign collection_url = all_collections[sub_collection].products[0].url -%}
+                {%- endif -%}
+                {%- include 'collection-card' -%}
+            </div><!--
+        -->{%- endif %}<!---
+    -->{%- endfor -%}
+</div>

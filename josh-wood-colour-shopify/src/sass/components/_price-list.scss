@@ -1,0 +1,60 @@
+.c-price-list {
+    /**
+     * All rows
+     */
+    td {
+        @include inuit-font-size(15px);
+        font-family: $global-font-family-bold;
+        vertical-align: top;
+
+        @include mq ($from: mobileSmall) {
+            @include inuit-font-size(17px);
+        }
+    }
+
+
+    @include mq ($until: mobile) {
+        .o-layout__item {
+            margin-bottom: $global-spacing-large !important;
+        }
+    }
+}
+
+
+.c-price-list--headers {
+    /**
+     * Heading rows
+     */
+    tr:nth-child(1),
+    tr:nth-child(3) {
+        border-top: 1px solid $color-grey-light;
+    }
+        tr:nth-child(1) td,
+        tr:nth-child(3) td {
+            @include inuit-font-size(12px);
+            color: $color-grey;
+            font-family: $global-font-family-bold;
+            letter-spacing: 0.4px;
+            line-height: 1;
+            padding-top: $global-spacing-tiny;
+            width: 33.3%;
+        }
+
+    /**
+     * Price rows
+     */
+    tr:nth-child(2) td,
+    tr:nth-child(4) td {
+        padding-bottom: $global-spacing;
+    }
+}
+
+.c-price-list--treatments {
+    td {
+        padding-right: $global-spacing-small;
+    }
+    
+    td:nth-child(2) {
+        text-align: right;
+    }
+}

@@ -1,0 +1,46 @@
+{%- if settings.promo_banner_text != blank -%}
+    {%- if template == 'list-collections' or template == 'collection' or template == 'product' or template == 'cart' -%}
+        {%- assign HAS_PROMO_BANNER = true -%}
+    {%- endif -%}
+{%- endif -%}
+<div data-section-id="{{ section.id }}" data-section-type="header-section">
+    <header class="c-page-header js-page-header js-sticky {% if template.suffix == 'consultation' %}transparent{% endif %}">
+        <div class="o-section u-pv0 u-ph u-ph+@tablet c-page-header__wrapper">
+            <nav class="spread dark c-page-header__nav u-show@tablet">
+                {%- for link in linklists.main-menu.links -%}
+                    {%- if link.title != 'Home' -%}
+                        <a href="{{ link.url }}" class="c-page-header__link {% if link.active %}c-page-header__link--active{% endif %}">
+                            {{ link.title }}
+                        </a>
+                    {%- endif -%}
+                {%- endfor -%}
+            </nav>
+            {%- for link in linklists.feature-menu.links -%}
+                <a href="{{ link.url }}" class="c-button c-button--small c-button--thin c-page-header__button  u-show@tablet">
+                    {{ link.title }}
+                </a>
+            {%- endfor -%}
+            {%- if customer -%}
+                <a class="u-ml u-show@tablet" href="/account">{% include 'icon-user' %}</a>
+            {%- else -%}
+                <a class="u-ml u-show@tablet" href="/account/login">{% include 'icon-user' %}</a>
+            {%- endif -%}
+            <a class="u-ml c-page-header-home__link--cart js-cart-summary js-modal-open" data-modal="cart-summary" href="/cart">
+                {%- if cart.item_count != 0 %}
+                    {% include 'icon-bag-cutout' %}<span class="js-cart-count">{{ cart.item_count }}</span>
+                {% else %}
+                    {% include 'icon-bag' %}
+                {% endif %}
+            </a>
+
+            <a class="c-hamburger u-hide@tablet js-overlay-nav-toggle" href="#menu">
+                <span class="c-hamburger__icon">Menu</span>
+            </a>
+
+            <a aria-label="Go to the home page" href="/">
+                {%- assign classes = 'c-page-header__logo c-svg--black dark' -%}
+                {% include 'logo' %}
+            </a>
+        </div>
+    </header>
+</div>

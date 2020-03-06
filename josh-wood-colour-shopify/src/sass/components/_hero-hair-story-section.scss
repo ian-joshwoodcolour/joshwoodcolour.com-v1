@@ -1,0 +1,58 @@
+$hero-hair-story-section-mobile-layout-extra-width: 60%;
+
+
+@include mq ($from: mobile) {
+    /**
+     * 1. Indent on the left, offsetting the image under it
+     * 2. Overlap the title with the image under it
+     * 3. Prevent a long-running text line
+     */
+    .c-hero-hair-story-section__title {
+        @include rem(margin-left, $global-spacing-huge); /* [1] */
+        position: relative;
+        transform: translateY(80px); /* [2] */
+        max-width: 380px; /* [3] */
+        z-index: 2;
+    }
+
+    .c-hero-hair-story-section__text {
+        margin-top: $global-spacing-large;
+        max-width: 500px;
+    }
+}
+
+
+@include mq ($until: mobile) {
+    .c-hero-hair-story-section__title {
+        position: relative;
+        transform: translateY(40px); /* [2] */
+        z-index: 2;
+    }
+
+    .c-hero-hair-story-section__image-group1 {
+        position: relative;
+        z-index: 1;
+
+        img {
+            max-width: 130%;
+            width: 130% !important;
+        }
+
+        > .o-layout__item {
+            padding-left: $global-spacing !important;
+        }
+
+        > .o-layout__item:nth-child(2) > img {
+            transform: translateX(-10%)
+                       translateY(-5%);
+        }
+    }
+
+    .c-hero-hair-story-section__cta {
+        display: block;
+        font-size: 14px;
+        padding-left: 0;
+        padding-right: 0;
+        text-align: center;
+    }
+}

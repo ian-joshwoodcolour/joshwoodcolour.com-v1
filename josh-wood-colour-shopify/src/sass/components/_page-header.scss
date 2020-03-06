@@ -1,0 +1,240 @@
+$page-header-animation-duration: 0.8s;
+$page-header-logo-width: 68px;
+$page-header-logo-width--mobile: 54px;
+$page-header-padding: $global-spacing;
+$page-header-shadow: 0 10px 20px rgba($color-black, .05);
+$page-header-z-index: ($global-highest-z-index + 2);
+
+
+/**
+ * 1. Allow the box shadow to transition when the header gets 'stuck'.
+ * 2. Promote this el to a new layer for smoother transitions
+ * 3. Keep the header positioned above all other content
+ * 4. Ensure the 'stuck' header appears above all other content
+ */
+.c-page-header {
+    @include rem(padding-bottom, $global-spacing-small);
+    @include rem(padding-top, $global-spacing-small);
+    align-items: center;
+    display: flex;
+    left: 0;
+    overflow: hidden;
+    position: fixed; /* [1] */
+    transition: $global-transition; /* [2] */
+    width: 100%;
+    will-change: transform; /* [3] */
+    z-index: $page-header-z-index; /* [4] */
+}
+    .s-no-hero .c-page-header {
+        background-color: $color-white;
+    }
+
+    /**
+     * 1. Set the colour for the hamburger (it uses currentColor in its styling)
+     */
+    .c-page-header__wrapper {
+        color: $color-black; /* [1] */
+        position: relative;
+        width: 100%;
+        z-index: $global-highest-z-index;;
+    }
+
+    .c-page-header__logo {
+        height: auto;
+        left: 50%;
+        margin-left: (($page-header-logo-width--mobile / 2) * -1);
+        position: absolute;
+        top: -5px;
+        transition: $global-transition;
+        width: $page-header-logo-width--mobile;
+        will-change: opacity;
+    }
+
+
+/**
+ * 1. When the header is 'stuck' then add a shadow to show the depth between the main page content
+ * 2. Add a filled background to prevent content from showing underneath
+ */
+.c-page-header.u-is-stuck {
+    box-shadow: $page-header-shadow; /* [1] */
+    background-color: $color-white; /* [1] */
+
+    /**
+     * 1. Hide the gradient used for legibility with the navigation
+     */
+    &::after {
+        opacity: 0;
+    }
+}
+
+.c-page-header.transparent {
+    background-color: transparent;
+}
+
+.c-page-header__nav {
+    &.spread {
+        display: flex;
+        margin-right: 30px;
+        .c-page-header__link:nth-child(5) {
+            display: block;
+            margin-left: auto;
+        }
+    }
+    &.dark {
+        .c-page-header__link {
+            color: black !important;
+        }
+    }
+}
+
+
+/**
+ * If there is a Hero Banner used on the page we need to invert the colours of the header items, but only
+ * when the header is not fixed on scroll.
+ */
+.s-hero:not(.s-no-hero) .c-page-header:not(.u-is-stuck) {
+    .c-page-header__logo path {
+        fill: $color-white;
+    }
+
+    .c-page-header__wrapper {
+        color: $color-white;
+    }
+
+    .c-page-header__link {
+        color: $color-white;
+    }
+}
+
+.c-page-header-home__link--cart {
+    float: right;
+    position: relative;
+    width: 21px;
+    height: 28px;
+    padding-left: 20px;
+    svg {
+        width: 21px;
+        height: 28px;
+    }
+    .js-cart-count {
+        background: black;
+        color: white;
+        border-radius: 13px;
+        padding: 0 8px;
+        min-width: 11px;
+        height: 27px;
+        display: block;
+        font-weight: bold;
+        text-align: center;
+        line-height: 27px;
+        position: absolute;
+        bottom: -27px;
+        right: -10px;
+        transform: translateY(-50%)
+    }
+}
+
+
+@include mq ($from: $global-page-header-breakpoint) {
+    .c-page-header {
+        height: $global-page-header-height;
+    }
+
+    /**
+     * Add a gradient behind the navigation links, to improve legibility when there is a hero image
+     */
+    .s-hero .c-page-header::after {
+        box-shadow: 0 0 100px rgba($color-black, 0.2) inset;
+        content: '';
+        height: 200%;
+        left: -10%;
+        position: absolute;
+        top: 0;
+        width: 120%;
+        will-change: opacity;
+        z-index: ($global-highest-z-index - 1);
+    }
+
+    /**
+     * 1. Align nav and CTA vertically in the center
+     * 2. Make sure the flex items fill the width of the container
+     */
+    .c-page-header__wrapper {
+        align-items: center; /* [1] */
+        display: flex;
+        width: 100%; /* [2] */
+    }
+
+    /**
+     * 1. Make the navigation fill the space, pushing the CTA to the right of the wrapper
+     */
+    .c-page-header__nav {
+        flex-grow: 1; /* [1] */
+    }
+        /**
+         * 1. Add spacing between links
+         */
+        .c-page-header__link + .c-page-header__link {
+            @include rem(margin-left, $global-spacing); /* [1] */
+        }
+
+    .c-page-header__logo {
+        top: -8px;
+        width: $page-header-logo-width;
+    }
+
+    /**
+     * Style the 'Feature' menu buttons
+     */
+    .c-page-header__button {
+        @include inuit-font-size(14px, false);
+        background-color: $color-black;
+        border-color: $color-black;
+        color: $color-white;
+    }
+        .c-page-header__button:hover,
+        .c-page-header__button:focus {
+            background-color: lighten($color-black, 20%);
+            border-color: lighten($color-black, 20%);
+        }
+}
+
+.c-page-header-bottom {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 100;
+    .c-page-header__button svg {
+        position: relative;
+        top: 7px;
+        width: 20px;
+        height: 20px;
+        margin-right: 9px;
+    }
+}
+
+svg.icon-user {
+    width: 28px;
+    height: 28px;
+    position: relative;
+    top: 4px;
+}
+
+svg.c-page-header__logo.dark path {
+    fill: black !important;
+}
+
+@include mq($from: tablet, $until: 1200px) {
+    .c-page-header__link + .c-page-header__link {
+        @include rem(margin-left, $global-spacing-small);
+    }
+}
+
+
+/**
+ * Fix for Permanent Colour hair being positioned at top, behind navigation
+ */
+[id^="permanent-colour"] .c-page-header {
+    background-color: $color-white !important;
+    box-shadow: $page-header-shadow;
+}

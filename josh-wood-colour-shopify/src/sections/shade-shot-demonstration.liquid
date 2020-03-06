@@ -1,0 +1,122 @@
+<div class="u-text-center u-7/12@mobile u-m-auto u-mb u-mb+@mobile">
+    <h2 class="u-heading u-h3 u-mb">{{ section.settings.title }}</h2>
+
+    <p>{{ section.settings.text }}</p>
+</div>
+
+<div class="c-product-demo">
+    <div class="c-product-demo__panes">
+        <div class="c-product-demo__pane c-product-demo__pane--bottom js-product-demo-original-pane" style="background-image: url('{{ section.settings.original_image_brunette | img_url: '1900x' }}');">
+        </div>
+        <div class="c-product-demo__top-pane-container">
+            <div class="c-product-demo__pane c-product-demo__pane--entrance c-product-demo__pane--top js-product-demo-new-pane" style="background-image: url('{{ section.blocks[0].settings.image | img_url: '1900x' }}');">
+            </div>
+        </div>
+
+        <div class="c-product-demo__label c-product-demo__label--left  u-box-label js-product-demo-original-label">
+            {{ section.settings.original_label_brunette }}
+        </div>
+        <div class="c-product-demo__label c-product-demo__label--right u-box-label js-product-demo-new-label">
+            {{ section.blocks[0].settings.label }}
+        </div>
+    </div>
+    
+    <div class="c-product-demo__product-image u-lazyload u-fade-intersected js-product-demo-new-product js-monitor" style="background-image: url('{{ all_products[section.blocks[0].settings.product].featured_image | img_url: '380x500', crop: 'center' }}');"></div>
+</div>
+
+{%- assign product = product -%}
+{%- assign product_collection_slug = product.type | handle -%}
+{%- assign associated_products = collections[product_collection_slug].products -%}
+{%- if product.tags contains 'blonde' -%}
+    {%- assign default_care_colour = 'blonde' -%}
+{%- else -%}
+    {%- assign default_care_colour = 'brown' -%}
+{%- endif -%}
+{%- assign toggle_container_classes = 'c-product-toggle--columns' -%}
+{% include 'care-product-options-toggles' %}
+
+{%- assign button_classes = 'u-mt u-mt0@mobile' -%}
+{%- assign button_has_price = false -%}
+{%- assign button_source = 'Shade Shot demo' -%}
+{% include 'add-to-cart-button' %}
+
+<script>
+window.globalData.productDemos = {
+    originalLabelBlonde: '{{ section.settings.original_label_blonde }}',
+    originalImageBlonde: '{{ section.settings.original_image_blonde | img_url: '1900x' }}',
+    originalLabelBrown: '{{ section.settings.original_label_brunette }}',
+    originalImageBrown: '{{ section.settings.original_image_brunette | img_url: '1900x' }}',
+    products: [
+        {%- for block in section.blocks -%}
+            {
+                productURL: '{{ all_products[block.settings.product].url }}',
+                label: '{{ block.settings.label }}',
+                image: '{{ block.settings.image | img_url: '1900x' }}',
+                productImage: '{{ all_products[block.settings.product].featured_image | img_url: '380x500', crop: 'center' }}',
+            },
+        {%- endfor -%}
+    ]
+};
+</script>
+ 
+{% schema %}
+{
+    "name": "Shade Shot demonstration",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+        },
+        {
+            "type": "textarea",
+            "id": "text",
+            "label": "Text"
+        },
+        {
+
+            "type": "text",
+            "id": "original_label_blonde",
+            "label": "Original label – Blonde"
+        },
+        {
+            "type": "image_picker",
+            "id": "original_image_blonde",
+            "label": "Original image – Blonde"
+        },
+        {
+            "type": "text",
+            "id": "original_label_brunette",
+            "label": "Original label – Brunette"
+        },
+        {
+            "type": "image_picker",
+            "id": "original_image_brunette",
+            "label": "Original image – Brunette"
+        }
+    ],
+    "blocks": [
+        {
+            "name": "Demonstration content",
+            "type": "object",
+            "settings": [
+                {
+                    "type": "product",
+                    "id": "product",
+                    "label": "Product"
+                },
+                {
+                    "type": "text",
+                    "id": "label",
+                    "label": "Label"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

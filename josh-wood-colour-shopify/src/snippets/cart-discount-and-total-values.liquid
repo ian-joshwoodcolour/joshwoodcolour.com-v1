@@ -1,0 +1,7 @@
+<div class="js-cart-discount-total-container u-mb--" style="{% if cart.total_discount == 0 %}display: none;{% endif %}">
+    <strong>{{ 'customer.order.discount' | t }}:</strong>
+    <span class="u-float-right">-<span class="js-cart-discount-total">{{ cart.total_discount | money_without_trailing_zeros }}</span></span>
+</div>
+
+<strong>{{ 'cart.general.subtotal' | t }}:</strong>
+<span class="u-heading u-h5 u-float-right js-cart-total">{{ cart.total_price | money_without_trailing_zeros }}</span>

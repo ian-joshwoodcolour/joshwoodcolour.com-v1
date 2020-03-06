@@ -1,0 +1,23 @@
+/**
+ * 1. Allow the navigation to consume the height of its parent element
+ */
+.c-main-navigation {
+    display: flex; /* [1] */
+}
+    /**
+     * 1. Align the link text vertically in the center
+     * 2. Setup the border to use for active links
+     * 3. Allow the link to consume the space of the main nav element
+     */
+    .c-main-navigation__item {
+        align-items: center; /* [1] */
+        border-bottom: 2px solid transparent; /* [2] */
+        color: $color-white;
+        display: flex; /* [] */
+    }
+        /**
+         * 1. Use the link's text color for the border
+         */
+        .c-main-navigation__item--active {
+            border-bottom-color: currentColor; /* [1] */
+        }

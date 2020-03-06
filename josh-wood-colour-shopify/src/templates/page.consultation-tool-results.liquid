@@ -1,0 +1,25 @@
+<div class="u-min-100h" id="consultation-results-container"></div>
+
+<script>
+{%- assign main_collections = 'Permanent colour|Root concealers|Care range' | split: '|' -%}
+{%- for collection in main_collections -%}
+    {%- assign collection_slug = collection | handle -%}
+    window.globalData.{{ collections[collection_slug].title | replace: ' ', '' }}Products = [{%- for product in collections[collection_slug].products -%}
+        {title: '{{ product.title }}', id: {{ product.id }}, handle: '{{ product.handle }}', key: '{{ product.title | handle }}', price: '{{ product.price | money_without_trailing_zeroes }}', variantId: '{{ product.selected_or_first_available_variant.id }}', type: '{{ product.type }}', image: '{{ product.featured_image | img_url: '800x', crop: 'center' }}', imageSmall: '{{ product.featured_image | img_url: '200x', crop: 'center' }}'},
+    {%- endfor -%}];
+
+    {%- if collection_slug == 'permanent-colour' -%}
+        window.globalData.{{ collections[collection_slug].title | replace: ' ', '' }}BoxImages = [{%- for product in collections['permanent-colour'].products -%}
+            {%- for image in product.images -%}
+                {%- if image.alt == 'box' -%}
+                    {key: '{{ product.handle }}', image: '{{ image | img_url: 'x800', crop: 'center' }}'},
+                    {%- continue -%}
+                {%- endif -%}
+            {%- endfor -%}
+        {%- endfor -%}];
+    {%- endif -%}
+{%- endfor -%}
+window.globalData.concealerTitle = 'Root concealers';
+window.globalData.careTitle = 'Care range';
+</script>
+    
